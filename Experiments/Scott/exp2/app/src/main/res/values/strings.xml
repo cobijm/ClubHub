@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Experiment2</string>
+    <string name="home_page">Home Page</string>
+    <string name="button">Button</string>
+    <string name="activity_page">Activity Page</string>
+    <string name="welcome_to_the_activity_page">Welcome to the Activity Page</string>
+    <string name="welcome_page">Welcome Page</string>
+</resources>

@@ -48,21 +48,25 @@ public class Owners {
     @NotFound(action = NotFoundAction.IGNORE)
     private Integer id;
 
-    @Column(name = "first_name")
+    @Column(name = "first_name_dog")
     @NotFound(action = NotFoundAction.IGNORE)
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name = "last_name_dog")
     @NotFound(action = NotFoundAction.IGNORE)
     private String lastName;
 
-    @Column(name = "address")
+    @Column(name = "address_dog")
     @NotFound(action = NotFoundAction.IGNORE)
     private String address;
 
-    @Column(name = "telephone")
+    @Column(name = "telephone_dog")
     @NotFound(action = NotFoundAction.IGNORE)
     private String telephone;
+    
+    @Column(name = "telephone2_cat")
+    @NotFound(action = NotFoundAction.IGNORE)
+    private String telephone2;
 
     public Integer getId() {
         return id;
@@ -103,20 +107,33 @@ public class Owners {
     public String getTelephone() {
         return this.telephone;
     }
+    
+    public String getTelephone2() {
+        return this.telephone2;
+    }
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+    
+    public void setTelephone2(String telephone2) {
+        this.telephone2 = telephone2;
     }
 
     @Override
     public String toString() {
         return new ToStringCreator(this)
 
+        		//why????
                 .append("id", this.getId())
                 .append("new", this.isNew())
                 .append("lastName", this.getLastName())
                 .append("firstName", this.getFirstName())
                 .append("address", this.address)
                 .append("telephone", this.telephone).toString();
+                //.append("telephone2", this.telephone2).toString();
+        
+        		
+        
     }
 }

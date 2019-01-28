@@ -36,7 +36,7 @@ public interface OwnerRepository extends CrudRepository<Owners, Integer> {
 
     Collection<Owners> findAll();
 
-    Collection<Owners> findById(@Param("id") int id);
+    Collection<Owners> findById(@Param ("id") int id);
 
     @SuppressWarnings("unchecked")
 	Owners save(Owners owner);

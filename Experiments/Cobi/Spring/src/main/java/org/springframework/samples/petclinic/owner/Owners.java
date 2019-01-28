@@ -63,6 +63,10 @@ public class Owners {
     @Column(name = "telephone")
     @NotFound(action = NotFoundAction.IGNORE)
     private String telephone;
+    
+    @Column(name = "breed")
+    @NotFound(action = NotFoundAction.IGNORE)
+    private String breed;
 
     public Integer getId() {
         return id;

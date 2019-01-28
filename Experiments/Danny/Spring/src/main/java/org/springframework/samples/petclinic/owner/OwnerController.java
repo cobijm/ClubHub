@@ -187,7 +187,7 @@ class OwnerController {
         		"";
     }
 
-    @GetMapping("/owners/googleOwners")
+    @GetMapping("/owners")
     public String googleOwners() {
         return "<html xmlns:th=\"http://www.thymeleaf.org\"\r\n" + 
         		"  th:replace=\"~{fragments/layout :: layout (~{::body},'owners')}\">\r\n" + 

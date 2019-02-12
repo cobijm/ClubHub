@@ -14,7 +14,7 @@
         android:lineSpacingExtra="10sp"
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textColor="#00FFFF"
+        android:textColor="#FF0000"
         android:textSize="18sp"
         android:textStyle="bold"
         android:typeface="normal"

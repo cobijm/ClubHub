@@ -63,10 +63,10 @@ public class JSONRequestActivity extends Activity implements OnClickListener {
     /**
      * Making json object request
      * */
-    private void makeJsonObjReq() {
+    private void login() {
         showProgressDialog();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Method.GET,
-                Const.URL_JSON_OBJECT, null,
+                Const.POSTMAN_URL + "/login", null,
                 new Response.Listener<JSONObject>() {
 
                     @Override
@@ -147,7 +147,7 @@ public class JSONRequestActivity extends Activity implements OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnLogin:
-                makeJsonObjReq();
+                login();
                 break;
         }
 

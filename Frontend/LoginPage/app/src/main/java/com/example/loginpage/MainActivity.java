@@ -50,81 +50,94 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Login = (Button) findViewById(R.id.btnLogin);
-
+        LoginID = (EditText)findViewById(R.id.loginText);
+        Password = (EditText) findViewById(R.id.passText);
 
 
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mQueue = Volley.newRequestQueue(getApplicationContext());
-                try {
-                    login();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
+                login();
             }
         });
 
 
     }
 
-    private void login() throws JSONException {
-
-        JSONObject jsonBody = new JSONObject();
-        jsonBody.put("name", "name");
-        jsonBody.put("password", "pass");
-        final String requestBody = jsonBody.toString();
-        StringRequest jsonObjReq = new StringRequest(Request.Method.POST,
-                Const.POSTMAN_URL + "/login",
-                new Response.Listener<String>() {
-
+    private void login() {
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("id", LoginID.getText().toString());
+        params.put("password", Password.getText().toString());
+        String url = "http://cs309-pp-4.misc.iastate.edu:8080/usersid";
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                url, new JSONObject(params),
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(String response) {
-                        Toast toast = Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT);
-                        toast.show();
+                    public void onResponse(JSONObject response) {
                         Log.d(TAG, response.toString());
                     }
                 }, new Response.ErrorListener() {
-
             @Override
             public void onErrorResponse(VolleyError error) {
-                error.getCause();
-                VolleyLog.d(TAG, "Error: " + error.getCause());
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
-                error.printStackTrace();
             }
-        }) {
-
-            /**
-             * Passing some request headers
-             * */
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("Content-Type", "application/json");
-                return headers;
-            }
-
-            @Override
-            public byte[] getBody() throws AuthFailureError {
-                try{
-
-                    return requestBody == null ? null : requestBody.getBytes("utf-8");
-                } catch (UnsupportedEncodingException e) {
-                    return null;
-                }
-
-//                Map<String, String> params = new HashMap<String, String>();
-
-//                params.put("name", "Androidhive");
-//                params.put("pass", "password123");
+        });
+        AppController.getInstance().addToRequestQueue(jsonObjReq);
+    }
+//        JSONObject jsonBody = new JSONObject();
+//        jsonBody.put("name", "name");
+//        jsonBody.put("password", "pass");
+//        final String requestBody = jsonBody.toString();
+//        StringRequest jsonObjReq = new StringRequest(Request.Method.POST,
+//                Const.POSTMAN_URL + "/login",
+//                new Response.Listener<String>() {
 //
-//                return params;
-            }
-
-        };
-        mQueue.add(jsonObjReq);
+//                    @Override
+//                    public void onResponse(String response) {
+//                        Toast toast = Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT);
+//                        toast.show();
+//                        Log.d(TAG, response.toString());
+//                    }
+//                }, new Response.ErrorListener() {
+//
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                error.getCause();
+//                VolleyLog.d(TAG, "Error: " + error.getCause());
+//                VolleyLog.d(TAG, "Error: " + error.getMessage());
+//                error.printStackTrace();
+//            }
+//        }) {
+//
+//            /**
+//             * Passing some request headers
+//             * */
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                HashMap<String, String> headers = new HashMap<String, String>();
+//                headers.put("Content-Type", "application/json");
+//                return headers;
+//            }
+//
+//            @Override
+//            public byte[] getBody() throws AuthFailureError {
+//                try{
+//
+//                    return requestBody == null ? null : requestBody.getBytes("utf-8");
+//                } catch (UnsupportedEncodingException e) {
+//                    return null;
+//                }
+//
+////                Map<String, String> params = new HashMap<String, String>();
+//
+////                params.put("name", "Androidhive");
+////                params.put("pass", "password123");
+////
+////                return params;
+//            }
+//
+//        };
+//        mQueue.add(jsonObjReq);
 
 //        // Adding request to request queue
 //        AppController.getInstance().addToRequestQueue(jsonObjReq,"");
@@ -132,16 +145,7 @@ public class MainActivity extends AppCompatActivity {
         // Cancelling request
         // ApplicationController.getInstance().getRequestQueue().cancelAll(tag_json_obj);
 
-    }
 
 
-    protected JSONObject getJSON() {
-        Map<String, String> params = new HashMap<String, String>();
-
-        params.put("name", "Androidhive");
-        params.put("pass", "password123");
-
-        return new JSONObject(params);
-    }
 
 }

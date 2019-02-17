@@ -1,4 +1,5 @@
 package backend.userID;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,41 +18,34 @@ import java.util.Optional;
 @RestController
 public class userIDController {
 
-    @Autowired
-   private userIDServices useridServices;
+	@Autowired
+	private userIDServices useridServices;
 
-    @RequestMapping("/usersid")
-    public List <userID> getAlluserID()
-    {
+	@RequestMapping("/usersid")
+	public List<userID> getAlluserID() {
 		return useridServices.getAlluserID();
-    	
-    }
-    
-    @RequestMapping("/usersid/{id}")
-    public userID getuserID(@PathVariable String id)
-    {
+		
+	}
+
+	@RequestMapping("/usersid/{id}")
+	public userID getuserID(@PathVariable String id) {
 		return useridServices.getuserID(id);
-    	
-    }
 
-    @RequestMapping(method = RequestMethod.POST, path = "/usersid")
-    public void adduserID(@RequestBody userID userid)
-    {
-    	useridServices.adduserID(userid);
-    }
+	}
 
-    @RequestMapping(method = RequestMethod.PUT, path ="/usersid/{id}")
-    public void updateuserID(@RequestBody userID userid, @PathVariable String id)
-    {
-    	useridServices.adduserID(userid);
-    }
-    
-    @RequestMapping(method = RequestMethod.DELETE, path = "/usersid/{id}")
-    public void deleteuserID(@PathVariable String id)
-    {
-    	useridServices.deleteuserID(id);
-    }
-    
+	@RequestMapping(method = RequestMethod.POST, path = "/usersid")
+	public void adduserID(@RequestBody userID userid) {
+		useridServices.adduserID(userid);
+	}
+
+	@RequestMapping(method = RequestMethod.PUT, path = "/usersid/{id}")
+	public void updateuserID(@RequestBody userID userid, @PathVariable String id) {
+		useridServices.adduserID(userid);
+	}
+
+	@RequestMapping(method = RequestMethod.DELETE, path = "/usersid/{id}")
+	public void deleteuserID(@PathVariable String id) {
+		useridServices.deleteuserID(id);
+	}
+
 }
-    
-    

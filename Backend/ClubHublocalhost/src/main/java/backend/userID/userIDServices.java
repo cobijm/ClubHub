@@ -9,35 +9,30 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class userIDServices {
-	
+
 	@Autowired
 	private userIDRepository usersidRepository;
-			
-	public List<userID> getAlluserID()
-	{
+
+	public List<userID> getAlluserID() {
 		List<userID> usersid = new ArrayList<>();
 		usersidRepository.findAll().forEach(usersid::add);
 		return usersid;
 	}
-	
-	public userID getuserID(String id)
-	{
+
+	public userID getuserID(String id) {
 		return usersidRepository.findOne(id);
 	}
-	
-	public void adduserID( userID userid)
-	{
+
+	public void adduserID(userID userid) {
 		usersidRepository.save(userid);
 	}
-	
-	public void updateuserID(String id, userID userid)
-	{
+
+	public void updateuserID(String id, userID userid) {
 		usersidRepository.save(userid);
 
 	}
-	
-	public void deleteuserID(String id)
-	{
+
+	public void deleteuserID(String id) {
 		usersidRepository.delete(id);
 
 	}

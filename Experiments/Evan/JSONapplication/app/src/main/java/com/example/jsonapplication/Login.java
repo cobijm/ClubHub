@@ -81,15 +81,31 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                         String netid = student.getString("netid");
                                         String password = student.getString("password");
 
-                                        Toast.makeText(getApplicationContext(), netid + password, Toast.LENGTH_LONG).show();
+                                        //Toast.makeText(getApplicationContext(), netid + password, Toast.LENGTH_LONG).show();
+                                        boolean checked = false;
 
                                         if(netid.equals(netIDInput) && password.equals(passInput)){
-                                            startActivity(new Intent(Login.this, LoginSuccess.class));
+                                            checked = true;
+                                            Bundle extra = new Bundle();
+                                            String user = netIDInput;
+                                            extra.putSerializable("user", user);
+
+                                            Intent j = new Intent(getApplicationContext(), LoginSuccess.class);
+                                            j.putExtra("extra", extra);
+                                            startActivity(j);
+
+//                                            startActivity(new Intent(getApplicationContext(), LoginSuccess.class));
+
+                                        }
+
+                                        else{
+                                            if(checked == false){
+                                                Toast.makeText(getApplicationContext(), "Login Failed ", Toast.LENGTH_LONG).show();
+                                            }
                                         }
 
                                     }
 
-                                   // Toast.makeText(getApplicationContext(), "Login Failed ", Toast.LENGTH_LONG).show();
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();

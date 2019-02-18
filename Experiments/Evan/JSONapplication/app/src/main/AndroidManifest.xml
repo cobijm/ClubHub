@@ -12,7 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".RegistrationSuccess"></activity>
+        <activity
+            android:name=".LoginSuccess"
+            android:label="@string/title_activity_login_success"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Login"
+            android:label="@string/title_activity_login"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".RegistrationSuccess" />
         <activity
             android:name=".Registration"
             android:label="@string/title_activity_registration"

@@ -1,7 +1,6 @@
 package com.example.jsonapplication;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.CoordinatorLayout;
@@ -11,14 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import android.app.Activity;
-import android.content.Context;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -63,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mButton.setOnClickListener(this);
 
         //Button to change text
-        Button nButton = (Button) findViewById(R.id.changeText);
+        Button nButton = (Button) findViewById(R.id.Login);
         nButton.setOnClickListener(this);
 
         //Button to go to the registration page
@@ -126,8 +117,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
 
-            case R.id.changeText:
-                mTextView.setText("Text Changed");
+            case R.id.Login:
+                //mTextView.setText("Text Changed");
+                startActivity(new Intent(MainActivity.this, Login.class));
                 break;
 
             case R.id.register:

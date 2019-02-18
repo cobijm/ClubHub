@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -59,12 +60,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         Button oButton = (Button) findViewById(R.id.buttonRegister);
         oButton.setOnClickListener(this);
 
-
-
-
     }
-
-
 
     public void onClick(View v) {
 
@@ -82,14 +78,23 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                 EditText descriptionEdit = (EditText)findViewById(R.id.textDescription);
                 final String descriptionInput = nameEdit.getText().toString();
 
-                String url = "https://0ea88006-bc29-40d9-8155-873d2ed83f3c.mock.pstmn.io/registration";
-                StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-                        new Response.Listener<String>()
+                Map<String, String> params = new HashMap();
+                params.put("name", "test3");
+                params.put("netid", "test3");
+                params.put("password", "test3");
+
+                JSONObject parameters = new JSONObject(params);
+
+                String url = "http://cs309-pp-4.misc.iastate.edu:8080/usersid";
+                //String url = "https://0ea88006-bc29-40d9-8155-873d2ed83f3c.mock.pstmn.io/registration";
+                JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, parameters,
+                        new Response.Listener<JSONObject>()
                         {
                             @Override
-                            public void onResponse(String response) {
+                            public void onResponse(JSONObject response) {
                                 // response
-                                Log.d("Response", response);
+                                //Log.d("Response", response);
+                                Toast.makeText(getApplicationContext(), "Volley success " + response, Toast.LENGTH_LONG).show();
                             }
                         },
                         new Response.ErrorListener()
@@ -98,23 +103,13 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                             public void onErrorResponse(VolleyError error) {
                                 // error
                                 //Log.d("Error.Response", error);
+                                Toast.makeText(getApplicationContext(), "Volley error " + error.getMessage(), Toast.LENGTH_LONG).show();
                             }
                         }
-                ) {
-                    @Override
-                    protected Map<String, String> getParams()
-                    {
-                        Map<String, String>  params = new HashMap<String, String>();
-                        params.put("id", IDInput);
-                        params.put("name", nameInput);
-                        params.put("description", descriptionInput);
-
-                        return params;
-                    }
-                };
+                );
                 queue.add(postRequest);
 
-                startActivity(new Intent(Registration.this, RegistrationSuccess.class));
+                //startActivity(new Intent(Registration.this, RegistrationSuccess.class));
                 break;
 
         }

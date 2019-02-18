@@ -1,4 +1,5 @@
 package backend.userID;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -21,44 +22,32 @@ import java.util.Optional;
 @RestController
 public class userIDController {
 
-    @Autowired
-   private userIDServices useridServices;
+	@Autowired
+	private userIDServices useridServices;
 
-    @RequestMapping("/usersid")
-    
-    public Student getAlluserID()
-    {
-    	
+	@RequestMapping("/usersid")
+	public Student getAlluserID() {
 		return new Student(useridServices.getAlluserID());
-    	
-    }
-    
-    
-    @RequestMapping("/usersid/{netid}")
-    public userID getuserID(@PathVariable String netid)
-    {
+	}
+
+	@RequestMapping("/usersid/{netid}")
+	public userID getuserID(@PathVariable String netid) {
 		return useridServices.getuserID(netid);
-    	
-    }
+	}
 
-    @RequestMapping(method = RequestMethod.POST, path = "/usersid")
-    public void adduserID(@RequestBody userID userid)
-    {
-    	useridServices.adduserID(userid);
-    }
+	@RequestMapping(method = RequestMethod.POST, path = "/usersid")
+	public void adduserID(@RequestBody userID userid) {
+		useridServices.adduserID(userid);
+	}
 
-    @RequestMapping(method = RequestMethod.PUT, path ="/usersid/{netid}")
-    public void updateuserID(@RequestBody userID userid, @PathVariable String netid)
-    {
-    	useridServices.adduserID(userid);
-    }
-    
-    @RequestMapping(method = RequestMethod.DELETE, path = "/usersid/{netid}")
-    public void deleteuserID(@PathVariable String netid)
-    {
-    	useridServices.deleteuserID(netid);
-    }
-    
+	@RequestMapping(method = RequestMethod.PUT, path = "/usersid/{netid}")
+	public void updateuserID(@RequestBody userID userid, @PathVariable String netid) {
+		useridServices.adduserID(userid);
+	}
+
+	@RequestMapping(method = RequestMethod.DELETE, path = "/usersid/{netid}")
+	public void deleteuserID(@PathVariable String netid) {
+		useridServices.deleteuserID(netid);
+	}
+
 }
-    
-    

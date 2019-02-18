@@ -9,47 +9,48 @@ import org.springframework.core.style.ToStringCreator;
 @Entity
 @Table(name = "UserID")
 public class userID {
-	
+
 	@Id
-	private  String netid;
-	private  String password;
+	private String name;
+	private String netid;
+	private String password;
+
+	public userID() {
+
+	}
+
+	public userID(String name, String netid, String password) {
+		super();
+
+		this.name = name;
+		this.netid = netid;
+		this.password = password;
+
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 	
+	public String getNetid() {
+		return netid;
+	}
 
+	public void setNetid(String netid) {
+		this.netid = netid;
+	}
 
-public userID()
-{
-	
-}
+	public String getPassword() {
+		return password;
+	}
 
-public userID(String netid, String password)
-{
-	super();
-		
-	
-	this.netid = netid;
-	this.password = password;
-	
-}
-
-public String getNetid() {
-	return netid;
-}
-
-public void setNetid(String netid) {
-	this.netid = netid;
-}
-
-public String getPassword() {
-	return password;
-}
-
-public void setPassword(String password) {
-	this.password = password;
-}
-
-
-
-
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 }
 //    @Id

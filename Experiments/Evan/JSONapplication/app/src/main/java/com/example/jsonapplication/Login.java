@@ -33,6 +33,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     private Context mContext;
     private String mJSONURLString = "http://cs309-pp-4.misc.iastate.edu:8080/usersid";
     private String postmanTest = "https://0ea88006-bc29-40d9-8155-873d2ed83f3c.mock.pstmn.io/registration";
+    private boolean checked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +82,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                         String netid = student.getString("netid");
                                         String password = student.getString("password");
 
-                                        //Toast.makeText(getApplicationContext(), netid + password, Toast.LENGTH_LONG).show();
-                                        boolean checked = false;
-
                                         if(netid.equals(netIDInput) && password.equals(passInput)){
                                             checked = true;
                                             Bundle extra = new Bundle();
@@ -93,7 +91,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                             Intent j = new Intent(getApplicationContext(), LoginSuccess.class);
                                             j.putExtra("extra", extra);
                                             startActivity(j);
-
+                                            finish();
 //                                            startActivity(new Intent(getApplicationContext(), LoginSuccess.class));
 
                                         }

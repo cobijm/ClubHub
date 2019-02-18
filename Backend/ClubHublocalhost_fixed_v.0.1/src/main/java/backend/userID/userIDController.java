@@ -34,10 +34,10 @@ public class userIDController {
     }
     
     
-    @RequestMapping("/usersid/{id}")
-    public userID getuserID(@PathVariable String id)
+    @RequestMapping("/usersid/{netid}")
+    public userID getuserID(@PathVariable String netid)
     {
-		return useridServices.getuserID(id);
+		return useridServices.getuserID(netid);
     	
     }
 
@@ -47,16 +47,16 @@ public class userIDController {
     	useridServices.adduserID(userid);
     }
 
-    @RequestMapping(method = RequestMethod.PUT, path ="/usersid/{id}")
-    public void updateuserID(@RequestBody userID userid, @PathVariable String id)
+    @RequestMapping(method = RequestMethod.PUT, path ="/usersid/{netid}")
+    public void updateuserID(@RequestBody userID userid, @PathVariable String netid)
     {
     	useridServices.adduserID(userid);
     }
     
-    @RequestMapping(method = RequestMethod.DELETE, path = "/usersid/{id}")
-    public void deleteuserID(@PathVariable String id)
+    @RequestMapping(method = RequestMethod.DELETE, path = "/usersid/{netid}")
+    public void deleteuserID(@PathVariable String netid)
     {
-    	useridServices.deleteuserID(id);
+    	useridServices.deleteuserID(netid);
     }
     
 }

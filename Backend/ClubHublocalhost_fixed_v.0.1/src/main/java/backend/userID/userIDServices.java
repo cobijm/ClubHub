@@ -20,9 +20,9 @@ public class userIDServices {
 		return usersid;
 	}
 	
-	public userID getuserID(String id)
+	public userID getuserID(String netid)
 	{
-		return usersidRepository.findOne(id);
+		return usersidRepository.findOne(netid);
 	}
 	
 	public void adduserID( userID userid)
@@ -30,15 +30,15 @@ public class userIDServices {
 		usersidRepository.save(userid);
 	}
 	
-	public void updateuserID(String id, userID userid)
+	public void updateuserID(String netid, userID userid)
 	{
 		usersidRepository.save(userid);
 
 	}
 	
-	public void deleteuserID(String id)
+	public void deleteuserID(String netid)
 	{
-		usersidRepository.delete(id);
+		usersidRepository.delete(netid);
 
 	}
 

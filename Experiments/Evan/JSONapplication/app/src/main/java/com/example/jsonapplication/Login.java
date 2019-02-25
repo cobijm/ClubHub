@@ -95,11 +95,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
                                         }
 
-//                                        if(!netid.equals(netIDInput) && !password.equals(passInput)) {
-//
-//                                            Toast.makeText(getApplicationContext(), "Incorrect Credentials", Toast.LENGTH_LONG).show();
-//                                        }
+                                        else {
 
+                                            checked = false;
+
+                                            if (checked == false) {
+                                                Toast.makeText(getApplicationContext(), "Incorrect Credentials", Toast.LENGTH_LONG).show();
+
+                                            }
+                                        }
                                     }
 
 

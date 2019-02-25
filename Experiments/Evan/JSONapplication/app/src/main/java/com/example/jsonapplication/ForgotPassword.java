@@ -47,7 +47,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         //setSupportActionBar(toolbar);
 
         //Button to go to the registration page
-        Button oButton = (Button) findViewById(R.id.buttonRegister);
+        Button oButton = (Button) findViewById(R.id.submitChange);
         oButton.setOnClickListener(this);
 
     }
@@ -126,6 +126,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         final String passwordInput = passwordEdit.getText().toString();
 
         Map<String, String> params = new HashMap();
+        params.put("name", "Test");
         params.put("netid", IDInput);
         params.put("password", passwordInput);
 
@@ -156,7 +157,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                 }
         );
         queue.add(postRequest);
-    }
+}
 
 }
 

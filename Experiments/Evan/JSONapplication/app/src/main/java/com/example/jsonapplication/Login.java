@@ -30,10 +30,10 @@ import java.util.Map;
 
 public class Login extends AppCompatActivity implements View.OnClickListener{
 
-    private Context mContext;
+
     private String mJSONURLString = "http://cs309-pp-4.misc.iastate.edu:8080/usersid";
-    private String postmanTest = "https://0ea88006-bc29-40d9-8155-873d2ed83f3c.mock.pstmn.io/registration";
-    private boolean checked = false;
+   // private String postmanTest = "https://0ea88006-bc29-40d9-8155-873d2ed83f3c.mock.pstmn.io/registration";
+    private boolean checked = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +75,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
                                     //Change upper bound of for loop to array.length() to print all values
                                     for (int i = 0; i < array.length(); i++) {
+
                                         // Get current json object
                                         JSONObject student = array.getJSONObject(i);
 
@@ -83,7 +84,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                         String password = student.getString("password");
 
                                         if(netid.equals(netIDInput) && password.equals(passInput)){
-                                            checked = true;
                                             Bundle extra = new Bundle();
                                             String user = netIDInput;
                                             extra.putSerializable("user", user);
@@ -92,15 +92,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                             j.putExtra("extra", extra);
                                             startActivity(j);
                                             finish();
-//                                            startActivity(new Intent(getApplicationContext(), LoginSuccess.class));
 
                                         }
 
-                                        else{
-                                            if(checked == false){
-                                                Toast.makeText(getApplicationContext(), "Login Failed ", Toast.LENGTH_LONG).show();
-                                            }
-                                        }
+//                                        if(!netid.equals(netIDInput) && !password.equals(passInput)) {
+//
+//                                            Toast.makeText(getApplicationContext(), "Incorrect Credentials", Toast.LENGTH_LONG).show();
+//                                        }
 
                                     }
 
@@ -118,39 +116,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                             }
                         }
                 );
-//                // Add JsonObjectRequest to the RequestQueue
-//                requestQueue.add(jsonObjectRequest);
-//                String url = "https://0ea88006-bc29-40d9-8155-873d2ed83f3c.mock.pstmn.io/registration";
-//                StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-//                        new Response.Listener<String>()
-//                        {
-//                            @Override
-//                            public void onResponse(String response) {
-//                                // response
-//                                Log.d("Response", response);
-//                            }
-//                        },
-//                        new Response.ErrorListener()
-//                        {
-//                            @Override
-//                            public void onErrorResponse(VolleyError error) {
-//                                // error
-//                                //Log.d("Error.Response", error);
-//                            }
-//                        }
-//                ) {
-//                    @Override
-//                    protected Map<String, String> getParams()
-//                    {
-//                        Map<String, String>  params = new HashMap<String, String>();
-//                        params.put("id", IDInput);
-//                        params.put("name", nameInput);
-//                        params.put("description", descriptionInput);
-//
-//                        return params;
-//                    }
-//                };
-//                queue.add(postRequest);
 
                 requestQueue.add(jsonObjectRequest);
                 break;

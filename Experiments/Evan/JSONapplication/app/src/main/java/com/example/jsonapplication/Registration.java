@@ -124,8 +124,8 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                 queue.add(jsonObjectRequest);
 
                 break;
-            }
         }
+    }
 
     public void postData(){
         RequestQueue queue = Volley.newRequestQueue(this);

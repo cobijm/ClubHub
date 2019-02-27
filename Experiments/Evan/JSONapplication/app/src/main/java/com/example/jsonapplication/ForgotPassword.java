@@ -86,11 +86,12 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                                         String password = student.getString("password");
 
                                         if(netid.equals(IDInput)){
-                                            Toast.makeText(getApplicationContext(), "NetID Already Registered", Toast.LENGTH_LONG).show();
+                                            //Toast.makeText(getApplicationContext(), "NetID Already Registered", Toast.LENGTH_LONG).show();
                                             idExists = 1;
                                         }
                                     }
                                     if(idExists == 1) {
+                                        //Log.d("Got here", "This is my message");
                                         postData();
                                     }
                                     else{
@@ -122,11 +123,11 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         EditText IDEdit = (EditText)findViewById(R.id.username);
         final String IDInput = IDEdit.getText().toString();
 
-        EditText passwordEdit = (EditText)findViewById(R.id.textPassword);
+        EditText passwordEdit = (EditText)findViewById(R.id.newPassword);
         final String passwordInput = passwordEdit.getText().toString();
 
         Map<String, String> params = new HashMap();
-        params.put("name", "Test");
+        params.put("name", "Evan");
         params.put("netid", IDInput);
         params.put("password", passwordInput);
 
@@ -134,15 +135,15 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
 
         String url = "http://cs309-pp-4.misc.iastate.edu:8080/usersid";
         //String url = "https://0ea88006-bc29-40d9-8155-873d2ed83f3c.mock.pstmn.io/registration";
-        JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, parameters,
+        JsonObjectRequest postRequestForgotPassword = new JsonObjectRequest(Request.Method.POST, url, parameters,
                 new Response.Listener<JSONObject>()
                 {
                     @Override
                     public void onResponse(JSONObject response) {
                         // response
-                        //Log.d("Response", response);
+                        Log.d("Response", response.toString());
                         //Toast.makeText(getApplicationContext(), "Volley success " + response, Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(ForgotPassword.this, RegistrationSuccess.class));
+                        //startActivity(new Intent(ForgotPassword.this, RegistrationSuccess.class));
                     }
                 },
                 new Response.ErrorListener()
@@ -150,14 +151,14 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // error
-                        //Log.d("Error.Response", error);
+                        Log.d("Error.Response", error.toString());
                         //Toast.makeText(getApplicationContext(), "Volley error " + error.getMessage(), Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(ForgotPassword.this, RegistrationSuccess.class));
+                        //startActivity(new Intent(ForgotPassword.this, RegistrationSuccess.class));
                     }
                 }
         );
-        queue.add(postRequest);
-}
+        queue.add(postRequestForgotPassword);
+    }
 
 }
 

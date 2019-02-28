@@ -34,31 +34,20 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Registration extends AppCompatActivity implements View.OnClickListener {
+public class ForgotPassword extends AppCompatActivity implements View.OnClickListener {
 
     private Context mContext;
     private String mJSONURLString = "http://cs309-pp-4.misc.iastate.edu:8080/usersid";
-    private String postmanTest = "https://0ea88006-bc29-40d9-8155-873d2ed83f3c.mock.pstmn.io/registration";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setContentView(R.layout.activity_forgot_password);
+        //Toolbar toolbar = findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
 
-        /*
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        */
         //Button to go to the registration page
-        Button oButton = (Button) findViewById(R.id.buttonRegister);
+        Button oButton = (Button) findViewById(R.id.submitChange);
         oButton.setOnClickListener(this);
 
     }
@@ -67,23 +56,20 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
         switch (v.getId()) {
 
-            case R.id.buttonRegister:
+            case R.id.submitChange:
                 RequestQueue queue = Volley.newRequestQueue(this);  // this = context
 
-                EditText nameEdit = (EditText)findViewById(R.id.textName);
-                final String nameInput = nameEdit.getText().toString();
-
-                EditText IDEdit = (EditText)findViewById(R.id.textID);
+                EditText IDEdit = (EditText)findViewById(R.id.username);
                 final String IDInput = IDEdit.getText().toString();
 
-                EditText passwordEdit = (EditText)findViewById(R.id.textPassword);
+                EditText passwordEdit = (EditText)findViewById(R.id.newPassword);
                 final String passwordInput = passwordEdit.getText().toString();
 
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, mJSONURLString, null,
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-                                int alreadyTaken = 0;
+                                int idExists = 0;
                                 // Do something with response
                                 try {
                                     // Get JSON object
@@ -100,12 +86,16 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                                         String password = student.getString("password");
 
                                         if(netid.equals(IDInput)){
-                                            Toast.makeText(getApplicationContext(), "NetID Already Registered", Toast.LENGTH_LONG).show();
-                                            alreadyTaken = 1;
+                                            //Toast.makeText(getApplicationContext(), "NetID Already Registered", Toast.LENGTH_LONG).show();
+                                            idExists = 1;
                                         }
                                     }
-                                    if(alreadyTaken == 0) {
+                                    if(idExists == 1) {
+                                        //Log.d("Got here", "This is my message");
                                         postData();
+                                    }
+                                    else{
+                                        Toast.makeText(getApplicationContext(), "NetID does not exist", Toast.LENGTH_LONG).show();
                                     }
 
                                 } catch (JSONException e) {
@@ -130,17 +120,14 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     public void postData(){
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        EditText nameEdit = (EditText)findViewById(R.id.textName);
-        final String nameInput = nameEdit.getText().toString();
-
-        EditText IDEdit = (EditText)findViewById(R.id.textID);
+        EditText IDEdit = (EditText)findViewById(R.id.username);
         final String IDInput = IDEdit.getText().toString();
 
-        EditText passwordEdit = (EditText)findViewById(R.id.textPassword);
+        EditText passwordEdit = (EditText)findViewById(R.id.newPassword);
         final String passwordInput = passwordEdit.getText().toString();
 
         Map<String, String> params = new HashMap();
-        params.put("name", nameInput);
+        params.put("name", "Evan");
         params.put("netid", IDInput);
         params.put("password", passwordInput);
 
@@ -148,15 +135,15 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
         String url = "http://cs309-pp-4.misc.iastate.edu:8080/usersid";
         //String url = "https://0ea88006-bc29-40d9-8155-873d2ed83f3c.mock.pstmn.io/registration";
-        JsonObjectRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, parameters,
+        JsonObjectRequest postRequestForgotPassword = new JsonObjectRequest(Request.Method.POST, url, parameters,
                 new Response.Listener<JSONObject>()
                 {
                     @Override
                     public void onResponse(JSONObject response) {
                         // response
-                        //Log.d("Response", response);
+                        Log.d("Response", response.toString());
                         //Toast.makeText(getApplicationContext(), "Volley success " + response, Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(Registration.this, RegistrationSuccess.class));
+                        //startActivity(new Intent(ForgotPassword.this, RegistrationSuccess.class));
                     }
                 },
                 new Response.ErrorListener()
@@ -164,13 +151,14 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // error
-                        //Log.d("Error.Response", error);
+                        Log.d("Error.Response", error.toString());
                         //Toast.makeText(getApplicationContext(), "Volley error " + error.getMessage(), Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(Registration.this, RegistrationSuccess.class));
+                        //startActivity(new Intent(ForgotPassword.this, RegistrationSuccess.class));
                     }
                 }
         );
-        queue.add(postRequest);
+        queue.add(postRequestForgotPassword);
     }
 
 }
+

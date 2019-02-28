@@ -8,4 +8,11 @@
     tools:context=".Login"
     tools:showIn="@layout/activity_login">
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button"
+        tools:layout_editor_absoluteX="116dp"
+        tools:layout_editor_absoluteY="598dp" />
 </android.support.constraint.ConstraintLayout>

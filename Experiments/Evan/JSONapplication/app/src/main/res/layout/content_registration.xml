@@ -21,36 +21,54 @@
         app:layout_constraintVertical_bias="0.652" />
 
     <EditText
-        android:id="@+id/textID"
+        android:id="@+id/textName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="114dp"
+        android:layout_marginTop="149dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="id"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="Name"
+        app:layout_constraintStart_toStartOf="@+id/textID"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/textName"
+        android:id="@+id/textID"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="99dp"
+        android:layout_marginLeft="99dp"
+        android:layout_marginTop="27dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="NetID"
+        app:layout_constraintEnd_toStartOf="@+id/textView4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textName" />
+
+    <EditText
+        android:id="@+id/textPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="18dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="name"
+        android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="@+id/textID"
         app:layout_constraintTop_toBottomOf="@+id/textID" />
 
-    <EditText
-        android:id="@+id/textDescription"
+    <TextView
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="description"
-        app:layout_constraintStart_toStartOf="@+id/textName"
-        app:layout_constraintTop_toBottomOf="@+id/textName" />
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="99dp"
+        android:layout_marginRight="99dp"
+        android:text="@iastate.edu"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textID"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textID"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="@iastate.edu" />
+
 </android.support.constraint.ConstraintLayout>

@@ -75,14 +75,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //Initialize a new RequestQueue instance
                 RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
-                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, postmanTest, null,
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, mJSONURLString, null,
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
                                 // Do something with response
                                 try {
                                 // Get JSON object
-                                JSONArray array = response.getJSONArray("usersid");
+                                JSONArray array = response.getJSONArray("student");
 
                                 //Change upper bound of for loop to array.length() to print all values
                                 for (int i = 0; i < 1; i++) {
@@ -90,12 +90,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     JSONObject student = array.getJSONObject(i);
 
                                     // Get the current student (json object) data
-                                    String id = student.getString("id");
                                     String name = student.getString("name");
-                                    String description = student.getString("description");
+                                    String netid = student.getString("netid");
+                                    String password = student.getString("password");
 
                                     // Display the formatted json data in text view
-                                    mTextView.append("UserID: " + id + "\n" + "Name: " + name + "\n" + "Description : " + description);
+                                    mTextView.append("Name: " + name + "\n" + "netid: " + netid + "\n" + "Password : " + password);
                                     mTextView.append("\n\n");
                                 }
 

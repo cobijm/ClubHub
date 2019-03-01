@@ -69,6 +69,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
+                                String currentName = "";
                                 int idExists = 0;
                                 // Do something with response
                                 try {
@@ -88,11 +89,12 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                                         if(netid.equals(IDInput)){
                                             //Toast.makeText(getApplicationContext(), "NetID Already Registered", Toast.LENGTH_LONG).show();
                                             idExists = 1;
+                                            currentName = student.getString("name");
                                         }
                                     }
                                     if(idExists == 1) {
                                         //Log.d("Got here", "This is my message");
-                                        postData();
+                                        postData(currentName);
                                     }
                                     else{
                                         Toast.makeText(getApplicationContext(), "NetID does not exist", Toast.LENGTH_LONG).show();
@@ -117,7 +119,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    public void postData(){
+    public void postData(String currentName){
         RequestQueue queue = Volley.newRequestQueue(this);
 
         EditText IDEdit = (EditText)findViewById(R.id.username);
@@ -127,7 +129,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         final String passwordInput = passwordEdit.getText().toString();
 
         Map<String, String> params = new HashMap();
-        params.put("name", "Evan");
+        params.put("name", currentName);
         params.put("netid", IDInput);
         params.put("password", passwordInput);
 

@@ -12,21 +12,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ForgotPassword"></activity>
+        <activity android:name="com.example.ClubHub.ForgotPassword"></activity>
         <activity
-            android:name=".LoginSuccess"
+            android:name="com.example.ClubHub.LoginSuccess"
             android:label="@string/title_activity_login_success"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Login"
+            android:name="com.example.ClubHub.Login"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".RegistrationSuccess" />
+        <activity android:name="com.example.ClubHub.RegistrationSuccess" />
         <activity
-            android:name=".Registration"
+            android:name="com.example.ClubHub.Registration"
             android:label="@string/title_activity_registration"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.ClubHub.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

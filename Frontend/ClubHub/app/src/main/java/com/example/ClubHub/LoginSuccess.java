@@ -14,7 +14,7 @@ public class LoginSuccess extends AppCompatActivity {
         setContentView(R.layout.activity_login_success);
         String fetched = fetchUser();
         text = (TextView)findViewById(R.id.textView3);
-        fetched = "Welcome user: " + fetched;
+        fetched = "Welcome back " + fetched;
         text.setText(fetched);
 
     }

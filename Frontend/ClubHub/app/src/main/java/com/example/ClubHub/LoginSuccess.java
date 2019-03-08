@@ -3,6 +3,8 @@ package com.example.ClubHub;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 public class LoginSuccess extends AppCompatActivity {
@@ -32,5 +34,12 @@ public class LoginSuccess extends AppCompatActivity {
             Log.d("No user detected", s);
             return "";
         }
+    }
+
+    public void initializeTable(){
+
+        TableLayout layout = (TableLayout)findViewById(R.id.layout);
+
+
     }
 }

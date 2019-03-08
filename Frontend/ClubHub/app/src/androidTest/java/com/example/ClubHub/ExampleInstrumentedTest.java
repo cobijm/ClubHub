@@ -1,4 +1,4 @@
-package com.example.clubhub;
+package com.example.ClubHub;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

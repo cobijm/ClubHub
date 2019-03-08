@@ -1,4 +1,4 @@
-package com.example.clubhub;
+package com.example.ClubHub;
 
 import org.junit.Test;
 

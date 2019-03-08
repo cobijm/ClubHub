@@ -1,4 +1,4 @@
-package com.example.clubhub;
+package com.example.ClubHub;
 
 import android.content.Intent;
 import android.os.Bundle;

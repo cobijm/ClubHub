@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -66,28 +67,35 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                 // Do something with response
                                 try {
                                     // Get JSON object
-                                    JSONArray array = response.getJSONArray("student");
+                                    JSONArray array = response.getJSONArray("user");
 
                                     //Change upper bound of for loop to array.length() to print all values
                                     for (int i = 0; i < array.length(); i++) {
 
                                         // Get current json object
-                                        JSONObject student = array.getJSONObject(i);
+                                        JSONObject user = array.getJSONObject(i);
 
                                         // Get the current student (json object) data
-                                        String netid = student.getString("netid");
-                                        String password = student.getString("password");
+                                        String netid = user.getString("netid");
+                                        String password = user.getString("password");
 
                                         if(netid.equals(netIDInput) && password.equals(passInput)){
                                             Bundle extra = new Bundle();
-                                            String user = netIDInput;
-                                            extra.putSerializable("user", user);
+                                            String userID = netIDInput;
+                                            extra.putSerializable("user", userID);
 
+                                            Log.d("Got here", "yes");
+
+                                            startActivity(new Intent(Login.this, LoginSuccess.class));
+                                            exists = true;
+
+                                            /*
                                             Intent j = new Intent(getApplicationContext(), LoginSuccess.class);
                                             j.putExtra("extra", extra);
                                             startActivity(j);
                                             finish();
                                             exists = true;
+                                            */
 
                                         }
 

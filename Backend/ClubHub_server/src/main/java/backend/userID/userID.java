@@ -1,7 +1,8 @@
 package backend.userID;
 
 import javax.persistence.Entity;
-
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -10,7 +11,7 @@ import javax.persistence.Table;
 public class userID {
 
 	@Id
-	private String studentid;
+	private String id;
 	private String netid;
 	private String firstName;
 	private String lastName;
@@ -23,27 +24,27 @@ public class userID {
 
 	}
 
-	public userID(String studentid, String netid, String firstName, String lastName, String classification, 
+	public userID(String id, String netid, String firstName, String lastName, String classification, 
 			String phoneNumber, String major, String password) {
 		super();
 
-		this.studentid = studentid;
+		this.id = id;
 		this.netid = netid;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.classification = classification;
 		this.phoneNumber = phoneNumber;
-		this.major = major;;
+		this.major = major;
 		this.password = password;
 
 	}
 
 	public String getId() {
-		return studentid;
+		return id;
 	}
 
-	public void setId(String studentid) {
-		this.studentid = studentid;
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 	public String getNetid() {

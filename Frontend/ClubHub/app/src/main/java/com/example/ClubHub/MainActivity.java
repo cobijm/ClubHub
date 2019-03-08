@@ -60,6 +60,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Button to go to the registration page
         Button oButton = (Button) findViewById(R.id.register);
         oButton.setOnClickListener(this);
+
+        //Search button
+        Button pButton = (Button) findViewById(R.id.search);
+        pButton.setOnClickListener(this);
     }
 
     @Override
@@ -126,6 +130,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(MainActivity.this, Registration.class));
                 break;
 
+            case R.id.search:
+                startActivity(new Intent(MainActivity.this, ClubSearchPage.class));
+                break;
         }
 
     }

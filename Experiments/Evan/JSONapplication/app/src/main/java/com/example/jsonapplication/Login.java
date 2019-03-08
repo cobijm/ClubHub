@@ -25,7 +25,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
     private String mJSONURLString = "http://cs309-pp-4.misc.iastate.edu:8080/usersid";
    // private String postmanTest = "https://0ea88006-bc29-40d9-8155-873d2ed83f3c.mock.pstmn.io/registration";
-    private boolean checked = true;
+    private boolean exists = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,18 +87,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                             j.putExtra("extra", extra);
                                             startActivity(j);
                                             finish();
+                                            exists = true;
 
                                         }
 
-                                        else {
+                                    }
 
-                                            checked = false;
+                                    if (!exists) {
+                                        Toast.makeText(getApplicationContext(), "Incorrect Credentials", Toast.LENGTH_LONG).show();
 
-                                            if (checked == false) {
-                                                Toast.makeText(getApplicationContext(), "Incorrect Credentials", Toast.LENGTH_LONG).show();
-
-                                            }
-                                        }
                                     }
 
 

@@ -1,13 +1,8 @@
-package com.example.ClubHub;
+package com.example.clubhub;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,18 +14,12 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.DataOutputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -69,6 +58,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
+                                String currentName = "";
                                 int idExists = 0;
                                 // Do something with response
                                 try {
@@ -88,11 +78,12 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                                         if(netid.equals(IDInput)){
                                             //Toast.makeText(getApplicationContext(), "NetID Already Registered", Toast.LENGTH_LONG).show();
                                             idExists = 1;
+                                            currentName = student.getString("name");
                                         }
                                     }
                                     if(idExists == 1) {
                                         //Log.d("Got here", "This is my message");
-                                        postData();
+                                        postData(currentName);
                                     }
                                     else{
                                         Toast.makeText(getApplicationContext(), "NetID does not exist", Toast.LENGTH_LONG).show();
@@ -117,7 +108,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    public void postData(){
+    public void postData(String currentName){
         RequestQueue queue = Volley.newRequestQueue(this);
 
         EditText IDEdit = (EditText)findViewById(R.id.username);
@@ -127,7 +118,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         final String passwordInput = passwordEdit.getText().toString();
 
         Map<String, String> params = new HashMap();
-        params.put("name", "Evan");
+        params.put("name", currentName);
         params.put("netid", IDInput);
         params.put("password", passwordInput);
 

@@ -1,5 +1,7 @@
 package backend.clubTable;
 
+import java.util.ArrayList;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -15,12 +17,16 @@ public class clubTable {
 	private String clubName;
 	private String clubDomain;
 	private String clubStatus;
+	private ArrayList <String> clubMembers;
+
+		
+
 
 	public clubTable() {
 
 	}
 
-	public clubTable(String clubname, String clubid, String clubdomain, String clubstatus ) {
+	public clubTable( String clubid, String clubname, String clubdomain, String clubstatus ) {
 		super();
 
 		this.clubName = clubname;
@@ -62,7 +68,13 @@ public class clubTable {
 		this.clubStatus = clubStatus;
 	}
 
-	
+	public ArrayList<String> getClubMembers() {
+		return clubMembers;
+	}
+
+	public void setClubMembers(ArrayList<String> clubMembers) {
+		this.clubMembers = clubMembers;
+	}
 	
 	
 }

@@ -17,12 +17,12 @@ import java.util.ArrayList;
 public class LoginSuccess extends ListActivity {
 
     TextView text;
-
-    ArrayList<String> listItems = new ArrayList<String>();
-
-    ArrayAdapter<String> adapter;
-
-    int clickCounter = 0;
+//
+//    ArrayList<String> listItems = new ArrayList<String>();
+//
+//    ArrayAdapter<String> adapter;
+//
+//    int clickCounter = 0;
 
 
     @Override
@@ -33,8 +33,8 @@ public class LoginSuccess extends ListActivity {
         text = (TextView)findViewById(R.id.textView3);
         fetched = "Welcome back " + fetched;
         text.setText(fetched);
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, listItems);
-        setListAdapter(adapter);
+//        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, listItems);
+//        setListAdapter(adapter);
 
 
 
@@ -54,11 +54,11 @@ public class LoginSuccess extends ListActivity {
             return "";
         }
     }
-
-    public void addItems(View v){
-        listItems.add("Clicked: " + clickCounter++);
-        adapter.notifyDataSetChanged();
-    }
+//
+//    public void addItems(View v){
+//        listItems.add("Clicked: " + clickCounter++);
+//        adapter.notifyDataSetChanged();
+//    }
 
 
 }

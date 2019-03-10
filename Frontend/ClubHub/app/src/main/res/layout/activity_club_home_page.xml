@@ -6,4 +6,13 @@
     android:layout_height="match_parent"
     tools:context="com.example.ClubHub.ClubHomePage">
 
+    <TextView
+        android:id="@+id/clubName"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:text="@string/clubname"
+        android:textSize="36sp"
+        android:textStyle="bold"
+      />
 </android.support.constraint.ConstraintLayout>

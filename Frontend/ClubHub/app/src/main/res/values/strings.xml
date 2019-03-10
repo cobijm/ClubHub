@@ -13,4 +13,5 @@
     <string name="search">Search</string>
     <string name="go_to_homepage">Go To HomePage</string>
     <string name="your_clubs">Your Clubs</string>
+    <string name="clubname">clubName</string>
 </resources>

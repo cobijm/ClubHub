@@ -16,7 +16,7 @@ public class ClubSearchPage extends Activity implements SearchView.OnQueryTextLi
 
     private SearchView mSearchView;
     private ListView mListView;
-
+    private String mJSONURLString = "http://cs309-pp-4.misc.iastate.edu:8080/clubtable";
     private final String[] mStrings = { "Google", "Apple", "Samsung", "Sony", "LG", "HTC" };
 
     @Override

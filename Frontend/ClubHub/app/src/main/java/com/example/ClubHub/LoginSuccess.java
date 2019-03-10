@@ -1,8 +1,11 @@
 package com.example.ClubHub;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -20,6 +23,17 @@ public class LoginSuccess extends AppCompatActivity {
         text = (TextView)findViewById(R.id.textView3);
         fetched = "Welcome back " + fetched;
         text.setText(fetched);
+
+        Button oButton = (Button) findViewById(R.id.homePageBTN);
+        oButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v){
+
+                startActivity(new Intent(LoginSuccess.this, UserHomePage.class));
+
+            }
+        });
 
     }
 

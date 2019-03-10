@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 public class ClubHomePage extends AppCompatActivity {
 
     private String clubName;
-    private String users;
+    private String clubDomain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,8 +18,11 @@ public class ClubHomePage extends AppCompatActivity {
         setContentView(R.layout.activity_club_home_page);
 
         clubName = getIntent().getStringExtra("clubName");
+
+
         TextView myTxt = (TextView) findViewById(R.id.clubName);
         myTxt.setText(clubName);
+
     }
 
 }

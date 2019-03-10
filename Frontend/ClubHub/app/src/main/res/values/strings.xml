@@ -14,4 +14,6 @@
     <string name="go_to_homepage">Go To HomePage</string>
     <string name="your_clubs">Your Clubs</string>
     <string name="clubname">clubName</string>
+    <string name="clubdomain">clubDomain</string>
+    <string name="domain">Domain</string>
 </resources>

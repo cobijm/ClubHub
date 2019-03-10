@@ -61,7 +61,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                 RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, mJSONURLString, null,
-                        new Response.Listener<JSONObject>() {
+                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
                                 // Do something with response

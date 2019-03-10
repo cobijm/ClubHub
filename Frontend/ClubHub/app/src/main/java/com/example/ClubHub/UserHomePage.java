@@ -1,47 +1,98 @@
 package com.example.ClubHub;
-
-import android.app.ListActivity;
-import android.support.constraint.ConstraintSet;
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
+import android.widget.ListView;
+import android.widget.Toast;
+
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class UserHomePage extends ListActivity {
-    //LIST OF ARRAY STRINGS WHICH WILL SERVE AS LIST ITEMS
-    ArrayList<String> listItems=new ArrayList<String>();
 
-    //DEFINING A STRING ADAPTER WHICH WILL HANDLE THE DATA OF THE LISTVIEW
-    ArrayAdapter<String> adapter;
-
-    //RECORDING HOW MANY TIMES THE BUTTON HAS BEEN CLICKED
-    int clickCounter=0;
+public class UserHomePage extends Activity {
 
     @Override
-    public void onCreate(Bundle icicle) {
-        super.onCreate(icicle);
-        setContentView(R.layout.activity_club_search_page);
-        adapter=new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1,
-                listItems);
-        setListAdapter(adapter);
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_user_home_page);
+
+        final ArrayList<String> clubNames = new ArrayList<String>();
+        final ListView listView = (ListView) findViewById(R.id.myList);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, clubNames);
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = "http://cs309-pp-4.misc.iastate.edu:8080/clubtable";
+
+        JsonObjectRequest JSONRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+
+                    JSONArray array = response.getJSONArray("clubs");
+                    for (int i = 0; i < array.length(); i++) {
+
+                        JSONObject object = array.getJSONObject(i);
+                        String clubs = object.getString("clubName");
+
+                        if(clubs != null) {
+                            clubNames.add(clubs);
+                        }
+
+                    }
+
+                    listView.setAdapter(arrayAdapter);
+                    // Once we added the string to the array, we notify the arrayAdapter
+                    arrayAdapter.notifyDataSetChanged();
+
+                    // ListView Item Click Listener
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view,
+                                                int position, long id) {
+
+                            // ListView Clicked item index
+                            int itemPosition     = position;
+
+                            // ListView Clicked item value
+                            String  itemValue    = (String) listView.getItemAtPosition(position);
+
+                            Intent intent = new Intent(getApplicationContext(), ClubHomePage.class);
+                            startActivity(intent);
+
+                        }
+
+                    });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "Volley error " + error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+        queue.add(JSONRequest);
     }
 
-    //METHOD WHICH WILL HANDLE DYNAMIC INSERTION
-    public void addItems(View v) {
-        listItems.add("Clicked : "+clickCounter++);
-        adapter.notifyDataSetChanged();
-    }
+
 
 }
+
+

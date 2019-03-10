@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".UserHomePage"></activity>
+        <activity android:name=".ClubHomePage"></activity>
+        <activity android:name=".UserHomePage" />
         <activity android:name=".ClubSearchPage" />
         <activity android:name=".ForgotPassword" />
         <activity

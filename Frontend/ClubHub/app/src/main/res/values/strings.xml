@@ -9,8 +9,8 @@
     <string name="title_activity_login_success">LoginSuccess</string>
     <string name="welcome_back">Welcome Back</string>
     <string name="textview">TextView</string>
-    <string name="your_clubs">Your Clubs</string>
     <string name="button">Button</string>
     <string name="search">Search</string>
     <string name="go_to_homepage">Go To HomePage</string>
+    <string name="your_clubs">Your Clubs</string>
 </resources>

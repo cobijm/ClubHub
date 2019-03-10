@@ -86,8 +86,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
                                             Log.d("Got here", "yes");
 
-//                                            startActivity(new Intent(Login.this, LoginSuccess.class));
-//                                            exists = true;
 
 
                                             Intent j = new Intent(getApplicationContext(), LoginSuccess.class);

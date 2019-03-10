@@ -1,54 +1,59 @@
 package backend.clubEnrollment;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "clubEnrollment")
-public class clubEnrollment {
+@Table(name = "EnrollmentID")
+public class enrollmentID {
 
 	@Id
-	private String enrollmentID;
-	private String clubID;
+	private String id;
 	private String studentID;
 	private String rank;
 	private String joinDate;
 	private String expirationDate;
 	private String clubStanding;
 
-	public clubEnrollment() {
+	public enrollmentID() {
 
 	}
 
-	public clubEnrollment(String enrollmentid, String clubid, String studentid, String rank, String joinDate, 
-			String expirationDate, String clubStanding) {
+	public enrollmentID(String id, String studentID, String rank, String joinDate, String expirationDate, 
+			String clubStanding) {
 		super();
-		this.enrollmentID = enrollmentid;
-		this.clubID = clubid;
-		this.studentID = studentid;
+
+		this.id = id;
+		this.studentID = studentID;
 		this.rank = rank;
 		this.joinDate = joinDate;
 		this.expirationDate = expirationDate;
 		this.clubStanding = clubStanding;
+
+
 	}
 
-	public String getClubId() {
-		return clubID;
+
+
+	public String getId() {
+		return id;
 	}
 
-	public void setClubId(String clubid) {
-		this.clubID = clubid;
+	public void setId(String id) {
+		this.id = id;
 	}
-	
-	public String getStudentId() {
+
+	public String getStudentID() {
 		return studentID;
 	}
 
-	public void setNetid(String studentid) {
-		this.studentID = studentid;
+	public void setStudentID(String studentID) {
+		this.studentID = studentID;
 	}
-	
+
 	public String getRank() {
 		return rank;
 	}
@@ -56,7 +61,7 @@ public class clubEnrollment {
 	public void setRank(String rank) {
 		this.rank = rank;
 	}
-	
+
 	public String getJoinDate() {
 		return joinDate;
 	}
@@ -72,7 +77,7 @@ public class clubEnrollment {
 	public void setExpirationDate(String expirationDate) {
 		this.expirationDate = expirationDate;
 	}
-	
+
 	public String getClubStanding() {
 		return clubStanding;
 	}
@@ -80,12 +85,10 @@ public class clubEnrollment {
 	public void setClubStanding(String clubStanding) {
 		this.clubStanding = clubStanding;
 	}
-	
-	public String getEnrollmentID() {
-		return enrollmentID;
-	}
 
-	public void setEnrollmentID(String enrollmentID) {
-		this.enrollmentID = enrollmentID;
-	}
+	
+	
+	
+	
+
 }

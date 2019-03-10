@@ -20,9 +20,9 @@ public class clubTableServices {
 		return clubtable;
 	}
 	
-	public clubTable getclubTable(String clubtable)
+	public clubTable getclubTable(String netid)
 	{
-		return clubTableRepository.findOne(clubtable);
+		return clubTableRepository.findOne(netid);
 	}
 	
 	public void addclubTable( clubTable clubtable)
@@ -30,15 +30,15 @@ public class clubTableServices {
 		clubTableRepository.save(clubtable);
 	}
 	
-	public void updateclubTable(String clubid, clubTable clubtable)
+	public void updateclubTable(String netid, clubTable clubtable)
 	{
 		clubTableRepository.save(clubtable);
 
 	}
 	
-	public void deleteclubTable(String clubtable)
+	public void deleteclubTable(String netid)
 	{
-		clubTableRepository.delete(clubtable);
+		clubTableRepository.delete(netid);
 
 	}
 

@@ -31,9 +31,9 @@ public class clubTableController {
 		return new Clubs(clubtableServices.getAllclubTable());
 	}
 
-	@RequestMapping("/clubtable/{clubid}")
-	public clubTable getclubTable(@PathVariable String clubtable) {
-		return clubtableServices.getclubTable(clubtable);
+	@RequestMapping("/clubtable/{netid}")
+	public clubTable getclubTable(@PathVariable String netid) {
+		return clubtableServices.getclubTable(netid);
 	}
 
 	@RequestMapping(method = RequestMethod.POST, path = "/clubtable")
@@ -41,14 +41,14 @@ public class clubTableController {
 		clubtableServices.addclubTable(clubtable);
 	}
 
-	@RequestMapping(method = RequestMethod.PUT, path = "/clubtable/{clubid}")
-	public void updateclubTable(@RequestBody clubTable clubtable, @PathVariable String clubid) {
-		clubtableServices.updateclubTable(clubid, clubtable);
+	@RequestMapping(method = RequestMethod.PUT, path = "/clubtable/{netid}")
+	public void updateclubTable(@RequestBody clubTable clubtable, @PathVariable String netid) {
+		clubtableServices.updateclubTable(netid, clubtable);
 	}
 
-	@RequestMapping(method = RequestMethod.DELETE, path = "/clubtable/{clubid}")
-	public void deleteclubTable(@PathVariable String clubtable) {
-		clubtableServices.deleteclubTable(clubtable);
+	@RequestMapping(method = RequestMethod.DELETE, path = "/clubtable/{netid}")
+	public void deleteclubTable(@PathVariable String netid) {
+		clubtableServices.deleteclubTable(netid);
 	}
 
 }

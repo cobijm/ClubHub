@@ -28,6 +28,8 @@ public class ClubSearchPage extends Activity implements SearchView.OnQueryTextLi
 
         mSearchView = (SearchView) findViewById(R.id.search_view);
         mListView = (ListView) findViewById(R.id.list_view);
+
+
         mListView.setAdapter(new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1,
                 mStrings));

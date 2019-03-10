@@ -4,9 +4,11 @@ package com.example.ClubHub;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Window;
+import android.webkit.HttpAuthHandler;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -24,17 +26,41 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Array;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Shows a list that can be filtered in-place with a SearchView in non-iconified mode.
  */
-public class ClubSearchPage extends Activity implements SearchView.OnQueryTextListener {
+public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     private SearchView mSearchView;
     private ListView mListView;
     private String mJSONURLString = "http://cs309-pp-4.misc.iastate.edu:8080/clubtable";
     private final String[] mStrings = { "Google", "Apple", "Samsung", "Sony", "LG", "HTC" };
 
-    //String[] clubNameArray;
+    //public static String[] clubNameArray;
+    //private String[] clubNameArray = new String[100];
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,17 +69,17 @@ public class ClubSearchPage extends Activity implements SearchView.OnQueryTextLi
 
         setContentView(R.layout.activity_club_search_page);
 
-        fetchClubs();
+        final ArrayList<String> clubNameArrayList = new ArrayList<>();
+
+
+        //Log.d("Test check", clubNameArray[0]);
+        //Toast.makeText(getApplicationContext(), clubNameArray[0], Toast.LENGTH_LONG).show();
 
         mSearchView = (SearchView) findViewById(R.id.search_view);
         mListView = (ListView) findViewById(R.id.list_view);
-        mListView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mStrings));
-        mListView.setTextFilterEnabled(true);
-        setupSearchView();
-    }
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, clubNameArrayList);
+        mListView.setAdapter(adapter);
 
-    /*
-    private void fetchClubs(){
         RequestQueue queue = Volley.newRequestQueue(this);  // this = context
 
         //Initialize a new RequestQueue instance
@@ -74,15 +100,19 @@ public class ClubSearchPage extends Activity implements SearchView.OnQueryTextLi
                             for (int i = 0; i < array.length(); i++) {
 
                                 // Get current json object
-                                JSONObject user = array.getJSONObject(i);
+                                JSONObject club = array.getJSONObject(i);
 
                                 // Get the current club (json object) data
-                                String clubID = user.getString("clubID");
-                                String clubName = user.getString("clubName");
+                                String clubID = club.getString("clubID");
+                                String clubName = club.getString("clubName");
+                                //innerClubNameArray[i] = clubID;
+                                //clubNameArray[i] = clubID;
+                                clubNameArrayList.add(clubName);
+                                adapter.notifyDataSetChanged();
+                                mListView.setAdapter(adapter);
+                                //Toast.makeText(getApplicationContext(), clubID, Toast.LENGTH_LONG).show();
 
                             }
-
-                            clubNameArray = innerClubNameArray;
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -98,9 +128,9 @@ public class ClubSearchPage extends Activity implements SearchView.OnQueryTextLi
         );
 
         requestQueue.add(jsonObjectRequest);
+        mListView.setTextFilterEnabled(true);
+        setupSearchView();
     }
-    */
-
 
     private void setupSearchView() {
         mSearchView.setIconifiedByDefault(false);

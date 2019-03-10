@@ -60,13 +60,28 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
             case R.id.buttonRegister:
                 RequestQueue queue = Volley.newRequestQueue(this);  // this = context
 
-                EditText nameEdit = (EditText)findViewById(R.id.textName);
-                final String nameInput = nameEdit.getText().toString();
+                EditText idEdit = (EditText)findViewById(R.id.registrationID);
+                final String idInput = idEdit.getText().toString();
 
-                EditText IDEdit = (EditText)findViewById(R.id.textID);
-                final String IDInput = IDEdit.getText().toString();
+                EditText netIDEdit = (EditText)findViewById(R.id.registrationNetID);
+                final String netIDinput = netIDEdit.getText().toString();
 
-                EditText passwordEdit = (EditText)findViewById(R.id.textPassword);
+                EditText firstNameEdit = (EditText)findViewById(R.id.registrationFirstName);
+                final String firstNameInput = firstNameEdit.getText().toString();
+
+                EditText lastNameEdit = (EditText)findViewById(R.id.registrationLastName);
+                final String lastNameInput = lastNameEdit.getText().toString();
+
+                EditText classificationEdit = (EditText)findViewById(R.id.registrationClassification);
+                final String classificationInput = classificationEdit.getText().toString();
+
+                EditText phoneNumberEdit = (EditText)findViewById(R.id.registrationPhoneNumber);
+                final String phoneNumberInput = phoneNumberEdit.getText().toString();
+
+                EditText majorEdit = (EditText)findViewById(R.id.registrationMajor);
+                final String majorInput = majorEdit.getText().toString();
+
+                EditText passwordEdit = (EditText)findViewById(R.id.registrationPassword);
                 final String passwordInput = passwordEdit.getText().toString();
 
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, mJSONURLString, null,
@@ -77,19 +92,24 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                                 // Do something with response
                                 try {
                                     // Get JSON object
-                                    JSONArray array = response.getJSONArray("student");
+                                    JSONArray array = response.getJSONArray("user");
 
                                     //Change upper bound of for loop to array.length() to print all values
                                     for (int i = 0; i < array.length(); i++) {
                                         // Get current json object
-                                        JSONObject student = array.getJSONObject(i);
+                                        JSONObject currentStudent = array.getJSONObject(i);
 
                                         // Get the current student (json object) data
-                                        String name = student.getString("name");
-                                        String netid = student.getString("netid");
-                                        String password = student.getString("password");
+                                        String id = currentStudent.getString("id");
+                                        String netid = currentStudent.getString("netid");
+                                        String firstName = currentStudent.getString("firstName");
+                                        String lastName = currentStudent.getString("lastName");
+                                        String classification = currentStudent.getString("classification");
+                                        String phoneNumber = currentStudent.getString("phoneNumber");
+                                        String major = currentStudent.getString("major");
+                                        String password = currentStudent.getString("password");
 
-                                        if(netid.equals(IDInput)){
+                                        if(netid.equals(netIDinput)){
                                             Toast.makeText(getApplicationContext(), "NetID Already Registered", Toast.LENGTH_LONG).show();
                                             alreadyTaken = 1;
                                         }
@@ -120,18 +140,38 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
     public void postData(){
         RequestQueue queue = Volley.newRequestQueue(this);
 
-        EditText nameEdit = (EditText)findViewById(R.id.textName);
-        final String nameInput = nameEdit.getText().toString();
+        EditText idEdit = (EditText)findViewById(R.id.registrationID);
+        final String idInput = idEdit.getText().toString();
 
-        EditText IDEdit = (EditText)findViewById(R.id.textID);
-        final String IDInput = IDEdit.getText().toString();
+        EditText netIDEdit = (EditText)findViewById(R.id.registrationNetID);
+        final String netIDinput = netIDEdit.getText().toString();
 
-        EditText passwordEdit = (EditText)findViewById(R.id.textPassword);
+        EditText firstNameEdit = (EditText)findViewById(R.id.registrationFirstName);
+        final String firstNameInput = firstNameEdit.getText().toString();
+
+        EditText lastNameEdit = (EditText)findViewById(R.id.registrationLastName);
+        final String lastNameInput = lastNameEdit.getText().toString();
+
+        EditText classificationEdit = (EditText)findViewById(R.id.registrationClassification);
+        final String classificationInput = classificationEdit.getText().toString();
+
+        EditText phoneNumberEdit = (EditText)findViewById(R.id.registrationPhoneNumber);
+        final String phoneNumberInput = phoneNumberEdit.getText().toString();
+
+        EditText majorEdit = (EditText)findViewById(R.id.registrationMajor);
+        final String majorInput = majorEdit.getText().toString();
+
+        EditText passwordEdit = (EditText)findViewById(R.id.registrationPassword);
         final String passwordInput = passwordEdit.getText().toString();
 
         Map<String, String> params = new HashMap();
-        params.put("name", nameInput);
-        params.put("netid", IDInput);
+        params.put("id", idInput);
+        params.put("netid", netIDinput);
+        params.put("firstName", firstNameInput);
+        params.put("lastName", lastNameInput);
+        params.put("classification", classificationInput);
+        params.put("phoneNumber", phoneNumberInput);
+        params.put("major", majorInput);
         params.put("password", passwordInput);
 
         JSONObject parameters = new JSONObject(params);
@@ -146,7 +186,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                         // response
                         //Log.d("Response", response);
                         //Toast.makeText(getApplicationContext(), "Volley success " + response, Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(Registration.this, RegistrationSuccess.class));
+                        startActivity(new Intent(Registration.this, LoginSuccess.class));
                     }
                 },
                 new Response.ErrorListener()
@@ -156,7 +196,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                         // error
                         //Log.d("Error.Response", error);
                         //Toast.makeText(getApplicationContext(), "Volley error " + error.getMessage(), Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(Registration.this, RegistrationSuccess.class));
+                        startActivity(new Intent(Registration.this, LoginSuccess.class));
                     }
                 }
         );

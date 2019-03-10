@@ -25,7 +25,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
 
     private String mJSONURLString = "http://cs309-pp-4.misc.iastate.edu:8080/usersid";
-   // private String postmanTest = "https://0ea88006-bc29-40d9-8155-873d2ed83f3c.mock.pstmn.io/registration";
     private boolean exists = false;
 
     @Override

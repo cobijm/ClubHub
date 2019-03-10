@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.webkit.HttpAuthHandler;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -26,27 +28,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
-import android.widget.Toast;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.lang.reflect.Array;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 
 /**
  * Shows a list that can be filtered in-place with a SearchView in non-iconified mode.
@@ -105,13 +88,9 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
                                 // Get the current club (json object) data
                                 String clubID = club.getString("clubID");
                                 String clubName = club.getString("clubName");
-                                //innerClubNameArray[i] = clubID;
-                                //clubNameArray[i] = clubID;
                                 clubNameArrayList.add(clubName);
                                 adapter.notifyDataSetChanged();
                                 mListView.setAdapter(adapter);
-                                //Toast.makeText(getApplicationContext(), clubID, Toast.LENGTH_LONG).show();
-
                             }
 
                         } catch (JSONException e) {
@@ -126,6 +105,17 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
                     }
                 }
         );
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+                //Change to Intent clubPage = new Intent(ClubSearchPage.class, ClubHomePage.class);
+                Intent clubPage = new Intent(ClubSearchPage.this, Login.class);
+                clubPage.putExtra("ClubName", clubNameArrayList.get(position));
+
+                startActivity(clubPage);
+            }
+        });
 
         requestQueue.add(jsonObjectRequest);
         mListView.setTextFilterEnabled(true);

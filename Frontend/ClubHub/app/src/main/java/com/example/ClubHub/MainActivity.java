@@ -49,10 +49,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //mButtonDo = (Button) findViewById(R.id.JSONget);
         mTextView = (TextView) findViewById(R.id.showResponse);
 
-        //Button to get from JSON
-        Button mButton = (Button) findViewById(R.id.JSONget);
-        mButton.setOnClickListener(this);
-
         //Button to change text
         Button nButton = (Button) findViewById(R.id.Login);
         nButton.setOnClickListener(this);
@@ -70,56 +66,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
 
         switch (v.getId()) {
-
-            case R.id.JSONget:
-
-                //Empty text view
-                mTextView.setText("");
-
-                //Initialize a new RequestQueue instance
-                RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-
-                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, mJSONURLString, null,
-                        new Response.Listener<JSONObject>() {
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                // Do something with response
-                                try {
-                                // Get JSON object
-                                JSONArray array = response.getJSONArray("student");
-
-                                //Change upper bound of for loop to array.length() to print all values
-                                for (int i = 0; i < 1; i++) {
-                                    // Get current json object
-                                    JSONObject student = array.getJSONObject(i);
-
-                                    // Get the current student (json object) data
-                                    String name = student.getString("name");
-                                    String netid = student.getString("netid");
-                                    String password = student.getString("password");
-
-                                    // Display the formatted json data in text view
-                                    mTextView.append("Name: " + name + "\n" + "netid: " + netid + "\n" + "Password : " + password);
-                                    mTextView.append("\n\n");
-                                }
-
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                    mTextView.append("failed");
-                                }
-                            }
-                        },
-                        new Response.ErrorListener() {
-                            @Override
-                            public void onErrorResponse(VolleyError error) {
-                                Toast.makeText(getApplicationContext(), "Volley error " + error.getMessage(), Toast.LENGTH_LONG).show();
-                            }
-                        }
-                );
-                // Add JsonObjectRequest to the RequestQueue
-                requestQueue.add(jsonObjectRequest);
-
-                break;
 
             case R.id.Login:
                 //mTextView.setText("Text Changed");

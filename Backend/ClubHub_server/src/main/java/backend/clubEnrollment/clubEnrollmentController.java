@@ -14,17 +14,17 @@ public class clubEnrollmentController {
 	@Autowired
 	private clubEnrollmentServices clubenrollmentServices;
 
-	@RequestMapping("/clubEnrollment")
+	@RequestMapping("/clubenrollment")
 	public enrollment getAllclubEnrollment() {
 		return new enrollment(clubenrollmentServices.getAllclubEnrollment());
 	}
 
-	@RequestMapping("/clubEnrollment/{enrollmentid}")
+	@RequestMapping("/clubenrollment/{enrollmentid}")
 	public clubEnrollment getclubEnrollment(@PathVariable String clubenrollment) {
 		return clubenrollmentServices.getclubEnrollment(clubenrollment);
 	}
 
-	@RequestMapping(method = RequestMethod.POST, path = "/clubEnrollment")
+	@RequestMapping(method = RequestMethod.POST, path = "/clubenrollment")
 	public void addclubEnrollment(@RequestBody clubEnrollment clubenrollment) {
 		clubenrollmentServices.addclubEnrollment(clubenrollment);
 	}
@@ -34,7 +34,7 @@ public class clubEnrollmentController {
 //		clubenrollmentServices.updateclubEnrollment(enrollmentid);
 //	}
 
-	@RequestMapping(method = RequestMethod.DELETE, path = "/clubEnrollment/{enrollmentid}")
+	@RequestMapping(method = RequestMethod.DELETE, path = "/clubenrollment/{enrollmentid}")
 	public void deleteclubEnrollment(@PathVariable String clubenrollment) {
 		clubenrollmentServices.deleteclubEnrollment(clubenrollment);
 	}

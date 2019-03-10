@@ -18,17 +18,19 @@ public class clubTable {
 	private String clubDomain;
 	private String clubStatus;
 	private ArrayList <String> clubMembers;
+	private ArrayList <String> clubTags;
 
 		
-
-
 	public clubTable() {
 
 	}
 
-	public clubTable( String clubid, String clubname, String clubdomain, String clubstatus ) {
+	public clubTable( String clubid, String clubname, String clubdomain, String clubstatus,
+			ArrayList <String> clubMembers, ArrayList <String> clubTags) {
 		super();
 
+		this.clubMembers = clubMembers;
+		this.clubTags = clubTags;
 		this.clubName = clubname;
 		this.clubID = clubid;
 		this.clubDomain = clubdomain;
@@ -75,6 +77,15 @@ public class clubTable {
 	public void setClubMembers(ArrayList<String> clubMembers) {
 		this.clubMembers = clubMembers;
 	}
+	
+	public ArrayList<String> getClubTags() {
+		return clubTags;
+	}
+
+	public void setClubTags(ArrayList<String> clubTags) {
+		this.clubTags = clubTags;
+	}
+
 	
 	
 }

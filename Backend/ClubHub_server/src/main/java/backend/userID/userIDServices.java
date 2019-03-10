@@ -32,7 +32,7 @@ public class userIDServices {
 	
 	public void updateuserID(String netid, userID userid)
 	{
-//		usersidRepository.save(userid);
+		usersidRepository.save(userid);
 
 	}
 	

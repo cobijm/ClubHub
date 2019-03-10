@@ -18,24 +18,16 @@ public class clubTable {
 	private String clubDomain;
 	private String clubStatus;
 	private ArrayList <String> clubMembers;
-<<<<<<< HEAD
-	private ArrayList <String> clubTags;
-=======
 	private ArrayList <String> clubTags;
 
->>>>>>> 11-create-a-clubenrollment-database-table
 		
 	public clubTable() {
 
 	}
 
-<<<<<<< HEAD
-	public clubTable( String clubid, String clubname, String clubdomain, String clubstatus, 
-			ArrayList <String> clubMembers, ArrayList<String> clubTags) {
-=======
+
 	public clubTable( String clubid, String clubname, String clubdomain, String clubstatus,
 			ArrayList <String> clubMembers, ArrayList <String> clubTags) {
->>>>>>> 11-create-a-clubenrollment-database-table
 		super();
 
 		this.clubMembers = clubMembers;
@@ -93,9 +85,6 @@ public class clubTable {
 	public void setClubTags(ArrayList<String> clubTags) {
 		this.clubTags = clubTags;
 	}
-<<<<<<< HEAD
-=======
->>>>>>> 11-create-a-clubenrollment-database-table
 	
 	
 }

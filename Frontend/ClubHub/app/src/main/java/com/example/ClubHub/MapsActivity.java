@@ -25,9 +25,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
         mapLoc = getIntent().getStringExtra("clubName");
-        if(mapLoc == null){
-            mapLoc = "Fishing Club";
-        }
+//        if(mapLoc == null){
+//            mapLoc = "Fishing Club";
+//        }
     }
 
 

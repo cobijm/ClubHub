@@ -34,14 +34,51 @@ public class UserHomePage extends Activity {
         final ListView listView = (ListView) findViewById(R.id.myList);
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, clubNames);
 
-        String userIDNumber;
+        final ArrayList<String> memberClubIDArray = new ArrayList<String>();
 
-        userIDNumber = getIntent().getStringExtra("IDNumber");
+
+        final String userIDNumber = getIntent().getStringExtra("IDNumber");
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String url = "http://cs309-pp-4.misc.iastate.edu:8080/clubtable";
+        //Maybe to change
+        String enrollmentURL = "http://cs309-pp-4.misc.iastate.edu:8080/clubenrollment";
+        String tableURL = "http://cs309-pp-4.misc.iastate.edu:8080/clubtable";
 
-        JsonObjectRequest JSONRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+        JsonObjectRequest JSONRequest = new JsonObjectRequest(Request.Method.GET, enrollmentURL, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+
+                    //Maybe to change
+                    JSONArray array = response.getJSONArray("enrollment");
+                    for (int i = 0; i < array.length(); i++) {
+
+                        JSONObject clubEnrollment = array.getJSONObject(i);
+                        String clubID = clubEnrollment.getString("clubID");
+                        String studentID = clubEnrollment.getString("studentID");
+
+                        if(studentID.equals(userIDNumber)){
+                            memberClubIDArray.add(clubID);
+                        }
+
+
+                    }
+
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), "Volley error " + error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+        queue.add(JSONRequest);
+
+        JsonObjectRequest JSONRequestTwo = new JsonObjectRequest(Request.Method.GET, tableURL, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
@@ -50,9 +87,10 @@ public class UserHomePage extends Activity {
                     for (int i = 0; i < array.length(); i++) {
 
                         JSONObject object = array.getJSONObject(i);
+                        String clubID = object.getString("clubID");
                         String clubs = object.getString("clubName");
 
-                        if(clubs != null) {
+                        if(memberClubIDArray.contains(clubID)) {
                             clubNames.add(clubs);
                         }
 
@@ -94,7 +132,7 @@ public class UserHomePage extends Activity {
                 Toast.makeText(getApplicationContext(), "Volley error " + error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-        queue.add(JSONRequest);
+        queue.add(JSONRequestTwo);
     }
 
 

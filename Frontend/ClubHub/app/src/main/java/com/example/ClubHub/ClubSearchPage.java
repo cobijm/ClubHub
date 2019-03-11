@@ -68,11 +68,11 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
         final String tagReceived = getIntent().getStringExtra("tag");
 
         //If the tag is not "all" then update the search by removing all the clubs without the given tag
-        if(!tagReceived.equals("all")){
-            updateSearch();
-            adapter.notifyDataSetChanged();
-            mListView.setAdapter(adapter);
-        }
+//        if(!tagReceived.equals("all")){
+//            updateSearch();
+//            adapter.notifyDataSetChanged();
+//            mListView.setAdapter(adapter);
+//        }
     }
 
     private void updateSearch(){

@@ -63,16 +63,71 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
         mListView = (ListView) findViewById(R.id.list_view);
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, clubNameArrayList);
         mListView.setAdapter(adapter);
-        createSearch(adapter, clubNameArrayList);
 
         final String tagReceived = getIntent().getStringExtra("tag");
 
+        //Initialize a new RequestQueue instance
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, mJSONURLString, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Do something with response
+                        try {
+                            // Get JSON object
+                            JSONArray array = response.getJSONArray("clubs");
+
+                            String[] innerClubNameArray = new String[array.length()];
+
+                            //Change upper bound of for loop to array.length() to print all values
+                            for (int i = 0; i < array.length(); i++) {
+
+                                // Get current json object
+                                JSONObject club = array.getJSONObject(i);
+
+                                // Get the current club (json object) data
+                                String clubID = club.getString("clubID");
+                                String clubName = club.getString("clubName");
+                                clubNameArrayList.add(clubName);
+                                adapter.notifyDataSetChanged();
+                                mListView.setAdapter(adapter);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Volley error " + error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }
+        );
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+                Intent clubPage = new Intent(ClubSearchPage.this, ClubHomePage.class);
+                //Intent clubPage = new Intent(ClubSearchPage.this, Login.class);
+                clubPage.putExtra("clubName", clubNameArrayList.get(position));
+
+                startActivity(clubPage);
+            }
+        });
+
+        requestQueue.add(jsonObjectRequest);
+        mListView.setTextFilterEnabled(true);
+        setupSearchView();
+
         //If the tag is not "all" then update the search by removing all the clubs without the given tag
-        if(!tagReceived.equals("all")){
-            updateSearch();
-            adapter.notifyDataSetChanged();
-            mListView.setAdapter(adapter);
-        }
+//        if(!tagReceived.equals("all")){
+//            updateSearch();
+//            adapter.notifyDataSetChanged();
+//            mListView.setAdapter(adapter);
+//        }
     }
 
     private void updateSearch(){
@@ -133,67 +188,6 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
                 }
         );
         requestQueue.add(jsonObjectRequest);
-    }
-
-    private void createSearch(final ArrayAdapter<String> adapter, final ArrayList<String> clubNameArrayList){
-
-        //RequestQueue queue = Volley.newRequestQueue(this);  // this = context
-
-        //Initialize a new RequestQueue instance
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, mJSONURLString, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        // Do something with response
-                        try {
-                            // Get JSON object
-                            JSONArray array = response.getJSONArray("clubs");
-
-                            String[] innerClubNameArray = new String[array.length()];
-
-                            //Change upper bound of for loop to array.length() to print all values
-                            for (int i = 0; i < array.length(); i++) {
-
-                                // Get current json object
-                                JSONObject club = array.getJSONObject(i);
-
-                                // Get the current club (json object) data
-                                String clubID = club.getString("clubID");
-                                String clubName = club.getString("clubName");
-                                clubNameArrayList.add(clubName);
-                                adapter.notifyDataSetChanged();
-                                mListView.setAdapter(adapter);
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), "Volley error " + error.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                }
-        );
-
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-                Intent clubPage = new Intent(ClubSearchPage.this, ClubHomePage.class);
-                //Intent clubPage = new Intent(ClubSearchPage.this, Login.class);
-                clubPage.putExtra("clubName", clubNameArrayList.get(position));
-
-                startActivity(clubPage);
-            }
-        });
-
-        requestQueue.add(jsonObjectRequest);
-        mListView.setTextFilterEnabled(true);
-        setupSearchView();
     }
 
     private void setupSearchView() {

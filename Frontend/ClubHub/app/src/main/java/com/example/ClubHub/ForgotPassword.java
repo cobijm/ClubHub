@@ -38,7 +38,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         //Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
-        //Button to go to the registration page
+        //Button to go to register
         Button oButton = (Button) findViewById(R.id.submitChange);
         oButton.setOnClickListener(this);
 

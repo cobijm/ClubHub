@@ -12,6 +12,7 @@ import android.view.Window;
 import android.webkit.HttpAuthHandler;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -40,6 +41,7 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
     private ListView mListView;
     private String mJSONURLString = "http://cs309-pp-4.misc.iastate.edu:8080/clubtable";
     private final String[] mStrings = { "Google", "Apple", "Samsung", "Sony", "LG", "HTC" };
+    final ArrayList<String> clubNameArrayList = new ArrayList<>();
 
     //public static String[] clubNameArray;
     //private String[] clubNameArray = new String[100];
@@ -52,8 +54,6 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
 
         setContentView(R.layout.activity_club_search_page);
 
-        final ArrayList<String> clubNameArrayList = new ArrayList<>();
-
 
         //Log.d("Test check", clubNameArray[0]);
         //Toast.makeText(getApplicationContext(), clubNameArray[0], Toast.LENGTH_LONG).show();
@@ -62,6 +62,81 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
         mListView = (ListView) findViewById(R.id.list_view);
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, clubNameArrayList);
         mListView.setAdapter(adapter);
+        createSearch(adapter, clubNameArrayList);
+
+        mSearchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()) {
+                    case R.id.searchButton:
+                        updateSearch();
+                        createSearch(adapter,clubNameArrayList);
+                }
+            }
+        });
+
+    }
+
+    private void updateSearch(){
+        //Clears the current list of clubs
+        clubNameArrayList.clear();
+
+        EditText tagEdit = (EditText)findViewById(R.id.searchText);
+        final String tagInput = tagEdit.getText().toString();
+
+        //Do a new GET to get the tags for the club
+
+        RequestQueue queueTwo = Volley.newRequestQueue(this);  // this = context
+
+        //Initialize a new RequestQueue instance
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, mJSONURLString, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Do something with response
+                        try {
+                            // Get JSON object
+                            JSONArray clubData = response.getJSONArray("clubs");
+
+                            //Change upper bound of for loop to array.length() to print all values
+                            for (int i = 0; i < clubData.length(); i++) {
+                                JSONObject club = clubData.getJSONObject(i);
+
+                                // Get the current club (json object) data
+                                String clubID = club.getString("clubID");
+                                String clubName = club.getString("clubName");
+
+                                JSONArray clubTags = club.getJSONArray("clubTags");
+                                String[] tagsArr = new String[clubTags.length()];
+                                for (int j = 0; j < clubTags.length(); j++){
+                                    tagsArr[i] = clubTags.getString(i);
+                                }
+                                for(int k = 0; k < tagsArr.length; k++){
+                                    if(tagInput == tagsArr[k]){
+                                        //Add the club name for any club with the given tags
+                                        clubNameArrayList.add(clubName);
+                                    }
+                                }
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Volley error " + error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }
+        );
+        queueTwo.add(jsonObjectRequest);
+    }
+
+    private void createSearch(final ArrayAdapter<String> adapter, final ArrayList<String> clubNameArrayList){
 
         RequestQueue queue = Volley.newRequestQueue(this);  // this = context
 

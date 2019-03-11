@@ -2,14 +2,14 @@ package backend.clubTable;
 
 import java.util.List;
 
-public class Clubs {
-	private List<clubTable> Clubs;
+public class clubs {
+	private List<clubTable> clubs;
 
-	public Clubs(List<clubTable> Clubs) {
-		this.Clubs = Clubs;
+	public clubs(List<clubTable> clubs) {
+		this.clubs = clubs;
 	}
 
-	public List<clubTable> getClubs() {
-		return Clubs;
+	public List<clubTable> getclubs() {
+		return clubs;
 	}
 }

@@ -20,22 +20,21 @@ public class clubTable {
 	private ArrayList <String> clubMembers;
 	private ArrayList <String> clubTags;
 
-		
+	
 	public clubTable() {
 
 	}
 
-
-	public clubTable( String clubid, String clubname, String clubdomain, String clubstatus,
-			ArrayList <String> clubMembers, ArrayList <String> clubTags) {
+	public clubTable(String clubid, String clubname, String clubdomain, String clubstatus, ArrayList <String> clubmembers,ArrayList <String> clubtags  ) {
 		super();
 
-		this.clubMembers = clubMembers;
-		this.clubTags = clubTags;
 		this.clubName = clubname;
 		this.clubID = clubid;
 		this.clubDomain = clubdomain;
 		this.clubStatus = clubstatus;
+		this.clubMembers = clubmembers;
+		this.clubTags = clubtags;
+
 	}
 
 	public String getClubID() {
@@ -77,7 +76,7 @@ public class clubTable {
 	public void setClubMembers(ArrayList<String> clubMembers) {
 		this.clubMembers = clubMembers;
 	}
-	
+
 	public ArrayList<String> getClubTags() {
 		return clubTags;
 	}
@@ -85,6 +84,8 @@ public class clubTable {
 	public void setClubTags(ArrayList<String> clubTags) {
 		this.clubTags = clubTags;
 	}
+
+	
 	
 	
 }

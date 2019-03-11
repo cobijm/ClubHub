@@ -1,7 +1,6 @@
 package backend.clubTable;
 
 import org.json.JSONArray;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -27,8 +26,8 @@ public class clubTableController {
 	private clubTableServices clubtableServices;
 
 	@RequestMapping("/clubtable")
-	public Clubs getAllclubTable() {
-		return new Clubs(clubtableServices.getAllclubTable());
+	public clubs getAllclubTable() {
+		return new clubs(clubtableServices.getAllclubTable());
 	}
 
 	@RequestMapping("/clubtable/{netid}")

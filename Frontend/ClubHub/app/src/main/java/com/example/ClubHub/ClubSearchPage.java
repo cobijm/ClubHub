@@ -45,15 +45,14 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
     //private final String[] mStrings = { "Google", "Apple", "Samsung", "Sony", "LG", "HTC" };
     final ArrayList<String> clubNameArrayList = new ArrayList<>();
 
-    String clubDomain = "";
-    String clubStatus = "";
-
     //public static String[] clubNameArray;
     //private String[] clubNameArray = new String[100];
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        final ArrayList<String> clubDomainList = new ArrayList<>();
+        final ArrayList<String> clubStatusList = new ArrayList<>();
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
 
@@ -86,12 +85,18 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
                                 JSONObject club = array.getJSONObject(i);
 
                                 // Get the current club (json object) data
-                                clubDomain = club.getString("clubDomain");
-                                clubStatus = club.getString("clubStatus");
+                                String clubDomain = club.getString("clubDomain");
+                                String clubStatus = club.getString("clubStatus");
                                 String clubName = club.getString("clubName");
+
+                                //clubDomainList.add(clubDomain);
+                                //clubStatusList.add(clubStatus);
 
                                 if(tagReceived.equals("all")){
                                     clubNameArrayList.add(clubName);
+                                    clubDomainList.add(clubDomain);
+                                    clubStatusList.add(clubStatus);
+
                                 }
                                 else{
                                     JSONArray clubTags = club.getJSONArray("clubTags");
@@ -102,6 +107,8 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
                                     for(int k = 0; k < tagsArr.length; k++){
                                         if(tagReceived.equals(tagsArr[k])){
                                             //Add the club name for any club with the given tags
+                                            clubDomainList.add(clubDomain);
+                                            clubStatusList.add(clubStatus);
                                             clubNameArrayList.add(clubName);
                                             adapter.notifyDataSetChanged();
                                             mListView.setAdapter(adapter);
@@ -136,8 +143,8 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
             clubPage.putExtra("clubName", clubNameArrayList.get(position));
 
             //Change below to get current domain and status
-            clubPage.putExtra("clubDomain", clubDomain);
-            clubPage.putExtra("clubStatus", clubStatus);
+            clubPage.putExtra("clubDomain", clubDomainList.get(position));
+            clubPage.putExtra("clubStatus", clubStatusList.get(position));
             startActivity(clubPage);
             }
         });

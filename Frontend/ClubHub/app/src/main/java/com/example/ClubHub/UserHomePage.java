@@ -61,10 +61,7 @@ public class UserHomePage extends Activity {
                         if(studentID.equals(userIDNumber)){
                             memberClubIDArray.add(clubID);
                         }
-
-
                     }
-
 
                 } catch (JSONException e) {
                     e.printStackTrace();

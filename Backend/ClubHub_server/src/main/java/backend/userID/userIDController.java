@@ -36,13 +36,13 @@ public class userIDController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, path = "/usersid")
-	public void adduserID(@RequestBody userID userID) {
-		useridServices.adduserID(userID);
+	public void adduserID(@RequestBody userID userid) {
+		useridServices.adduserID(userid);
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, path = "/usersid/{netid}")
-	public void updateuserID(@RequestBody userID userID, @PathVariable String netid) {
-		useridServices.updateuserID(netid, userID);
+	public void updateuserID(@RequestBody userID userid, @PathVariable String netid) {
+		useridServices.updateuserID(netid, userid);
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE, path = "/usersid/{netid}")

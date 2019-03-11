@@ -25,14 +25,14 @@ public class userIDServices {
 		return usersidRepository.findOne(netid);
 	}
 	
-	public void adduserID(userID userID)
+	public void adduserID( userID userid)
 	{
-		usersidRepository.save(userID);
+		usersidRepository.save(userid);
 	}
 	
-	public void updateuserID(String netid, userID userID)
+	public void updateuserID(String netid, userID userid)
 	{
-		usersidRepository.save(userID);
+		usersidRepository.save(userid);
 
 	}
 	

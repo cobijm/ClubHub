@@ -7,12 +7,12 @@ import javax.persistence.Table;
 import org.springframework.core.style.ToStringCreator;
 
 @Entity
-@Table(name = "userID")
+@Table(name = "UserID")
 public class userID {
 
 	@Id
-	private String studentid;
-	private String netid;
+	private String studentID;
+	private String netID;
 	private String firstName;
 	private String lastName;
 	private String classification;
@@ -24,33 +24,34 @@ public class userID {
 
 	}
 
-	public userID(String studentid, String netid, String firstName, String lastName, String classification, 
-			String phoneNumber, String major, String password) {
+	public userID(String studentid, String netid, String firstname, String lastname, String classification, String phonenumber, String major, String password) {
 		super();
-		
-		this.setstudentid(studentid);
-		this.setNetid(netid);
-		this.setFirstName(firstName);
-		this.setLastName(lastName);
-		this.setClassification(classification);
-		this.setPhoneNumber(phoneNumber);
-		this.setMajor(major);
-		this.setPassword(password);
+
+		this.studentID = studentid;
+		this.netID = netid;
+		this.firstName = firstname;
+		this.lastName = lastname;
+		this.classification = classification;
+		this.phoneNumber = phonenumber;
+		this.major = major;
+		this.password = password;
 
 	}
 
-	public String getstudentid() {
-		return studentid;
-	}
-	public void setstudentid(String studentid) {
-		this.studentid = studentid;
-	}
-	public String getNetid() {
-		return netid;
+	public String getStudentID() {
+		return studentID;
 	}
 
-	public void setNetid(String netid) {
-		this.netid = netid;
+	public void setStudentID(String studentID) {
+		this.studentID = studentID;
+	}
+
+	public String getNetID() {
+		return netID;
+	}
+
+	public void setNetID(String netID) {
+		this.netID = netID;
 	}
 
 	public String getFirstName() {
@@ -100,7 +101,10 @@ public class userID {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	
 	
 	
 
 }
+

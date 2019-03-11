@@ -12,23 +12,23 @@ public class clubEnrollment {
 	@Id
 	private String enrollmentNumber;
 	private String clubID;
-	private String studentID;
-	private String ranking;
-	private String joinDate;
-	private String expirationDate;
 	private String clubStanding;
-	
+	private String expirationDate;
+	private String joinDate;
+	private String ranking;
+	private String studentID;
+
+
 	
 	public clubEnrollment()
 	{
 		
 	}
 	
-	public clubEnrollment(String enrollmentnumber, String clubID, String studentid, String ranking,
-			String joindate, String expirationdate , String clubstanding)
+	public clubEnrollment(String enrollmentnumber,String clubid,String clubstanding , String expirationdate, String joindate ,String ranking, String studentid )
 	{
+		this.clubID = clubid;
 		this.enrollmentNumber = enrollmentnumber;
-		this.clubID = clubID;
 		this.studentID = studentid;
 		this.ranking = ranking;
 		this.joinDate = joindate;
@@ -38,15 +38,48 @@ public class clubEnrollment {
 		
 	}
 
-	public String getEnrollmentID() {
+	public String getEnrollmentNumber() {
 		return enrollmentNumber;
 	}
 
-	public void setEnrollmentID(String enrollmentnumber) {
-		this.enrollmentNumber = enrollmentnumber;
+	public void setEnrollmentNumber(String enrollmentNumber) {
+		this.enrollmentNumber = enrollmentNumber;
 	}
-	
-	public String getClubtID() {
+
+
+	public String getClubStanding() {
+		return clubStanding;
+	}
+
+	public void setClubStanding(String clubStanding) {
+		this.clubStanding = clubStanding;
+	}
+
+	public String getExpirationDate() {
+		return expirationDate;
+	}
+
+	public void setExpirationDate(String expirationDate) {
+		this.expirationDate = expirationDate;
+	}
+
+	public String getJoinDate() {
+		return joinDate;
+	}
+
+	public void setJoinDate(String joinDate) {
+		this.joinDate = joinDate;
+	}
+
+	public String getRanking() {
+		return ranking;
+	}
+
+	public void setRanking(String ranking) {
+		this.ranking = ranking;
+	}
+
+	public String getClubID() {
 		return clubID;
 	}
 
@@ -62,38 +95,11 @@ public class clubEnrollment {
 		this.studentID = studentID;
 	}
 
-	public String getRank() {
-		return ranking;
-	}
 
-	public void setRank(String ranking) {
-		this.ranking = ranking;
-	}
 
-	public String getJoinDate() {
-		return joinDate;
-	}
 
-	public void setJoinDate(String joinDate) {
-		this.joinDate = joinDate;
-	}
 
-	public String getExpirationDate() {
-		return expirationDate;
-	}
-
-	public void setExpirationDate(String expirationDate) {
-		this.expirationDate = expirationDate;
-	}
-
-	public String getClubStanding() {
-		return clubStanding;
-	}
-
-	public void setClubStanding(String clubStanding) {
-		this.clubStanding = clubStanding;
-	}
-
+	
 	
 	
 	

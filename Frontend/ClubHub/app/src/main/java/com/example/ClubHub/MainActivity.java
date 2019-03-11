@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.search:
-                startActivity(new Intent(MainActivity.this, ClubSearchPage.class));
+                startActivity(new Intent(MainActivity.this, ClubTagSearch.class));
                 break;
 
             case R.id.mainMap:

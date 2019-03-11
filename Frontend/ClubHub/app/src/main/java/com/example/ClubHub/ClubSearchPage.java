@@ -4,14 +4,17 @@ package com.example.ClubHub;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.webkit.HttpAuthHandler;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -39,7 +42,8 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
     private SearchView mSearchView;
     private ListView mListView;
     private String mJSONURLString = "http://cs309-pp-4.misc.iastate.edu:8080/clubtable";
-    private final String[] mStrings = { "Google", "Apple", "Samsung", "Sony", "LG", "HTC" };
+    //private final String[] mStrings = { "Google", "Apple", "Samsung", "Sony", "LG", "HTC" };
+    final ArrayList<String> clubNameArrayList = new ArrayList<>();
 
     //public static String[] clubNameArray;
     //private String[] clubNameArray = new String[100];
@@ -52,10 +56,7 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
 
         setContentView(R.layout.activity_club_search_page);
 
-        final ArrayList<String> clubNameArrayList = new ArrayList<>();
 
-
-        //Log.d("Test check", clubNameArray[0]);
         //Toast.makeText(getApplicationContext(), clubNameArray[0], Toast.LENGTH_LONG).show();
 
         mSearchView = (SearchView) findViewById(R.id.search_view);
@@ -63,7 +64,7 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, clubNameArrayList);
         mListView.setAdapter(adapter);
 
-        RequestQueue queue = Volley.newRequestQueue(this);  // this = context
+        final String tagReceived = getIntent().getStringExtra("tag");
 
         //Initialize a new RequestQueue instance
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -76,9 +77,7 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
                         try {
                             // Get JSON object
                             JSONArray array = response.getJSONArray("clubs");
-
-                            String[] innerClubNameArray = new String[array.length()];
-
+                            /*
                             //Change upper bound of for loop to array.length() to print all values
                             for (int i = 0; i < array.length(); i++) {
 
@@ -91,6 +90,35 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
                                 clubNameArrayList.add(clubName);
                                 adapter.notifyDataSetChanged();
                                 mListView.setAdapter(adapter);
+                            }
+                            */
+
+                            //Change upper bound of for loop to array.length() to print all values
+                            for (int i = 0; i < array.length(); i++) {
+                                JSONObject club = array.getJSONObject(i);
+
+                                // Get the current club (json object) data
+                                String clubID = club.getString("clubID");
+                                String clubName = club.getString("clubName");
+
+                                if(tagReceived.equals("all")){
+                                    clubNameArrayList.add(clubName);
+                                }
+                                else{
+                                    JSONArray clubTags = club.getJSONArray("clubTags");
+                                    String[] tagsArr = new String[clubTags.length()];
+                                    for (int j = 0; j < clubTags.length(); j++){
+                                        tagsArr[j] = clubTags.getString(j);
+                                    }
+                                    for(int k = 0; k < tagsArr.length; k++){
+                                        if(tagReceived.equals(tagsArr[k])){
+                                            //Add the club name for any club with the given tags
+                                            clubNameArrayList.add(clubName);
+                                            adapter.notifyDataSetChanged();
+                                            mListView.setAdapter(adapter);
+                                        }
+                                    }
+                                }
                             }
 
                         } catch (JSONException e) {
@@ -105,21 +133,30 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
                     }
                 }
         );
+        requestQueue.add(jsonObjectRequest);
+
+        //If the tag is not "all" then update the search by removing all the clubs without the given tag
+//        if(!tagReceived.equals("all")){
+//            Toast.makeText(getApplicationContext(), tagReceived, Toast.LENGTH_LONG).show();
+//            //Delete!
+//            clubNameArrayList.clear();
+//            adapter.notifyDataSetChanged();
+//            mListView.setAdapter(adapter);
+//        }
+
+        mListView.setTextFilterEnabled(true);
+        setupSearchView();
 
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-                Intent clubPage = new Intent(ClubSearchPage.this, ClubHomePage.class);
-                //Intent clubPage = new Intent(ClubSearchPage.this, Login.class);
-                clubPage.putExtra("clubName", clubNameArrayList.get(position));
+            Intent clubPage = new Intent(ClubSearchPage.this, ClubHomePage.class);
+            //Intent clubPage = new Intent(ClubSearchPage.this, Login.class);
+            clubPage.putExtra("clubName", clubNameArrayList.get(position));
 
-                startActivity(clubPage);
+            startActivity(clubPage);
             }
         });
-
-        requestQueue.add(jsonObjectRequest);
-        mListView.setTextFilterEnabled(true);
-        setupSearchView();
     }
 
     private void setupSearchView() {
@@ -137,6 +174,7 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
         }
         return true;
     }
+
 
     public boolean onQueryTextSubmit(String query) {
         return false;

@@ -35,7 +35,8 @@ public class UserHomePage extends Activity {
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, clubNames);
 
         final ArrayList<String> memberClubIDArray = new ArrayList<String>();
-
+        final ArrayList<String> clubDomain = new ArrayList<>();
+        final ArrayList<String> clubStatus = new ArrayList<>();
 
         final String userIDNumber = getIntent().getStringExtra("IDNumber");
 
@@ -50,7 +51,7 @@ public class UserHomePage extends Activity {
                 try {
 
                     //Maybe to change
-                    JSONArray array = response.getJSONArray("enrollment");
+                    JSONArray array = response.getJSONArray("enrollments");
                     for (int i = 0; i < array.length(); i++) {
 
                         JSONObject clubEnrollment = array.getJSONObject(i);
@@ -89,6 +90,12 @@ public class UserHomePage extends Activity {
                         JSONObject object = array.getJSONObject(i);
                         String clubID = object.getString("clubID");
                         String clubs = object.getString("clubName");
+                        String domains = object.getString("clubDomain");
+                        String status = object.getString("clubStatus");
+
+
+                        clubDomain.add(domains);
+                        clubStatus.add(status);
 
                         if(memberClubIDArray.contains(clubID)) {
                             clubNames.add(clubs);
@@ -115,6 +122,8 @@ public class UserHomePage extends Activity {
                             String  itemValue    = (String) listView.getItemAtPosition(position);
 
                             Intent intent = new Intent(UserHomePage.this, ClubHomePage.class);
+                            intent.putExtra("clubDomain", clubDomain.get(position));
+                            intent.putExtra("clubStatus", clubStatus.get(position));
                             intent.putExtra("clubName", clubNames.get(position));
                             startActivity(intent);
 

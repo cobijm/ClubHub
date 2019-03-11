@@ -21,11 +21,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/*
+Login Page that takes netID and password from server
+ */
 public class Login extends AppCompatActivity implements View.OnClickListener{
 
 
     private String mJSONURLString = "http://cs309-pp-4.misc.iastate.edu:8080/usersid";
-    private boolean exists = false;
+    private boolean exists = false; // Variable to see if the user exists
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +37,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // Login Button
         Button oButton = (Button) findViewById(R.id.btnLogin);
         oButton.setOnClickListener(this);
 
+        // Forgot Password Button
         Button pButton = (Button) findViewById(R.id.forgotPasswordButton);
         pButton.setOnClickListener(this);
 
@@ -59,6 +64,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                 //Initialize a new RequestQueue instance
                 RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
 
+                // New JSON GET Request
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, mJSONURLString, null,
                          new Response.Listener<JSONObject>() {
                             @Override
@@ -66,7 +72,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                 // Do something with response
                                 try {
                                     // Get JSON object
-                                    JSONArray array = response.getJSONArray("user");
+                                    JSONArray array = response.getJSONArray("student"); // From usersid table
 
                                     //Change upper bound of for loop to array.length() to print all values
                                     for (int i = 0; i < array.length(); i++) {
@@ -75,10 +81,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                         JSONObject user = array.getJSONObject(i);
 
                                         // Get the current student (json object) data
-                                        String netid = user.getString("netid");
+                                        String netid = user.getString("netID");
                                         String password = user.getString("password");
-                                        String studentID = user.getString("id");
+                                        String studentID = user.getString("studentID");
 
+                                        // If netID and password match have intent go to LoginSuccess with custom message
                                         if(netid.equals(netIDInput) && password.equals(passInput)){
                                             Bundle extra = new Bundle();
                                             String userID = netIDInput;
@@ -89,19 +96,16 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
                                             Log.d("Got here", "yes");
 
-
-
                                             Intent j = new Intent(getApplicationContext(), LoginSuccess.class);
                                             j.putExtra("extra", extra);
                                             startActivity(j);
                                             finish();
                                             exists = true;
-
-
                                         }
 
                                     }
 
+                                    // Toast if credentials are not in the server
                                     if (!exists) {
                                         Toast.makeText(getApplicationContext(), "Incorrect Credentials", Toast.LENGTH_LONG).show();
 
@@ -125,6 +129,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                 requestQueue.add(jsonObjectRequest);
                 break;
 
+            // Intent takes user to the ForgotPassword page if clicked
             case R.id.forgotPasswordButton:
                 startActivity(new Intent(Login.this, ForgotPassword.class));
                 break;

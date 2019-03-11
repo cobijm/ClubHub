@@ -34,6 +34,10 @@ public class UserHomePage extends Activity {
         final ListView listView = (ListView) findViewById(R.id.myList);
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, clubNames);
 
+        String userIDNumber;
+
+        userIDNumber = getIntent().getStringExtra("IDNumber");
+
         RequestQueue queue = Volley.newRequestQueue(this);
         String url = "http://cs309-pp-4.misc.iastate.edu:8080/clubtable";
 

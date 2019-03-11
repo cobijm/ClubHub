@@ -77,11 +77,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                         // Get the current student (json object) data
                                         String netid = user.getString("netid");
                                         String password = user.getString("password");
+                                        String studentID = user.getString("id");
 
                                         if(netid.equals(netIDInput) && password.equals(passInput)){
                                             Bundle extra = new Bundle();
                                             String userID = netIDInput;
+
+                                            String userIDNumber = studentID;
                                             extra.putSerializable("user", userID);
+                                            extra.putSerializable("IDNumber", userIDNumber);
 
                                             Log.d("Got here", "yes");
 

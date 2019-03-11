@@ -25,7 +25,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
         mapLoc = getIntent().getStringExtra("clubName");
-
+        if(mapLoc == null){
+            mapLoc = "Fishing Club";
+        }
     }
 
 
@@ -41,27 +43,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
-//        // Add a marker in For StandUp and move the camera
-//        LatLng standUp = new LatLng(42.0275, -93.6421);
-//        mMap.addMarker(new MarkerOptions().position(standUp).title("Stand Up Comedy"));
-//
-//        // Add a marker in For HKN and move the camera
-//        LatLng hkn = new LatLng(42.0284, -93.6509);
-//        mMap.addMarker(new MarkerOptions().position(hkn).title("Eta Kappa Nu"));
-//
-//        // Add a marker in For HKN and move the camera
-//        LatLng solar = new LatLng(42.0278, -93.6509);
-//        mMap.addMarker(new MarkerOptions().position(solar).title("Solar Car"));
-//
-//        // Add a marker in For HKN and move the camera
-//        LatLng codingClub = new LatLng(42.0281, -93.6496);
-//        mMap.addMarker(new MarkerOptions().position(codingClub).title("Coding club"));
-//
-//        // Add a marker in For HKN and move the camera
-//        LatLng filmClub = new LatLng(42.0253, -93.6483);
-//        mMap.addMarker(new MarkerOptions().position(filmClub).title("Film club"));
-//        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(filmClub,14));
 
         if(mapLoc.equals("Fishing Club")){
             LatLng fishClub = new LatLng(42.0253, -93.6483);

@@ -24,13 +24,17 @@ public class LoginSuccess extends AppCompatActivity {
         fetched = "Welcome back " + fetched;
         text.setText(fetched);
 
+        Bundle extra = getIntent().getBundleExtra("extra");
+        final String userID = (String)extra.getSerializable("IDNumber");
+
         Button oButton = (Button) findViewById(R.id.homePageBTN);
         oButton.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v){
-
-                startActivity(new Intent(LoginSuccess.this, UserHomePage.class));
+                Intent userHomePage = new Intent(LoginSuccess.this, UserHomePage.class);
+                userHomePage.putExtra("IDNumber", userID);
+                startActivity(userHomePage);
 
             }
         });

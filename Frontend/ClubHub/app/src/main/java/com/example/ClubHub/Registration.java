@@ -100,8 +100,8 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                                         JSONObject currentStudent = array.getJSONObject(i);
 
                                         // Get the current student (json object) data
-                                        String id = currentStudent.getString("studentid");
-                                        String netid = currentStudent.getString("netid");
+                                        String id = currentStudent.getString("studentID");
+                                        String netid = currentStudent.getString("netID");
                                         String firstName = currentStudent.getString("firstName");
                                         String lastName = currentStudent.getString("lastName");
                                         String classification = currentStudent.getString("classification");
@@ -165,8 +165,8 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         final String passwordInput = passwordEdit.getText().toString();
 
         Map<String, String> params = new HashMap();
-        params.put("studentid", idInput);
-        params.put("netid", netIDinput);
+        params.put("studentID", idInput);
+        params.put("netID", netIDinput);
         params.put("firstName", firstNameInput);
         params.put("lastName", lastNameInput);
         params.put("classification", classificationInput);

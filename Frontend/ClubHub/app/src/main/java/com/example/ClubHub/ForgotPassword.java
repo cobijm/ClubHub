@@ -79,8 +79,8 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                                         JSONObject currentStudent = array.getJSONObject(i);
 
                                         // Get the current student (json object) data
-                                        String id = currentStudent.getString("studentid");
-                                        String netID = currentStudent.getString("netid");
+                                        String id = currentStudent.getString("studentID");
+                                        String netID = currentStudent.getString("netID");
                                         String firstName = currentStudent.getString("firstName");
                                         String lastName = currentStudent.getString("lastName");
                                         String classification = currentStudent.getString("classification");
@@ -137,8 +137,8 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         final String passwordInput = passwordEdit.getText().toString();
 
         Map<String, String> params = new HashMap();
-        params.put("studentid", id);
-        params.put("netid", netID);
+        params.put("studentID", id);
+        params.put("netID", netID);
         params.put("firstName", firstName);
         params.put("lastName", lastName);
         params.put("classification", classification);

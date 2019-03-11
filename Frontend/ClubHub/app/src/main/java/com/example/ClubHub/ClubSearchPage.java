@@ -56,6 +56,7 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
 
         setContentView(R.layout.activity_club_search_page);
 
+
         //Toast.makeText(getApplicationContext(), clubNameArray[0], Toast.LENGTH_LONG).show();
 
         mSearchView = (SearchView) findViewById(R.id.search_view);
@@ -63,15 +64,23 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, clubNameArrayList);
         mListView.setAdapter(adapter);
         createSearch(adapter, clubNameArrayList);
+
+        final String tagReceived = getIntent().getStringExtra("tag");
+
+        //If the tag is not "all" then update the search by removing all the clubs without the given tag
+        if(!tagReceived.equals("all")){
+            updateSearch();
+            adapter.notifyDataSetChanged();
+            mListView.setAdapter(adapter);
+        }
     }
 
     private void updateSearch(){
         //Clears the current list of clubs
         clubNameArrayList.clear();
 
-        //Gets tags typed in by the use
-        EditText tagEdit = (EditText)findViewById(R.id.searchText);
-        final String tagInput = tagEdit.getText().toString();
+        final String tagReceived = getIntent().getStringExtra("tag");
+
 
         //Do a new GET to get the tags for the club
         //RequestQueue queueTwo = Volley.newRequestQueue(this);  // this = context
@@ -104,7 +113,7 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
                                     tagsArr[i] = clubTags.getString(i);
                                 }
                                 for(int k = 0; k < tagsArr.length; k++){
-                                    if(tagInput == tagsArr[k]){
+                                    if(tagReceived == tagsArr[k]){
                                         //Add the club name for any club with the given tags
                                         clubNameArrayList.add(clubName);
                                     }

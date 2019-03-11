@@ -90,12 +90,10 @@ public class UserHomePage extends Activity {
                         String domains = object.getString("clubDomain");
                         String status = object.getString("clubStatus");
 
-
-                        clubDomain.add(domains);
-                        clubStatus.add(status);
-
                         if(memberClubIDArray.contains(clubID)) {
                             clubNames.add(clubs);
+                            clubDomain.add(domains);
+                            clubStatus.add(status);
                         }
 
                     }

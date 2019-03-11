@@ -77,9 +77,7 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
                         try {
                             // Get JSON object
                             JSONArray array = response.getJSONArray("clubs");
-
-                            String[] innerClubNameArray = new String[array.length()];
-
+                            /*
                             //Change upper bound of for loop to array.length() to print all values
                             for (int i = 0; i < array.length(); i++) {
 
@@ -93,84 +91,32 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
                                 adapter.notifyDataSetChanged();
                                 mListView.setAdapter(adapter);
                             }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), "Volley error " + error.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                }
-        );
-
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-                Intent clubPage = new Intent(ClubSearchPage.this, ClubHomePage.class);
-                //Intent clubPage = new Intent(ClubSearchPage.this, Login.class);
-                clubPage.putExtra("clubName", clubNameArrayList.get(position));
-
-                startActivity(clubPage);
-            }
-        });
-
-        requestQueue.add(jsonObjectRequest);
-        mListView.setTextFilterEnabled(true);
-        setupSearchView();
-
-        //If the tag is not "all" then update the search by removing all the clubs without the given tag
-//        if(!tagReceived.equals("all")){
-//            updateSearch();
-//            adapter.notifyDataSetChanged();
-//            mListView.setAdapter(adapter);
-//        }
-    }
-
-    private void updateSearch(){
-        //Clears the current list of clubs
-        clubNameArrayList.clear();
-
-        final String tagReceived = getIntent().getStringExtra("tag");
-
-
-        //Do a new GET to get the tags for the club
-        //RequestQueue queueTwo = Volley.newRequestQueue(this);  // this = context
-
-        //Do a new GET to get the tags for the club
-
-        //Initialize a new RequestQueue instance
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, mJSONURLString, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        // Do something with response
-                        try {
-                            // Get JSON object
-                            JSONArray clubData = response.getJSONArray("clubs");
+                            */
 
                             //Change upper bound of for loop to array.length() to print all values
-                            for (int i = 0; i < clubData.length(); i++) {
-                                JSONObject club = clubData.getJSONObject(i);
+                            for (int i = 0; i < array.length(); i++) {
+                                JSONObject club = array.getJSONObject(i);
 
                                 // Get the current club (json object) data
                                 String clubID = club.getString("clubID");
                                 String clubName = club.getString("clubName");
 
-                                JSONArray clubTags = club.getJSONArray("clubTags");
-                                String[] tagsArr = new String[clubTags.length()];
-                                for (int j = 0; j < clubTags.length(); j++){
-                                    tagsArr[i] = clubTags.getString(i);
+                                if(tagReceived.equals("all")){
+                                    clubNameArrayList.add(clubName);
                                 }
-                                for(int k = 0; k < tagsArr.length; k++){
-                                    if(tagReceived == tagsArr[k]){
-                                        //Add the club name for any club with the given tags
-                                        clubNameArrayList.add(clubName);
+                                else{
+                                    JSONArray clubTags = club.getJSONArray("clubTags");
+                                    String[] tagsArr = new String[clubTags.length()];
+                                    for (int j = 0; j < clubTags.length(); j++){
+                                        tagsArr[j] = clubTags.getString(j);
+                                    }
+                                    for(int k = 0; k < tagsArr.length; k++){
+                                        if(tagReceived.equals(tagsArr[k])){
+                                            //Add the club name for any club with the given tags
+                                            clubNameArrayList.add(clubName);
+                                            adapter.notifyDataSetChanged();
+                                            mListView.setAdapter(adapter);
+                                        }
                                     }
                                 }
                             }
@@ -188,6 +134,29 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
                 }
         );
         requestQueue.add(jsonObjectRequest);
+
+        //If the tag is not "all" then update the search by removing all the clubs without the given tag
+//        if(!tagReceived.equals("all")){
+//            Toast.makeText(getApplicationContext(), tagReceived, Toast.LENGTH_LONG).show();
+//            //Delete!
+//            clubNameArrayList.clear();
+//            adapter.notifyDataSetChanged();
+//            mListView.setAdapter(adapter);
+//        }
+
+        mListView.setTextFilterEnabled(true);
+        setupSearchView();
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+            Intent clubPage = new Intent(ClubSearchPage.this, ClubHomePage.class);
+            //Intent clubPage = new Intent(ClubSearchPage.this, Login.class);
+            clubPage.putExtra("clubName", clubNameArrayList.get(position));
+
+            startActivity(clubPage);
+            }
+        });
     }
 
     private void setupSearchView() {
@@ -198,9 +167,6 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
     }
 
     public boolean onQueryTextChange(String newText) {
-        //Custom update search
-        updateSearch();
-
         if (TextUtils.isEmpty(newText)) {
             mListView.clearTextFilter();
         } else {

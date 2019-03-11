@@ -11,7 +11,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class ClubTagSearch extends AppCompatActivity implements View.OnClickListener {
-    final ArrayList<String> availibleTags = new ArrayList<String>();
+    final ArrayList<String> availableTags = new ArrayList<String>();
 
 
     @Override
@@ -19,19 +19,19 @@ public class ClubTagSearch extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_club_tag_search);
 
-        availibleTags.add("social");
-        availibleTags.add("sport");
-        availibleTags.add("drinking");
-        availibleTags.add("academic");
-        availibleTags.add("engineering");
-        availibleTags.add("computers");
-        availibleTags.add("cars");
-        availibleTags.add("adult");
-        availibleTags.add("fun");
-        availibleTags.add("mips");
-        availibleTags.add("fish");
-        availibleTags.add("outdoors");
-        availibleTags.add("sleep");
+        availableTags.add("social");
+        availableTags.add("sport");
+        availableTags.add("drinking");
+        availableTags.add("academic");
+        availableTags.add("engineering");
+        availableTags.add("computers");
+        availableTags.add("cars");
+        availableTags.add("adult");
+        availableTags.add("fun");
+        availableTags.add("mips");
+        availableTags.add("fish");
+        availableTags.add("outdoors");
+        availableTags.add("sleep");
 
 
         //Button to search by the given tag
@@ -52,20 +52,21 @@ public class ClubTagSearch extends AppCompatActivity implements View.OnClickList
                 if (tagInput.equals("all") || tagInput.equals("All")) {
                     //Put in logic to not search by tag
                     sendTag = "all";
-                    Intent mapLocation = new Intent(ClubTagSearch.this, ClubSearchPage.class);
-                    mapLocation.putExtra("tag", sendTag);
-                    startActivity(mapLocation);
+                    Intent searchPage = new Intent(ClubTagSearch.this, ClubSearchPage.class);
+                    searchPage.putExtra("tag", sendTag);
+                    //Toast.makeText(getApplicationContext(), sendTag, Toast.LENGTH_LONG).show();
+                    startActivity(searchPage);
                 }
-                else if(availibleTags.contains(tagInput)){
+                else if(availableTags.contains(tagInput)){
                     sendTag = tagInput;
-                    Intent mapLocation = new Intent(ClubTagSearch.this, ClubSearchPage.class);
-                    mapLocation.putExtra("tag", sendTag);
-                    startActivity(mapLocation);
+                    Intent searchPage = new Intent(ClubTagSearch.this, ClubSearchPage.class);
+                    searchPage.putExtra("tag", sendTag);
+                    //Toast.makeText(getApplicationContext(), sendTag, Toast.LENGTH_LONG).show();
+                    startActivity(searchPage);
                 }
                 else{
                     Toast.makeText(getApplicationContext(), "Tag not available", Toast.LENGTH_LONG).show();
                 }
-                startActivity(new Intent(ClubTagSearch.this, ClubSearchPage.class));
                 break;
         }
     }

@@ -61,9 +61,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button pButton = (Button) findViewById(R.id.search);
         pButton.setOnClickListener(this);
 
-        //Search button
-        Button qButton = (Button) findViewById(R.id.mainMap);
-        qButton.setOnClickListener(this);
     }
 
     @Override
@@ -84,9 +81,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(MainActivity.this, ClubTagSearch.class));
                 break;
 
-            case R.id.mainMap:
-                startActivity(new Intent(MainActivity.this, MapsActivity.class));
-                break;
         }
 
     }

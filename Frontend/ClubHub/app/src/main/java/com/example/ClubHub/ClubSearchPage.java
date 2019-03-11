@@ -45,6 +45,9 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
     //private final String[] mStrings = { "Google", "Apple", "Samsung", "Sony", "LG", "HTC" };
     final ArrayList<String> clubNameArrayList = new ArrayList<>();
 
+    String clubDomain = "";
+    String clubStatus = "";
+
     //public static String[] clubNameArray;
     //private String[] clubNameArray = new String[100];
 
@@ -77,28 +80,14 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
                         try {
                             // Get JSON object
                             JSONArray array = response.getJSONArray("clubs");
-                            /*
-                            //Change upper bound of for loop to array.length() to print all values
-                            for (int i = 0; i < array.length(); i++) {
-
-                                // Get current json object
-                                JSONObject club = array.getJSONObject(i);
-
-                                // Get the current club (json object) data
-                                String clubID = club.getString("clubID");
-                                String clubName = club.getString("clubName");
-                                clubNameArrayList.add(clubName);
-                                adapter.notifyDataSetChanged();
-                                mListView.setAdapter(adapter);
-                            }
-                            */
 
                             //Change upper bound of for loop to array.length() to print all values
                             for (int i = 0; i < array.length(); i++) {
                                 JSONObject club = array.getJSONObject(i);
 
                                 // Get the current club (json object) data
-                                String clubID = club.getString("clubID");
+                                clubDomain = club.getString("clubDomain");
+                                clubStatus = club.getString("clubStatus");
                                 String clubName = club.getString("clubName");
 
                                 if(tagReceived.equals("all")){
@@ -135,14 +124,6 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
         );
         requestQueue.add(jsonObjectRequest);
 
-        //If the tag is not "all" then update the search by removing all the clubs without the given tag
-//        if(!tagReceived.equals("all")){
-//            Toast.makeText(getApplicationContext(), tagReceived, Toast.LENGTH_LONG).show();
-//            //Delete!
-//            clubNameArrayList.clear();
-//            adapter.notifyDataSetChanged();
-//            mListView.setAdapter(adapter);
-//        }
 
         mListView.setTextFilterEnabled(true);
         setupSearchView();
@@ -154,6 +135,9 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
             //Intent clubPage = new Intent(ClubSearchPage.this, Login.class);
             clubPage.putExtra("clubName", clubNameArrayList.get(position));
 
+            //Change below to get current domain and status
+            clubPage.putExtra("clubDomain", clubDomain);
+            clubPage.putExtra("clubStatus", clubStatus);
             startActivity(clubPage);
             }
         });

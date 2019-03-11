@@ -92,7 +92,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                                 // Do something with response
                                 try {
                                     // Get JSON object
-                                    JSONArray array = response.getJSONArray("user");
+                                    JSONArray array = response.getJSONArray("student");
 
                                     //Change upper bound of for loop to array.length() to print all values
                                     for (int i = 0; i < array.length(); i++) {
@@ -100,7 +100,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
                                         JSONObject currentStudent = array.getJSONObject(i);
 
                                         // Get the current student (json object) data
-                                        String id = currentStudent.getString("id");
+                                        String id = currentStudent.getString("studentid");
                                         String netid = currentStudent.getString("netid");
                                         String firstName = currentStudent.getString("firstName");
                                         String lastName = currentStudent.getString("lastName");
@@ -165,7 +165,7 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         final String passwordInput = passwordEdit.getText().toString();
 
         Map<String, String> params = new HashMap();
-        params.put("id", idInput);
+        params.put("studentid", idInput);
         params.put("netid", netIDinput);
         params.put("firstName", firstNameInput);
         params.put("lastName", lastNameInput);

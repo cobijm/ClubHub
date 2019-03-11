@@ -72,7 +72,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                 // Do something with response
                                 try {
                                     // Get JSON object
-                                    JSONArray array = response.getJSONArray("user"); // From usersid table
+                                    JSONArray array = response.getJSONArray("student"); // From usersid table
 
                                     //Change upper bound of for loop to array.length() to print all values
                                     for (int i = 0; i < array.length(); i++) {
@@ -83,7 +83,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                         // Get the current student (json object) data
                                         String netid = user.getString("netid");
                                         String password = user.getString("password");
-                                        String studentID = user.getString("id");
+                                        String studentID = user.getString("studentid");
 
                                         // If netID and password match have intent go to LoginSuccess with custom message
                                         if(netid.equals(netIDInput) && password.equals(passInput)){

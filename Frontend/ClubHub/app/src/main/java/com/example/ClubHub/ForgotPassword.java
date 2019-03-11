@@ -1,6 +1,7 @@
 package com.example.ClubHub;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -60,32 +61,51 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-                                String currentName = "";
+
+                                String currentID = "";
+                                String currentNetID = "";
+                                String currentfirstName = "";
+                                String currentlastName = "";
+                                String currentClassification = "";
+                                String currentPhoneNumber = "";
+                                String currentMajor = "";
+
                                 int idExists = 0;
                                 // Do something with response
                                 try {
                                     // Get JSON object
-                                    JSONArray array = response.getJSONArray("student");
+                                    JSONArray array = response.getJSONArray("user");
 
                                     //Change upper bound of for loop to array.length() to print all values
                                     for (int i = 0; i < array.length(); i++) {
                                         // Get current json object
-                                        JSONObject student = array.getJSONObject(i);
+                                        JSONObject currentStudent = array.getJSONObject(i);
 
                                         // Get the current student (json object) data
-                                        String name = student.getString("name");
-                                        String netid = student.getString("netid");
-                                        String password = student.getString("password");
+                                        String id = currentStudent.getString("id");
+                                        String netID = currentStudent.getString("netid");
+                                        String firstName = currentStudent.getString("firstName");
+                                        String lastName = currentStudent.getString("lastName");
+                                        String classification = currentStudent.getString("classification");
+                                        String phoneNumber = currentStudent.getString("phoneNumber");
+                                        String major = currentStudent.getString("major");
+                                        String password = currentStudent.getString("password");
 
-                                        if(netid.equals(IDInput)){
+                                        if(netID.equals(IDInput)){
                                             //Toast.makeText(getApplicationContext(), "NetID Already Registered", Toast.LENGTH_LONG).show();
                                             idExists = 1;
-                                            currentName = student.getString("name");
+                                            currentID = id;
+                                            currentNetID = netID;
+                                            currentfirstName = firstName;
+                                            currentlastName = lastName;
+                                            currentClassification = classification;
+                                            currentPhoneNumber = phoneNumber;
+                                            currentMajor = major;
                                         }
                                     }
                                     if(idExists == 1) {
                                         //Log.d("Got here", "This is my message");
-                                        postData(currentName);
+                                        postData(currentID, currentNetID, currentfirstName, currentlastName, currentClassification, currentPhoneNumber, currentMajor);
                                     }
                                     else{
                                         Toast.makeText(getApplicationContext(), "NetID does not exist", Toast.LENGTH_LONG).show();
@@ -110,7 +130,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    public void postData(String currentName){
+    public void postData(String id, String netID, String firstName, String lastName, String classification, String phoneNumber, String major){
         RequestQueue queue = Volley.newRequestQueue(this);
 
         EditText IDEdit = (EditText)findViewById(R.id.username);
@@ -120,8 +140,13 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         final String passwordInput = passwordEdit.getText().toString();
 
         Map<String, String> params = new HashMap();
-        params.put("name", currentName);
-        params.put("netid", IDInput);
+        params.put("id", id);
+        params.put("netid", netID);
+        params.put("firstName", firstName);
+        params.put("lastName", lastName);
+        params.put("classification", classification);
+        params.put("phoneNumber", phoneNumber);
+        params.put("major", major);
         params.put("password", passwordInput);
 
         JSONObject parameters = new JSONObject(params);
@@ -135,8 +160,8 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                     public void onResponse(JSONObject response) {
                         // response
                         Log.d("Response", response.toString());
-                        //Toast.makeText(getApplicationContext(), "Volley success " + response, Toast.LENGTH_LONG).show();
-                        //startActivity(new Intent(ForgotPassword.this, RegistrationSuccess.class));
+                        Toast.makeText(getApplicationContext(), "Password Successfully Changed", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(ForgotPassword.this, Login.class));
                     }
                 },
                 new Response.ErrorListener()
@@ -145,8 +170,8 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                     public void onErrorResponse(VolleyError error) {
                         // error
                         Log.d("Error.Response", error.toString());
-                        //Toast.makeText(getApplicationContext(), "Volley error " + error.getMessage(), Toast.LENGTH_LONG).show();
-                        //startActivity(new Intent(ForgotPassword.this, RegistrationSuccess.class));
+                        Toast.makeText(getApplicationContext(), "Password Successfully Changed", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(ForgotPassword.this, Login.class));
                     }
                 }
         );

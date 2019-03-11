@@ -1,0 +1,15 @@
+package backend.clubEnrollment;
+
+import java.util.List;
+
+public class Enrollments {
+	private List<enrollmentID> Enrollments;
+
+	public Enrollments(List<enrollmentID> Enrollments) {
+		this.Enrollments = Enrollments;
+	}
+
+	public List<enrollmentID> getEnrollments() {
+		return Enrollments;
+	}
+}

@@ -11,6 +11,7 @@ public class clubEnrollment {
 	
 	@Id
 	private String enrollmentNumber;
+	private String clubID;
 	private String studentID;
 	private String ranking;
 	private String joinDate;
@@ -23,9 +24,11 @@ public class clubEnrollment {
 		
 	}
 	
-	public clubEnrollment(String enrollmentnumber,String studentid ,String ranking, String joindate, String expirationdate , String clubstanding)
+	public clubEnrollment(String enrollmentnumber, String clubID, String studentid, String ranking,
+			String joindate, String expirationdate , String clubstanding)
 	{
 		this.enrollmentNumber = enrollmentnumber;
+		this.clubID = clubID;
 		this.studentID = studentid;
 		this.ranking = ranking;
 		this.joinDate = joindate;
@@ -41,6 +44,14 @@ public class clubEnrollment {
 
 	public void setEnrollmentID(String enrollmentnumber) {
 		this.enrollmentNumber = enrollmentnumber;
+	}
+	
+	public String getClubtID() {
+		return clubID;
+	}
+
+	public void setClubID(String clubID) {
+		this.clubID = clubID;
 	}
 
 	public String getStudentID() {
@@ -83,7 +94,6 @@ public class clubEnrollment {
 		this.clubStanding = clubStanding;
 	}
 
-	
 	
 	
 	

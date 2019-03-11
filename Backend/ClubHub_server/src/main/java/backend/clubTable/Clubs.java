@@ -2,10 +2,10 @@ package backend.clubTable;
 
 import java.util.List;
 
-public class clubs {
+public class Clubs {
 	private List<clubTable> clubs;
 
-	public clubs(List<clubTable> clubs) {
+	public Clubs(List<clubTable> clubs) {
 		this.clubs = clubs;
 	}
 

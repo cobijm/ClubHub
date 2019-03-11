@@ -26,8 +26,8 @@ public class clubTableController {
 	private clubTableServices clubtableServices;
 
 	@RequestMapping("/clubtable")
-	public clubs getAllclubTable() {
-		return new clubs(clubtableServices.getAllclubTable());
+	public Clubs getAllclubTable() {
+		return new Clubs(clubtableServices.getAllclubTable());
 	}
 
 	@RequestMapping("/clubtable/{netid}")

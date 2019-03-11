@@ -7,41 +7,90 @@ import javax.persistence.Table;
 import org.springframework.core.style.ToStringCreator;
 
 @Entity
-@Table(name = "UserID")
+@Table(name = "userID")
 public class userID {
 
 	@Id
-	private String name;
+	private String studentid;
 	private String netid;
+	private String firstName;
+	private String lastName;
+	private String classification;
+	private String phoneNumber;
+	private String major;
 	private String password;
 
 	public userID() {
 
 	}
 
-	public userID(String name, String netid, String password) {
+	public userID(String studentid, String netid, String firstName, String lastName, String classification, 
+			String phoneNumber, String major, String password) {
 		super();
-
-		this.name = name;
-		this.netid = netid;
-		this.password = password;
+		
+		this.setstudentid(studentid);
+		this.setNetid(netid);
+		this.setFirstName(firstName);
+		this.setLastName(lastName);
+		this.setClassification(classification);
+		this.setPhoneNumber(phoneNumber);
+		this.setMajor(major);
+		this.setPassword(password);
 
 	}
 
-	public String getName() {
-		return name;
+	public String getstudentid() {
+		return studentid;
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setstudentid(String studentid) {
+		this.studentid = studentid;
 	}
-	
 	public String getNetid() {
 		return netid;
 	}
 
 	public void setNetid(String netid) {
 		this.netid = netid;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getClassification() {
+		return classification;
+	}
+
+	public void setClassification(String classification) {
+		this.classification = classification;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public String getMajor() {
+		return major;
+	}
+
+	public void setMajor(String major) {
+		this.major = major;
 	}
 
 	public String getPassword() {
@@ -51,116 +100,7 @@ public class userID {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
+	
 
 }
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "ID")
-//    @NotFound(action = NotFoundAction.IGNORE)
-//    private Integer id;
-//
-//    @Column(name = "Name")
-//    @NotFound(action = NotFoundAction.IGNORE)
-//    private String name;
-//
-//    @Column(name = "NetID")
-//    @NotFound(action = NotFoundAction.IGNORE)
-//    private String netid;
-//
-//    @Column(name = "FirstName")
-//    @NotFound(action = NotFoundAction.IGNORE)
-//    private String firstname;
-//
-//    @Column(name = "LastName")
-//    @NotFound(action = NotFoundAction.IGNORE)
-//    private String lastname;
-//
-//    @Column(name = "Classification")
-//    @NotFound(action = NotFoundAction.IGNORE)
-//    private String classification;
-//    
-//    @Column(name = "Phone")
-//    @NotFound(action = NotFoundAction.IGNORE)
-//    private String phone;
-//    
-//    @Column(name = "Major")
-//    @NotFound(action = NotFoundAction.IGNORE)
-//    private String major;
-//    
-//    public Integer getId() {
-//        return id;
-//    }
-//
-//    public void setId(Integer id) {
-//        this.id = id;
-//    }
-//
-//    public boolean isNew() {
-//        return this.id == null;
-//    }
-//
-//    public String getName() {
-//    	return this.name;
-//    }
-//    
-//    public void setName(String name) {
-//    	this.name = name;
-//    }
-//    
-//    public String getNetID() {
-//    	return this.netid;
-//    }
-//    
-//    public String getFirstName() {
-//        return this.firstname;
-//    }
-//
-//    public void setFirstName(String firstName) {
-//        this.firstname = firstName;
-//    }
-//
-//    public String getLastName() {
-//        return this.lastname;
-//    }
-//
-//    public void setLastName(String lastName) {
-//        this.lastname = lastName;
-//    }
-//
-//    public String getClassification() {
-//        return this.classification;
-//    }
-//
-//    public void setClassification(String classification) {
-//        this.classification = classification;
-//    }
-//
-//    public String getPhone() {
-//        return this.phone;
-//    }
-//
-//    public void setPhone(String phone) {
-//        this.phone = phone;
-//    }
-//
-//    public String getMajor() {
-//    	return this.major;
-//    }
-//    
-//    public void setMajor(String major) {
-//        this.major = major;
-//    }
-//    @Override
-//    public String toString() {
-//        return new ToStringCreator(this)
-//
-//                .append("id", this.getId())
-//                .append("name", this.getName())
-//                .append("netid", this.getNetID())
-//                .append("firstname", this.getFirstName())
-//                .append("lastname", this.getLastName())
-//                .append("classification", this.getClassification())
-//        		.append("phone", this.getPhone())
-//                .append("major", this.getMajor()).toString();
-//    }
-//}

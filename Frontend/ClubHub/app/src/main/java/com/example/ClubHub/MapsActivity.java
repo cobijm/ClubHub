@@ -13,6 +13,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private String mapLoc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        mapLoc = getIntent().getStringExtra("clubName");
+//        if(mapLoc == null){
+//            mapLoc = "Fishing Club";
+//        }
     }
 
 
@@ -38,26 +44,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in For StandUp and move the camera
-        LatLng standUp = new LatLng(42.0275, -93.6421);
-        mMap.addMarker(new MarkerOptions().position(standUp).title("Stand Up Comedy"));
+        if(mapLoc.equals("fishing club")){
+            LatLng fishClub = new LatLng(42.0253, -93.6483);
+            mMap.addMarker(new MarkerOptions().position(fishClub).title("Fishing Club"));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(fishClub,18));
+        }
 
-        // Add a marker in For HKN and move the camera
-        LatLng hkn = new LatLng(42.0284, -93.6509);
-        mMap.addMarker(new MarkerOptions().position(hkn).title("Eta Kappa Nu"));
+        else if(mapLoc.equals("sleeping club")){
+            LatLng sleep = new LatLng(42.0281, -93.6496);
+            mMap.addMarker(new MarkerOptions().position(sleep).title("Sleeping Club"));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sleep,18));
+        }
 
-        // Add a marker in For HKN and move the camera
-        LatLng solar = new LatLng(42.0278, -93.6509);
-        mMap.addMarker(new MarkerOptions().position(solar).title("Solar Car"));
+        else if (mapLoc.equals("duwe fan club")){
+            LatLng duwe = new LatLng(42.0275, -93.6421);
+            mMap.addMarker(new MarkerOptions().position(duwe).title("Duwe Fan Club"));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(duwe,18));
+        }
 
-        // Add a marker in For HKN and move the camera
-        LatLng codingClub = new LatLng(42.0281, -93.6496);
-        mMap.addMarker(new MarkerOptions().position(codingClub).title("Coding club"));
+        else if (mapLoc.equals("driving club")){
+            LatLng drive = new LatLng(42.0284, -93.6509);
+            mMap.addMarker(new MarkerOptions().position(drive).title("Driving Club"));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(drive,18));
+        }
 
-        // Add a marker in For HKN and move the camera
-        LatLng filmClub = new LatLng(42.0253, -93.6483);
-        mMap.addMarker(new MarkerOptions().position(filmClub).title("Film club"));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(filmClub,14));
-
+        else if(mapLoc.equals("juicy boys")){
+            LatLng runner = new LatLng(42.0267, -93.6372);
+            mMap.addMarker(new MarkerOptions().position(runner).title("Juicy Boys"));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(runner,18));
+        }
     }
 }

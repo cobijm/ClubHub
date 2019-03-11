@@ -72,7 +72,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                 // Do something with response
                                 try {
                                     // Get JSON object
-                                    JSONArray array = response.getJSONArray("user"); // From usersid table
+                                    JSONArray array = response.getJSONArray("student"); // From usersid table
 
                                     //Change upper bound of for loop to array.length() to print all values
                                     for (int i = 0; i < array.length(); i++) {
@@ -81,9 +81,9 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                                         JSONObject user = array.getJSONObject(i);
 
                                         // Get the current student (json object) data
-                                        String netid = user.getString("netid");
+                                        String netid = user.getString("netID");
                                         String password = user.getString("password");
-                                        String studentID = user.getString("id");
+                                        String studentID = user.getString("studentID");
 
                                         // If netID and password match have intent go to LoginSuccess with custom message
                                         if(netid.equals(netIDInput) && password.equals(passInput)){
@@ -96,15 +96,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
                                             Log.d("Got here", "yes");
 
-
-
                                             Intent j = new Intent(getApplicationContext(), LoginSuccess.class);
                                             j.putExtra("extra", extra);
                                             startActivity(j);
                                             finish();
                                             exists = true;
-
-
                                         }
 
                                     }

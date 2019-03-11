@@ -36,7 +36,6 @@ public class UserHomePage extends Activity {
 
         final ArrayList<String> memberClubIDArray = new ArrayList<String>();
 
-
         final String userIDNumber = getIntent().getStringExtra("IDNumber");
 
         RequestQueue queue = Volley.newRequestQueue(this);

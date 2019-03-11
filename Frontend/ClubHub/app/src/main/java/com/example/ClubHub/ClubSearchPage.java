@@ -4,9 +4,11 @@ package com.example.ClubHub;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.webkit.HttpAuthHandler;
@@ -40,7 +42,7 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
     private SearchView mSearchView;
     private ListView mListView;
     private String mJSONURLString = "http://cs309-pp-4.misc.iastate.edu:8080/clubtable";
-    private final String[] mStrings = { "Google", "Apple", "Samsung", "Sony", "LG", "HTC" };
+    //private final String[] mStrings = { "Google", "Apple", "Samsung", "Sony", "LG", "HTC" };
     final ArrayList<String> clubNameArrayList = new ArrayList<>();
 
     //public static String[] clubNameArray;
@@ -55,7 +57,6 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
         setContentView(R.layout.activity_club_search_page);
 
 
-        //Log.d("Test check", clubNameArray[0]);
         //Toast.makeText(getApplicationContext(), clubNameArray[0], Toast.LENGTH_LONG).show();
 
         mSearchView = (SearchView) findViewById(R.id.search_view);
@@ -64,29 +65,27 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
         mListView.setAdapter(adapter);
         createSearch(adapter, clubNameArrayList);
 
-        mSearchView.setOnSearchClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch (v.getId()) {
-                    case R.id.searchButton:
-                        updateSearch();
-                        createSearch(adapter,clubNameArrayList);
-                }
-            }
-        });
+        final String tagReceived = getIntent().getStringExtra("tag");
 
+        //If the tag is not "all" then update the search by removing all the clubs without the given tag
+        if(!tagReceived.equals("all")){
+            updateSearch();
+            adapter.notifyDataSetChanged();
+            mListView.setAdapter(adapter);
+        }
     }
 
     private void updateSearch(){
         //Clears the current list of clubs
         clubNameArrayList.clear();
 
-        EditText tagEdit = (EditText)findViewById(R.id.searchText);
-        final String tagInput = tagEdit.getText().toString();
+        final String tagReceived = getIntent().getStringExtra("tag");
+
 
         //Do a new GET to get the tags for the club
+        //RequestQueue queueTwo = Volley.newRequestQueue(this);  // this = context
 
-        RequestQueue queueTwo = Volley.newRequestQueue(this);  // this = context
+        //Do a new GET to get the tags for the club
 
         //Initialize a new RequestQueue instance
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -114,7 +113,7 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
                                     tagsArr[i] = clubTags.getString(i);
                                 }
                                 for(int k = 0; k < tagsArr.length; k++){
-                                    if(tagInput == tagsArr[k]){
+                                    if(tagReceived == tagsArr[k]){
                                         //Add the club name for any club with the given tags
                                         clubNameArrayList.add(clubName);
                                     }
@@ -133,12 +132,12 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
                     }
                 }
         );
-        queueTwo.add(jsonObjectRequest);
+        requestQueue.add(jsonObjectRequest);
     }
 
     private void createSearch(final ArrayAdapter<String> adapter, final ArrayList<String> clubNameArrayList){
 
-        RequestQueue queue = Volley.newRequestQueue(this);  // this = context
+        //RequestQueue queue = Volley.newRequestQueue(this);  // this = context
 
         //Initialize a new RequestQueue instance
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -205,6 +204,9 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
     }
 
     public boolean onQueryTextChange(String newText) {
+        //Custom update search
+        updateSearch();
+
         if (TextUtils.isEmpty(newText)) {
             mListView.clearTextFilter();
         } else {
@@ -212,6 +214,7 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
         }
         return true;
     }
+
 
     public boolean onQueryTextSubmit(String query) {
         return false;

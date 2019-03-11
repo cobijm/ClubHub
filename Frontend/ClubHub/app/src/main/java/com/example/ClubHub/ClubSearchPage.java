@@ -213,6 +213,7 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
         return true;
     }
 
+
     public boolean onQueryTextSubmit(String query) {
         return false;
     }

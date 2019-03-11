@@ -63,33 +63,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        mMap.addMarker(new MarkerOptions().position(filmClub).title("Film club"));
 //        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(filmClub,14));
 
-        if(mapLoc.equals("Fishing Club")){
+        if(mapLoc.equals("fishing club")){
             LatLng fishClub = new LatLng(42.0253, -93.6483);
-            mMap.addMarker(new MarkerOptions().position(fishClub).title("Fishing club"));
+            mMap.addMarker(new MarkerOptions().position(fishClub).title("Fishing Club"));
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(fishClub,18));
         }
 
-        else if(mapLoc.equals("C Monsters")){
-            LatLng cMonst = new LatLng(42.0281, -93.6496);
-            mMap.addMarker(new MarkerOptions().position(cMonst).title("C Monsters"));
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(cMonst,18));
+        else if(mapLoc.equals("sleeping club")){
+            LatLng sleep = new LatLng(42.0281, -93.6496);
+            mMap.addMarker(new MarkerOptions().position(sleep).title("Sleeping Club"));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sleep,18));
         }
 
-        else if (mapLoc.equals("Wine Enthusiasts")){
-            LatLng wine = new LatLng(42.0275, -93.6421);
-            mMap.addMarker(new MarkerOptions().position(wine).title("Wine Enthusiasts"));
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(wine,18));
+        else if (mapLoc.equals("duwe fan club")){
+            LatLng duwe = new LatLng(42.0275, -93.6421);
+            mMap.addMarker(new MarkerOptions().position(duwe).title("Duwe Fan Club"));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(duwe,18));
         }
 
-        else if (mapLoc.equals("We Love MIPS")){
-            LatLng mips  = new LatLng(42.0284, -93.6509);
-            mMap.addMarker(new MarkerOptions().position(mips).title("We Love Mips"));
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(mips,18));
+        else if (mapLoc.equals("driving club")){
+            LatLng drive = new LatLng(42.0284, -93.6509);
+            mMap.addMarker(new MarkerOptions().position(drive).title("Driving Club"));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(drive,18));
         }
 
-        else if(mapLoc.equals("Runner's High")){
+        else if(mapLoc.equals("juicy boys")){
             LatLng runner = new LatLng(42.0267, -93.6372);
-            mMap.addMarker(new MarkerOptions().position(runner).title("Runner's High"));
+            mMap.addMarker(new MarkerOptions().position(runner).title("Juicy Boys"));
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(runner,18));
         }
     }

@@ -20,7 +20,8 @@ public class ClubHomePage extends AppCompatActivity {
         setContentView(R.layout.activity_club_home_page);
 
         clubName = getIntent().getStringExtra("clubName");
-        domainName = getIntent().getStringExtra("domain");
+        domainName = getIntent().getStringExtra("clubDomain");
+        clubStatus = getIntent().getStringExtra("clubStatus");
 
         Button mButton = (Button)findViewById(R.id.mapsLocation);
         mButton.setOnClickListener(new View.OnClickListener() {
@@ -32,10 +33,14 @@ public class ClubHomePage extends AppCompatActivity {
             }
         });
 
-
         TextView myTxt = (TextView) findViewById(R.id.clubName);
         myTxt.setText(clubName);
 
+        TextView myTxt2 = (TextView)findViewById(R.id.domain);
+        myTxt2.setText(domainName);
+
+        TextView myTxt3 = (TextView)findViewById(R.id.status);
+        myTxt3.setText(clubStatus);
     }
 
 }

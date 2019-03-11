@@ -109,9 +109,9 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-                //Change to Intent clubPage = new Intent(ClubSearchPage.class, ClubHomePage.class);
-                Intent clubPage = new Intent(ClubSearchPage.this, Login.class);
-                clubPage.putExtra("ClubName", clubNameArrayList.get(position));
+                Intent clubPage = new Intent(ClubSearchPage.this, ClubHomePage.class);
+                //Intent clubPage = new Intent(ClubSearchPage.this, Login.class);
+                clubPage.putExtra("clubName", clubNameArrayList.get(position));
 
                 startActivity(clubPage);
             }

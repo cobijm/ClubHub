@@ -49,7 +49,7 @@ public class UserHomePage extends Activity {
                 try {
 
                     //Maybe to change
-                    JSONArray array = response.getJSONArray("enrollment");
+                    JSONArray array = response.getJSONArray("enrollments");
                     for (int i = 0; i < array.length(); i++) {
 
                         JSONObject clubEnrollment = array.getJSONObject(i);

@@ -13,6 +13,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private String mapLoc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        mapLoc = getIntent().getStringExtra("clubName");
+
     }
 
 
@@ -38,26 +42,55 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in For StandUp and move the camera
-        LatLng standUp = new LatLng(42.0275, -93.6421);
-        mMap.addMarker(new MarkerOptions().position(standUp).title("Stand Up Comedy"));
+//        // Add a marker in For StandUp and move the camera
+//        LatLng standUp = new LatLng(42.0275, -93.6421);
+//        mMap.addMarker(new MarkerOptions().position(standUp).title("Stand Up Comedy"));
+//
+//        // Add a marker in For HKN and move the camera
+//        LatLng hkn = new LatLng(42.0284, -93.6509);
+//        mMap.addMarker(new MarkerOptions().position(hkn).title("Eta Kappa Nu"));
+//
+//        // Add a marker in For HKN and move the camera
+//        LatLng solar = new LatLng(42.0278, -93.6509);
+//        mMap.addMarker(new MarkerOptions().position(solar).title("Solar Car"));
+//
+//        // Add a marker in For HKN and move the camera
+//        LatLng codingClub = new LatLng(42.0281, -93.6496);
+//        mMap.addMarker(new MarkerOptions().position(codingClub).title("Coding club"));
+//
+//        // Add a marker in For HKN and move the camera
+//        LatLng filmClub = new LatLng(42.0253, -93.6483);
+//        mMap.addMarker(new MarkerOptions().position(filmClub).title("Film club"));
+//        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(filmClub,14));
 
-        // Add a marker in For HKN and move the camera
-        LatLng hkn = new LatLng(42.0284, -93.6509);
-        mMap.addMarker(new MarkerOptions().position(hkn).title("Eta Kappa Nu"));
+        if(mapLoc.equals("Fishing Club")){
+            LatLng fishClub = new LatLng(42.0253, -93.6483);
+            mMap.addMarker(new MarkerOptions().position(fishClub).title("Fishing club"));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(fishClub,18));
+        }
 
-        // Add a marker in For HKN and move the camera
-        LatLng solar = new LatLng(42.0278, -93.6509);
-        mMap.addMarker(new MarkerOptions().position(solar).title("Solar Car"));
+        else if(mapLoc.equals("C Monsters")){
+            LatLng cMonst = new LatLng(42.0281, -93.6496);
+            mMap.addMarker(new MarkerOptions().position(cMonst).title("C Monsters"));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(cMonst,18));
+        }
 
-        // Add a marker in For HKN and move the camera
-        LatLng codingClub = new LatLng(42.0281, -93.6496);
-        mMap.addMarker(new MarkerOptions().position(codingClub).title("Coding club"));
+        else if (mapLoc.equals("Wine Enthusiasts")){
+            LatLng wine = new LatLng(42.0275, -93.6421);
+            mMap.addMarker(new MarkerOptions().position(wine).title("Wine Enthusiasts"));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(wine,18));
+        }
 
-        // Add a marker in For HKN and move the camera
-        LatLng filmClub = new LatLng(42.0253, -93.6483);
-        mMap.addMarker(new MarkerOptions().position(filmClub).title("Film club"));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(filmClub,14));
+        else if (mapLoc.equals("We Love MIPS")){
+            LatLng mips  = new LatLng(42.0284, -93.6509);
+            mMap.addMarker(new MarkerOptions().position(mips).title("We Love Mips"));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(mips,18));
+        }
 
+        else if(mapLoc.equals("Runner's High")){
+            LatLng runner = new LatLng(42.0267, -93.6372);
+            mMap.addMarker(new MarkerOptions().position(runner).title("Runner's High"));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(runner,18));
+        }
     }
 }

@@ -1,4 +1,4 @@
-package backend.enrollmentTable;
+package backend.enrollmentSheet;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -7,8 +7,8 @@ import javax.persistence.Table;
 import org.springframework.core.style.ToStringCreator;
 
 @Entity
-@Table(name = "EnrollmentTable")
-public class enrollmentTable {
+@Table(name = "EnrollmentSheet")
+public class enrollmentSheet {
 
 	@Id
 	private String enrollmentID;
@@ -20,12 +20,12 @@ public class enrollmentTable {
 
 
 		
-	public enrollmentTable() {
+	public enrollmentSheet() {
 
 	}
 
 
-	public enrollmentTable( String enrollmentid, String studentid, String rank, String joindate,
+	public enrollmentSheet( String enrollmentid, String studentid, String rank, String joindate,
 			String expirationdate, String clubstanding) {
 		super();
 

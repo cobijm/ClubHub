@@ -1,4 +1,4 @@
-package backend.enrollmentTable;
+package backend.enrollmentSheet;
 
 
 import java.util.Collection;
@@ -12,7 +12,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-public interface enrollmentTableRepository extends CrudRepository<enrollmentTable, String> {
+public interface enrollmentSheetRepository extends CrudRepository<enrollmentSheet, String> {
 
 
 	

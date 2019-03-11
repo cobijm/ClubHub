@@ -11,7 +11,8 @@ import android.widget.TextView;
 public class ClubHomePage extends AppCompatActivity {
 
     private String clubName;
-
+    private String domainName;
+    private String clubStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +20,7 @@ public class ClubHomePage extends AppCompatActivity {
         setContentView(R.layout.activity_club_home_page);
 
         clubName = getIntent().getStringExtra("clubName");
-
+        domainName = getIntent().getStringExtra("domain");
 
         Button mButton = (Button)findViewById(R.id.mapsLocation);
         mButton.setOnClickListener(new View.OnClickListener() {

@@ -44,7 +44,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        if(mapLoc.equals("Fishing Club")){
+        if(mapLoc.equals("fishing club")){
             LatLng fishClub = new LatLng(42.0253, -93.6483);
             mMap.addMarker(new MarkerOptions().position(fishClub).title("Fishing Club"));
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(fishClub,18));

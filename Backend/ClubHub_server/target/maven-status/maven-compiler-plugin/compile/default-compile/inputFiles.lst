@@ -2,6 +2,7 @@ C:\Users\Yip\Desktop\New folder\team_8\Backend\ClubHub_server\src\main\java\back
 C:\Users\Yip\Desktop\New folder\team_8\Backend\ClubHub_server\src\main\java\backend\clubEnrollment\clubEnrollmentServices.java
 C:\Users\Yip\Desktop\New folder\team_8\Backend\ClubHub_server\src\main\java\backend\clubTable\clubTableServices.java
 C:\Users\Yip\Desktop\New folder\team_8\Backend\ClubHub_server\src\main\java\backend\clubEnrollment\enrollments.java
+C:\Users\Yip\Desktop\New folder\team_8\Backend\ClubHub_server\src\main\java\WebSocket\CustomConfigurator.java
 C:\Users\Yip\Desktop\New folder\team_8\Backend\ClubHub_server\src\main\java\backend\clubTable\clubTableRepository.java
 C:\Users\Yip\Desktop\New folder\team_8\Backend\ClubHub_server\src\main\java\backend\userID\userID.java
 C:\Users\Yip\Desktop\New folder\team_8\Backend\ClubHub_server\src\main\java\backend\Test.java
@@ -12,5 +13,7 @@ C:\Users\Yip\Desktop\New folder\team_8\Backend\ClubHub_server\src\main\java\back
 C:\Users\Yip\Desktop\New folder\team_8\Backend\ClubHub_server\src\main\java\backend\clubEnrollment\clubEnrollmentController.java
 C:\Users\Yip\Desktop\New folder\team_8\Backend\ClubHub_server\src\main\java\backend\clubTable\clubTableController.java
 C:\Users\Yip\Desktop\New folder\team_8\Backend\ClubHub_server\src\main\java\backend\clubTable\clubs.java
+C:\Users\Yip\Desktop\New folder\team_8\Backend\ClubHub_server\src\main\java\WebSocket\WebSocketConfig.java
 C:\Users\Yip\Desktop\New folder\team_8\Backend\ClubHub_server\src\main\java\backend\clubEnrollment\clubEnrollmentRepository.java
 C:\Users\Yip\Desktop\New folder\team_8\Backend\ClubHub_server\src\main\java\backend\userID\userIDController.java
+C:\Users\Yip\Desktop\New folder\team_8\Backend\ClubHub_server\src\main\java\WebSocket\WebSocketServer.java

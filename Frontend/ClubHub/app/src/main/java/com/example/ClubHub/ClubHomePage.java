@@ -26,6 +26,8 @@ public class ClubHomePage extends AppCompatActivity {
         clubStatus = getIntent().getStringExtra("clubStatus");
 
         Button mButton = (Button)findViewById(R.id.mapsLocation);
+        Button jButton = (Button)findViewById(R.id.joinButton);
+
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -34,6 +36,14 @@ public class ClubHomePage extends AppCompatActivity {
                 startActivity(mapLocation);
             }
         });
+
+//        jButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
+
 
         TextView myTxt = (TextView) findViewById(R.id.clubName);
         myTxt.setText(clubName);

@@ -27,6 +27,7 @@
         android:text="@string/your_clubs"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -39,12 +40,23 @@
         android:layout_marginTop="106dp"
         android:layout_marginEnd="28dp"
         android:layout_marginRight="28dp"
-        android:layout_marginBottom="63dp"
-        app:layout_constraintBottom_toTopOf="@+id/homePageBTN"
+        android:layout_marginBottom="87dp"
+        android:contentDescription="TODO"
+        app:layout_constraintBottom_toTopOf="@+id/searchClubBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/iastate_logo"
-        android:contentDescription="TODO" />
+        app:srcCompat="@drawable/iastate_logo" />
+
+    <Button
+        android:id="@+id/searchClubBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="SEARCH FOR NEW CLUBS"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
 </android.support.constraint.ConstraintLayout>

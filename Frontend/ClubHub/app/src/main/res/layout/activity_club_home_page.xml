@@ -75,15 +75,4 @@
         app:layout_constraintStart_toStartOf="@+id/textView6"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
-    <Button
-        android:id="@+id/joinButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
-        android:layout_marginBottom="15dp"
-        android:text="JOIN"
-        app:layout_constraintBottom_toTopOf="@+id/mapsLocation"
-        app:layout_constraintStart_toStartOf="@+id/mapsLocation" />
-
 </android.support.constraint.ConstraintLayout>

@@ -37,12 +37,12 @@ public class ClubHomePage extends AppCompatActivity {
             }
         });
 
-        jButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+//        jButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
 
 
         TextView myTxt = (TextView) findViewById(R.id.clubName);

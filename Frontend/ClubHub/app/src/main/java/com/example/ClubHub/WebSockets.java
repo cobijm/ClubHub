@@ -46,7 +46,9 @@ public class WebSockets extends AppCompatActivity {
                  * computer, and change the ip address to that of your computer.
                  * If running on the emulator, you can use localhost.
                  */
-                String w = "ws://cs309-pp-4.misc.iastate.edu:3306/websocket/"+e1.getText().toString();
+                //ws://hostname:8080/chat/{user name/id}
+                //String w = "ws://cs309-pp-4.misc.iastate.edu:8080/websocket/"+e1.getText().toString();
+                String w = "ws://echo.websocket.org";
 
                 try {
                     Log.d("Socket:", "Trying socket");

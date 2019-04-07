@@ -82,6 +82,7 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
                                 String clubStatus = club.getString("clubStatus");
                                 String clubID = club.getString("clubID"); // Pass in the ClubID
 
+
                                 //clubDomainList.add(clubDomain);
                                 //clubStatusList.add(clubStatus);
 
@@ -133,6 +134,7 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
             Intent clubPage = new Intent(ClubSearchPage.this, ClubHomePage.class);
             //Intent clubPage = new Intent(ClubSearchPage.this, Login.class);
+            clubPage.putExtra("IDNumber", "IDNumber"); // IDK if this is right
             clubPage.putExtra("clubName", clubNameArrayList.get(position));
 
             //Change below to get current domain and status

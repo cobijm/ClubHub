@@ -42,9 +42,7 @@ public class ClubHomePage extends AppCompatActivity {
         jButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              Intent joinPressed = new Intent(ClubHomePage.this, ClubHomePage.class);
-              Toast.makeText(getApplicationContext(), "Club successfully joined", Toast.LENGTH_LONG).show();
-              startActivity(joinPressed);
+              Toast.makeText(getApplicationContext(), "Welcome to " + clubName, Toast.LENGTH_LONG).show();
             }
         });
 

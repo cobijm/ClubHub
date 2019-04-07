@@ -38,7 +38,7 @@ public class ClubHomePage extends AppCompatActivity {
             }
         });
 
-//        IMPLEMENT THIS
+//        IMPLEMENT THIS PROPERLY
         jButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

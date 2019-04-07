@@ -37,6 +37,7 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
     //private final String[] mStrings = { "Google", "Apple", "Samsung", "Sony", "LG", "HTC" };
     final ArrayList<String> clubNameArrayList = new ArrayList<>();
 
+
     //public static String[] clubNameArray;
     //private String[] clubNameArray = new String[100];
 
@@ -45,6 +46,7 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
     protected void onCreate(Bundle savedInstanceState) {
         final ArrayList<String> clubDomainList = new ArrayList<>();
         final ArrayList<String> clubStatusList = new ArrayList<>();
+        final String userID = getIntent().getStringExtra("IDNumber");
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
 
@@ -133,8 +135,14 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
             Intent clubPage = new Intent(ClubSearchPage.this, ClubHomePage.class);
-            //Intent clubPage = new Intent(ClubSearchPage.this, Login.class);
-            clubPage.putExtra("IDNumber", "IDNumber"); // IDK if this is right
+
+            if(userID.equals(null)){
+                clubPage.putExtra(" ", userID);
+            }
+            else{
+                clubPage.putExtra("IDNumber", userID);
+            }
+
             clubPage.putExtra("clubName", clubNameArrayList.get(position));
 
             //Change below to get current domain and status

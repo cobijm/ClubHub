@@ -47,8 +47,7 @@ public class WebSockets extends AppCompatActivity {
                  * If running on the emulator, you can use localhost.
                  */
                 //ws://hostname:8080/chat/{user name/id}
-                //String w = "ws://cs309-pp-4.misc.iastate.edu:8080/websocket/"+e1.getText().toString();
-                String w = "ws://echo.websocket.org";
+                String w = "ws://cs309-pp-4.misc.iastate.edu:8080/websocket/"+e1.getText().toString();
 
                 try {
                     Log.d("Socket:", "Trying socket");
@@ -61,7 +60,7 @@ public class WebSockets extends AppCompatActivity {
                             //Log.d("first", "run() returned: " + s);
                             //s=t1.getText().toString();
                             //Log.d("second", "run() returned: " + s);
-                            t1.setText(s+" Server:"+message);
+                            t1.setText(s+" Server:"+message +"\n");
                         }
 
                         @Override

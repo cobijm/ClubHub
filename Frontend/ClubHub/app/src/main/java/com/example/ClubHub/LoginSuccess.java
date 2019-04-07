@@ -40,12 +40,12 @@ public class LoginSuccess extends AppCompatActivity {
             }
         });
 
-        // FIX THIS MAYBE??
         sButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent searchPage = new Intent(LoginSuccess.this, ClubSearchPage.class);
                 searchPage.putExtra("IDNumber", userID);
+                searchPage.putExtra("tag", "all");
                 startActivity(searchPage);
             }
         });

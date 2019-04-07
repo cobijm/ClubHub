@@ -36,6 +36,7 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".ClubHomePage" />
+        <activity android:name=".LoggedInChat" />
         <activity android:name=".UserHomePage" />
         <activity android:name=".ClubSearchPage" />
         <activity android:name=".ForgotPassword" />

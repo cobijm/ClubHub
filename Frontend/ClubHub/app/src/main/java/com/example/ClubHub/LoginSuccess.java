@@ -19,10 +19,10 @@ public class LoginSuccess extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_success);
-        String fetched = fetchUser();
+        final String userName = fetchUser();
         text = (TextView)findViewById(R.id.textView3);
-        fetched = "Welcome back " + fetched;
-        text.setText(fetched);
+        String welcomeText = "Welcome back " + userName;
+        text.setText(welcomeText);
 
         Bundle extra = getIntent().getBundleExtra("extra");
         final String userID = (String)extra.getSerializable("IDNumber");
@@ -36,6 +36,17 @@ public class LoginSuccess extends AppCompatActivity {
                 userHomePage.putExtra("IDNumber", userID);
                 startActivity(userHomePage);
 
+            }
+        });
+
+        Button pButton = (Button) findViewById(R.id.loggedInChat);
+        pButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v){
+                Intent LoggedInChat = new Intent(LoginSuccess.this, LoggedInChat.class);
+                LoggedInChat.putExtra("userName", userName);
+                startActivity(LoggedInChat);
             }
         });
 

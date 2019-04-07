@@ -3,6 +3,7 @@ package com.example.ClubHub;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -35,6 +36,9 @@ public class WebSockets extends AppCompatActivity {
         e1=(EditText)findViewById(R.id.et1);
         e2=(EditText)findViewById(R.id.et2);
         t1=(TextView)findViewById(R.id.tx1);
+
+        //Make the textView scrollable
+        t1.setMovementMethod(new ScrollingMovementMethod());
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override

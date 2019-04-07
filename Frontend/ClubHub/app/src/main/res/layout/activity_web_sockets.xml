@@ -38,6 +38,7 @@
         android:textSize="20dp"
         android:id="@+id/tx1"
         android:text="The Coversation will appear here:\n"
+        android:scrollbars = "vertical"
         />
 
 </LinearLayout>

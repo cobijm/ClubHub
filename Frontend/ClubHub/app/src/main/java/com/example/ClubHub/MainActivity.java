@@ -61,6 +61,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button pButton = (Button) findViewById(R.id.search);
         pButton.setOnClickListener(this);
 
+        //Search button
+        Button cButton = (Button) findViewById(R.id.chat);
+        cButton.setOnClickListener(this);
+
     }
 
     @Override
@@ -79,6 +83,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.search:
                 startActivity(new Intent(MainActivity.this, ClubTagSearch.class));
+                break;
+
+            case R.id.chat:
+                startActivity(new Intent(MainActivity.this, WebSockets.class));
                 break;
 
         }

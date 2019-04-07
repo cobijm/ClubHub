@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 
 public class LoginSuccess extends AppCompatActivity {
 
@@ -28,6 +27,8 @@ public class LoginSuccess extends AppCompatActivity {
         final String userID = (String)extra.getSerializable("IDNumber");
 
         Button oButton = (Button) findViewById(R.id.homePageBTN);
+        Button sButton = (Button) findViewById(R.id.searchClubBtn);
+
         oButton.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -36,6 +37,16 @@ public class LoginSuccess extends AppCompatActivity {
                 userHomePage.putExtra("IDNumber", userID);
                 startActivity(userHomePage);
 
+            }
+        });
+
+        // FIX THIS MAYBE??
+        sButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent searchPage = new Intent(LoginSuccess.this, ClubSearchPage.class);
+                searchPage.putExtra("IDNumber", userID);
+                startActivity(searchPage);
             }
         });
 

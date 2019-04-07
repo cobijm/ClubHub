@@ -85,13 +85,10 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
                                 JSONObject club = array.getJSONObject(i);
 
                                 // Get the current club (json object) data
-//                                String clubID = club.getString("clubID");
                                 String clubName = club.getString("clubName");
                                 String clubDomain = club.getString("clubDomain");
                                 String clubStatus = club.getString("clubStatus");
-//                                JSONArray numArray = array.optJSONArray(5);
-
-
+                                String clubID = club.getString("clubID"); // Pass in the ClubID
 
                                 //clubDomainList.add(clubDomain);
                                 //clubStatusList.add(clubStatus);

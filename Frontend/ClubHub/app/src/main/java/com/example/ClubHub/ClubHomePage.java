@@ -8,6 +8,7 @@ import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class ClubHomePage extends AppCompatActivity {
@@ -37,19 +38,19 @@ public class ClubHomePage extends AppCompatActivity {
             }
         });
 
-//        jButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
+//        IMPLEMENT THIS
+        jButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              Intent joinPressed = new Intent(ClubHomePage.this, ClubHomePage.class);
+              Toast.makeText(getApplicationContext(), "Club successfully joined", Toast.LENGTH_LONG).show();
+              startActivity(joinPressed);
+            }
+        });
 
 
         TextView myTxt = (TextView) findViewById(R.id.clubName);
         myTxt.setText(clubName);
-
-        //TextView myTxt2 = (TextView)findViewById(R.id.domain);
-        //myTxt2.setText(domainName);
 
         TextView myTxt2 =(TextView)findViewById(R.id.domain);
         myTxt2.setClickable(true);

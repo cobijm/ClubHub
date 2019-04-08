@@ -25,6 +25,7 @@
 Backend/.metadata/.plugins/org.eclipse.core.runtime/.settings/*
 Backend/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.springframework.ide.eclipse.boot.dash:Cloud Foundry.prefs
 *.metadata/.plugins/org.eclipse.core.runtime/.settings/*
+.metadata
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 

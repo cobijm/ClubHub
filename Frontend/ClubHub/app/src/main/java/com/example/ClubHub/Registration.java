@@ -21,6 +21,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -203,4 +204,19 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         queue.add(postRequest);
     }
 
+    public ArrayList<String> regCreds(String netID, String id, String fName, String lName, String classification, String phone, String major, String pass){
+
+        ArrayList<String> regStuff = new ArrayList<String>();
+
+        regStuff.add(netID);
+        regStuff.add(id);
+        regStuff.add(fName);
+        regStuff.add(lName);
+        regStuff.add(classification);
+        regStuff.add(phone);
+        regStuff.add(major);
+        regStuff.add(pass);
+
+        return regStuff;
+    }
 }

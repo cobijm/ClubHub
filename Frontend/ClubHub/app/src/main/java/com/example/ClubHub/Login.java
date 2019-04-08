@@ -21,6 +21,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 /*
 Login Page that takes netID and password from server
  */
@@ -137,4 +139,14 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
     }
 
+    public ArrayList<String> loginCredentials(String user, String pass){
+
+        ArrayList<String> loginStuff = new ArrayList<String>();
+
+        loginStuff.add(user);
+        loginStuff.add(pass);
+
+        return loginStuff;
+
+    }
 }

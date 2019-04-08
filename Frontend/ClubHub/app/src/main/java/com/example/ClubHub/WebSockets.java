@@ -3,7 +3,12 @@ package com.example.ClubHub;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.PrecomputedText;
+import android.text.Spannable;
+import android.text.Spanned;
 import android.text.method.ScrollingMovementMethod;
+import android.text.style.BackgroundColorSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -70,6 +75,7 @@ public class WebSockets extends AppCompatActivity {
                             Log.d("", "run() returned: " + message);
                             String s=t1.getText().toString();
                             t1.setText(s+message +"\n");
+                            //Spanned display = Html.fromHtml(s + "<font color=blue>" + message + "\n" + "</font><br><br> < br/>");
                         }
 
                         @Override
@@ -103,6 +109,7 @@ public class WebSockets extends AppCompatActivity {
             public void onClick(View v) {
                 try {
                     cc.send(e2.getText().toString());
+                    e2.setText("");
                 }
                 catch (Exception e)
                 {

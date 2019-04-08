@@ -172,6 +172,10 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
         return true;
     }
 
+    public boolean onqueryTextTest(String newText){
+        return onQueryTextChange(newText);
+    }
+
 
     public boolean onQueryTextSubmit(String query) {
         return false;

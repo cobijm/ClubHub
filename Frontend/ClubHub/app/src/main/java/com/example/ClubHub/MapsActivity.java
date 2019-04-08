@@ -10,6 +10,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.Random;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -25,9 +27,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
         mapLoc = getIntent().getStringExtra("clubName");
-//        if(mapLoc == null){
-//            mapLoc = "Fishing Club";
-//        }
+
     }
 
 
@@ -43,6 +43,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        int locExists = 0;
+
+        //Skip logic if the location does not exist
+        //if(!existingClub(mapLoc)){
+            //return;
+        //}
 
         if(mapLoc.equals("fishing club")){
             LatLng fishClub = new LatLng(42.0253, -93.6483);
@@ -73,5 +79,61 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.addMarker(new MarkerOptions().position(runner).title("Juicy Boys"));
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(runner,18));
         }
+        else{
+            LatLng runner = new LatLng(randomX(), randomY());
+            mMap.addMarker(new MarkerOptions().position(runner).title(mapLoc));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(runner,18));
+        }
     }
+
+
+    //Helper method to check if the map locations have been created
+    public boolean existingClub(String locName){
+        boolean locExists = false;
+
+        switch(locName){
+            case("fishing club"):
+                locExists = true;
+                return locExists;
+            case("sleeping club"):
+                locExists = true;
+                return locExists;
+            case("duwe fan club"):
+                locExists = true;
+                return locExists;
+            case("driving club"):
+                locExists = true;
+                return locExists;
+            case("juicy boys"):
+                locExists = true;
+                return locExists;
+            default:
+                return locExists;
+        }
+    }
+
+    public float randomX(){
+        float randomValue;
+
+        Random r = new Random();
+        double random = 42.026 + r.nextDouble() * (42.029 - 42.026);
+
+        randomValue = (float) random;
+
+        return randomValue;
+    }
+
+    public float randomY(){
+        float randomValue;
+
+        Random r = new Random();
+        double random = -93.6509 + r.nextDouble() * (-93.6372 + 93.6509);
+
+        randomValue = (float) random;
+
+        return randomValue;
+    }
+
+
+
 }

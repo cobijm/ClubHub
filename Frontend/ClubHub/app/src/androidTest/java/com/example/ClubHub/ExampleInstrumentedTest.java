@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.jsonapplication", appContext.getPackageName());
+        assertEquals("com.example.clubhub", appContext.getPackageName());
     }
 }

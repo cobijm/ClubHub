@@ -15,87 +15,87 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import backend.userID.userID;
+
 @RunWith(MockitoJUnitRunner.class)
 public class clubTableTest {
 
-		@Mock
-		clubTableTest userid;
+	@Mock
+	clubTableTest userid;
 
-		@InjectMocks
-		clubTableServices clubtableservices;
+	@InjectMocks
+	clubTableServices clubtableservices;
 
-		
-		
-		
-		@Test
-		public void testGetUserId() {
-			
-			clubTableServices services = mock(clubTableServices.class);
-			when(services.getuserID("00001")).thenReturn(new userID("00010", "", "Cobi", "Mom", "", "", "", ""));
-			userID user = services.getuserID("00001");
-			
-			assertEquals("Cobi", user.getFirstName());
-			assertEquals("Mom", user.getLastName());
-			assertEquals("", user.getPassword());
+	@Test
+	public void testGetClubTable() {
 
-		}
-
-
-		@Test
-		public void testGetAllUserID() {
-		
 		clubTableServices services = mock(clubTableServices.class);
-		List<userID> myList = new ArrayList<userID>();
-		myList.add(new userID("00010", null, "Cobi", null, null, null, null, null) );
-		myList.add(new userID("00011", null, "Danny", null, null, null, null, null) );
-		
-		when(services.getAlluserID()).thenReturn(myList);
-		
-		List<userID> testList = new ArrayList<userID>();
-		testList = services.getAlluserID();
-		
-		assertEquals("Cobi", testList.get(0).getFirstName());
-		assertEquals("Danny", testList.get(1).getFirstName());
-		}
-		
-		
-		@Test
-		public void testAllFields() {
-			
-			clubTableServices services = mock(clubTableServices.class);
-			List<userID> myList = new ArrayList<userID>();
-			myList.add(new userID("00010", "cmom", "Cobi", "Mom", "Senior", "5155234567", "SE", "kk") );
-			myList.add(new userID("00011", "dannyyip", "Danny", "Yip", "Senior", "5155234566", "COMS", "pp") );
-			when(services.getAlluserID()).thenReturn(myList);
-			
-			List<userID> testList = new ArrayList<userID>();
-			testList = services.getAlluserID();
-			
-			assertEquals("00010", testList.get(0).getStudentID());
-			assertEquals("cmom", testList.get(0).getNetID());
-			assertEquals("Cobi", testList.get(0).getFirstName());
-			assertEquals("Mom", testList.get(0).getLastName());
-			assertEquals("Senior", testList.get(0).getClassification());
-			assertEquals("5155234567", testList.get(0).getPhoneNumber());
-			assertEquals("SE", testList.get(0).getMajor());
-			assertEquals("kk", testList.get(0).getPassword());
+		ArrayList<String> members = new ArrayList<String>();
+		ArrayList<String> tags = new ArrayList<String>();
+		when(services.getclubTable("00001"))
+				.thenReturn(new clubTable("00010", "uncrustables", "uncrustables.com", "active", members, tags));
+		clubTable club = services.getclubTable("00001");
 
-			
-			
-			assertEquals("00011", testList.get(1).getStudentID());
-			assertEquals("dannyyip", testList.get(1).getNetID());
-			assertEquals("Danny", testList.get(1).getFirstName());
-			assertEquals("Yip", testList.get(1).getLastName());
-			assertEquals("Senior", testList.get(1).getClassification());
-			assertEquals("5155234566", testList.get(1).getPhoneNumber());
-			assertEquals("COMS", testList.get(1).getMajor());
-			assertEquals("pp", testList.get(1).getPassword());
-			
-			
-			
-		}
-		
-		
-	
-	
+		assertEquals("uncrustables", club.getClubName());
+		assertEquals("uncrustables.com", club.getClubDomain());
+		assertEquals("active", club.getClubStatus());
+
+	}
+
+	@Test
+	public void testGetAllClubTables() {
+
+		clubTableServices services = mock(clubTableServices.class);
+		List<clubTable> clubList = new ArrayList<clubTable>();
+		clubList.add(new clubTable("00010", "uncrustables", "uncrustables.com", "active", null, null));
+		clubList.add(new clubTable("00100", "apple club", "apple.com", "active", null, null));
+
+		when(services.getAllclubTable()).thenReturn(clubList);
+
+		List<clubTable> testList = new ArrayList<clubTable>();
+		testList = services.getAllclubTable();
+
+		assertEquals("uncrustables", testList.get(0).getClubName());
+		assertEquals("apple.com", testList.get(1).getClubDomain());
+	}
+
+	@Test
+	public void testAllFields() {
+
+		clubTableServices services = mock(clubTableServices.class);
+
+		ArrayList<String> members = new ArrayList<String>();
+		members.add("123456780");
+		members.add("123456781");
+		members.add("123456782");
+
+		ArrayList<String> tags = new ArrayList<String>();
+		tags.add("food");
+		tags.add("social");
+		tags.add("fun");
+
+		List<clubTable> clubList = new ArrayList<clubTable>();
+		clubList.add(new clubTable("00010", "uncrustables", "uncrustables.com", "active", members, tags));
+		clubList.add(new clubTable("00100", "apple club", "apple.com", "active", members, tags));
+		when(services.getAllclubTable()).thenReturn(clubList);
+
+		List<clubTable> testList = new ArrayList<clubTable>();
+		testList = services.getAllclubTable();
+
+		assertEquals("00010", testList.get(0).getClubID());
+		assertEquals("uncrustables", testList.get(0).getClubName());
+		assertEquals("uncrustables.com", testList.get(0).getClubDomain());
+		assertEquals("active", testList.get(0).getClubStatus());
+		assertEquals(members, testList.get(0).getClubMembers());
+		assertEquals(tags, testList.get(0).getClubTags());
+
+		assertEquals("00100", testList.get(1).getClubID());
+		assertEquals("apple club", testList.get(1).getClubName());
+		assertEquals("apple.com", testList.get(1).getClubDomain());
+		assertEquals("active", testList.get(1).getClubStatus());
+		assertEquals(members, testList.get(0).getClubMembers());
+		assertEquals(tags, testList.get(1).getClubTags());
+
+	}
+
 }

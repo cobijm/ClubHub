@@ -2,7 +2,6 @@ package backend.WebSocket;
 
 
 import java.io.IOException;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +15,7 @@ import javax.websocket.server.ServerEndpoint;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.messaging.Message;
 import org.springframework.stereotype.Component;
 /**
  * 
@@ -42,8 +42,8 @@ public class WebSocketServer {
         sessionUsernameMap.put(session, username);
         usernameSessionMap.put(username, session);
         
-        String message = username + " has Joined the Chat";
-        	broadcast(message);
+        String message="User:" + username + " has Joined the Chat";
+        	broadcast(username, message);
 		
     }
  
@@ -62,7 +62,7 @@ public class WebSocketServer {
     	}
     	else // Message to whole chat
     	{
-	    	broadcast(username + ": " + message);
+	    	broadcast(username, username + ": " + message);
     	}
     }
  
@@ -76,7 +76,7 @@ public class WebSocketServer {
     	usernameSessionMap.remove(username);
         
     	String message= username + " disconnected";
-        broadcast(message);
+        broadcast(username, message);
     }
  
     @OnError
@@ -96,13 +96,15 @@ public class WebSocketServer {
         }
     }
     
-    private static void broadcast(String message) 
+    private static void broadcast(String user, String message) 
     	      throws IOException 
     {	  
     	sessionUsernameMap.forEach((session, username) -> {
     		synchronized (session) {
 	            try {
-	           		session.getBasicRemote().sendText(message);
+	            	if(username != user) {
+	            		session.getBasicRemote().sendText(message);
+	            	}
 	            } catch (IOException e) {
 	                e.printStackTrace();
 	            }

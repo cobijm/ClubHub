@@ -2,7 +2,6 @@ package backend.WebSocket;
 
 
 import java.io.IOException;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,9 +21,9 @@ import org.springframework.stereotype.Component;
  * @author Vamsi Krishna Calpakkam
  *
  */
-@ServerEndpoint("/websocket/{username}")
+@ServerEndpoint("/websocket/prisum/{username}")
 @Component
-public class WebSocketServer {
+public class PrISUmClubServer {
 	
 	// Store all socket session and their corresponding username.
     private static Map<Session, String> sessionUsernameMap = new HashMap<>();
@@ -42,7 +41,7 @@ public class WebSocketServer {
         sessionUsernameMap.put(session, username);
         usernameSessionMap.put(username, session);
         
-        String message = username + " has Joined the Chat";
+        String message = username + " has Joined PrISUm's Club Chat";
         	broadcast(message);
 		
     }

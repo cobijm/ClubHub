@@ -23,11 +23,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.SimpleTimeZone;
 
 
 public class ClubHomePage extends AppCompatActivity {
@@ -40,6 +44,9 @@ public class ClubHomePage extends AppCompatActivity {
     private String clubIDpassedIn;
     private String userIDpassedIn;
     private String cJSONURLString = "http://cs309-pp-4.misc.iastate.edu:8080/clubtable";
+    private String eJSONURLString = "http://cs309-pp-4.misc.iastate.edu:8080/clubenrollment";
+
+    private String mainClubId = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +58,7 @@ public class ClubHomePage extends AppCompatActivity {
         clubStatus = getIntent().getStringExtra("clubStatus");
         clubIDpassedIn = getIntent().getStringExtra("clubID");
         userIDpassedIn = getIntent().getStringExtra("IDNumber");
+
 
         Button mButton = (Button)findViewById(R.id.mapsLocation);
         Button jButton = (Button)findViewById(R.id.joinButton);
@@ -118,6 +126,7 @@ public class ClubHomePage extends AppCompatActivity {
                                         if(id.equals(clubIDpassedIn)){
 
                                             idFound = 1;
+                                            mainClubId = id;
                                             //ArrayList<String> memList = new ArrayList<>(members.length);
                                             for(String j : members){
                                                 memList.add(j);
@@ -163,6 +172,42 @@ public class ClubHomePage extends AppCompatActivity {
                 );
                 queue.add(jsonObjectRequest);
 
+                // New JSON GET Request
+                JsonObjectRequest jsonObjectRequestEnrollment = new JsonObjectRequest(Request.Method.GET, eJSONURLString, null,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                // Do something with response
+
+                                String enrollmentNumber = "";
+
+
+                                try {
+                                    // Get JSON object
+                                    JSONArray array = response.getJSONArray("enrollments"); // From enrollment table
+
+                                    // Get current json object
+                                    JSONObject enrollment = array.getJSONObject(array.length() - 1);
+
+                                    String enroll = enrollment.getString("enrollmentNumber");
+
+                                    epostData(enroll, mainClubId);
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(getApplicationContext(), "Volley error " + error.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        }
+                );
+                queue.add(jsonObjectRequestEnrollment);
+
             }
 
 
@@ -206,11 +251,53 @@ public class ClubHomePage extends AppCompatActivity {
                 );
                 queue.add(postRequestAddMember);
             }
+
+        public void epostData(String enrolled, String clubID) throws JSONException {
+            RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+
+            int enrolledInt = Integer.parseInt(enrolled);
+            enrolledInt += 1;
+            enrolled = Integer.toString(enrolledInt);
+
+
+            DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
+            String date = df.format(Calendar.getInstance().getTime());
+
+            //Map<String, String> params = new HashMap();
+            JSONObject params = new JSONObject();
+            params.put("enrollmentNumber", enrolled);
+            params.put("clubID", clubID);
+            params.put("clubStanding", "Active");
+            params.put("expirationDate", date);
+            params.put("joinDate", date);
+            params.put("ranking", "Member");
+            params.put("studentID",userIDpassedIn );
+
+            String url = "http://cs309-pp-4.misc.iastate.edu:8080/clubenrollment";
+            //String url = "https://0ea88006-bc29-40d9-8155-873d2ed83f3c.mock.pstmn.io/registration";
+            JsonObjectRequest postRequestAddMember2 = new JsonObjectRequest(Request.Method.POST, url, params,
+                    new Response.Listener<JSONObject>()
+                    {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            // response
+                            Log.d("Response", response.toString());
+                            Toast.makeText(getApplicationContext(), "Welcome to the" + clubName, Toast.LENGTH_LONG).show();
+                        }
+                    },
+                    new Response.ErrorListener()
+                    {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            // error
+                            Log.d("Error.Response", error.toString());
+                            //Toast.makeText(getApplicationContext(), "Error joining the " + clubName, Toast.LENGTH_LONG).show();
+                        }
+                    }
+            );
+            queue.add(postRequestAddMember2);
+        }
         });
-
-
-
-
 
         TextView myTxt = (TextView) findViewById(R.id.clubName);
         myTxt.setText(clubName);

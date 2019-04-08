@@ -236,7 +236,7 @@ public class ClubHomePage extends AppCompatActivity {
                             public void onResponse(JSONObject response) {
                                 // response
                                 Log.d("Response", response.toString());
-                                Toast.makeText(getApplicationContext(), "Welcome to the" + clubName, Toast.LENGTH_LONG).show();
+                                //Toast.makeText(getApplicationContext(), "Welcome to the" + clubName, Toast.LENGTH_LONG).show();
                             }
                         },
                         new Response.ErrorListener()
@@ -282,7 +282,7 @@ public class ClubHomePage extends AppCompatActivity {
                         public void onResponse(JSONObject response) {
                             // response
                             Log.d("Response", response.toString());
-                            Toast.makeText(getApplicationContext(), "Welcome to the" + clubName, Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getApplicationContext(), "Welcome to the" + clubName, Toast.LENGTH_LONG).show();
                         }
                     },
                     new Response.ErrorListener()

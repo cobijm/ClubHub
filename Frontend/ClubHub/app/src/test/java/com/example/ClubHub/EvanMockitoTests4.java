@@ -26,20 +26,33 @@ public class EvanMockitoTests4 {
  */
         boolean booleanResponse = true;
 
-        String testLocation = "sleeping club";
-        String testLocation1 = "driving club";
-        String testLocation2 = "fishing club";
-        String testLocation3 = "duwe fan club";
-        String brokenClub = "brokenClub";
-
         //Change comment
-/* Tests our method in a variety of fashions to check for all intended results
-    Tested with real and fake clubs
+/* Ensures that our random values are always within the givin range
  */
-        boolean testValue = test.existingClub(testLocation);
+        float testXCoor = test.randomX();
+        float testYCoor = test.randomY();
 
-        Assert.assertTrue(testValue);
+        Assert.assertTrue((testXCoor > 42.026) && (testXCoor < 42.029));
+        Assert.assertTrue((testYCoor > -93.6509) && (testYCoor < -93.6372));
 
+        testXCoor = test.randomX();
+        testYCoor = test.randomY();
+
+        Assert.assertTrue((testXCoor > 42.026) && (testXCoor < 42.029));
+        Assert.assertTrue((testYCoor > -93.6509) && (testYCoor < -93.6372));
+
+        testXCoor = test.randomX();
+        testYCoor = test.randomY();
+
+        Assert.assertTrue((testXCoor > 42.026) && (testXCoor < 42.029));
+        Assert.assertTrue((testYCoor > -93.6509) && (testYCoor < -93.6372));
+
+        testXCoor = test.randomX();
+        testYCoor = test.randomY();
+
+        Assert.assertTrue((testXCoor > 42.026) && (testXCoor < 42.029));
+        Assert.assertTrue((testYCoor > -93.6509) && (testYCoor < -93.6372));
+/*
         Assert.assertEquals(test.existingClub(testLocation1),true);
 
         Assert.assertEquals(test.existingClub(testLocation2),true);
@@ -56,7 +69,6 @@ public class EvanMockitoTests4 {
         Assert.assertEquals(test.existingClub(brokenClub),true);
 
 
-/*
         when(test.onQueryTextChange(inputText)).thenReturn(booleanResponse);
 
         Assert.assertEquals(test.onQueryTextChange(inputText),booleanResponse);

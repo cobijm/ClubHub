@@ -46,6 +46,7 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
     protected void onCreate(Bundle savedInstanceState) {
         final ArrayList<String> clubDomainList = new ArrayList<>();
         final ArrayList<String> clubStatusList = new ArrayList<>();
+        final ArrayList<String> clubIDList = new ArrayList<>();
         final String userID = getIntent().getStringExtra("IDNumber");
         final String clubID = getIntent().getStringExtra("clubID");
         super.onCreate(savedInstanceState);
@@ -83,6 +84,7 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
                                 String clubName = club.getString("clubName");
                                 String clubDomain = club.getString("clubDomain");
                                 String clubStatus = club.getString("clubStatus");
+                                String clubID = club.getString("clubID");
 
 
                                 //clubDomainList.add(clubDomain);
@@ -92,6 +94,7 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
                                     clubNameArrayList.add(clubName);
                                     clubDomainList.add(clubDomain);
                                     clubStatusList.add(clubStatus);
+                                    clubIDList.add(clubID);
 
                                 }
                                 else{
@@ -136,14 +139,14 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
             Intent clubPage = new Intent(ClubSearchPage.this, ClubHomePage.class);
 
-            if(userID == null){
-                clubPage.putExtra("userID" , " " );
-            }
-            else{
+            //if(userID == null){
+                //clubPage.putExtra("userID" , " " );
+            //}
+            //else{
                 clubPage.putExtra("IDNumber", userID);
-            }
+            //}
 
-            clubPage.putExtra("clubID", clubID);
+            clubPage.putExtra("clubID", clubIDList.get(position));
             clubPage.putExtra("clubName", clubNameArrayList.get(position));
             //Change below to get current domain and status
             clubPage.putExtra("clubDomain", clubDomainList.get(position));

@@ -24,13 +24,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
 public class ClubHomePage extends AppCompatActivity {
 
     private boolean exists = false; // Variable to see if the user is already in the club
+
     private String clubName;
     private String domainName;
     private String clubStatus;
@@ -47,7 +50,7 @@ public class ClubHomePage extends AppCompatActivity {
         domainName = getIntent().getStringExtra("clubDomain");
         clubStatus = getIntent().getStringExtra("clubStatus");
         clubIDpassedIn = getIntent().getStringExtra("clubID");
-        userIDpassedIn = getIntent().getStringExtra("userID");
+        userIDpassedIn = getIntent().getStringExtra("IDNumber");
 
         Button mButton = (Button)findViewById(R.id.mapsLocation);
         Button jButton = (Button)findViewById(R.id.joinButton);
@@ -79,8 +82,8 @@ public class ClubHomePage extends AppCompatActivity {
                                 String clubName = "";
                                 String clubDomain = "";
                                 String clubStatus = "";
-                                String [] clubMembers = {};
-                                String[] clubTags = {};
+                                ArrayList<String> memList = new ArrayList<>();
+                                String [] clubTags = {};
 
                                 int idFound = 0;
 
@@ -111,35 +114,38 @@ public class ClubHomePage extends AppCompatActivity {
                                         for(int p = 0; p < tagArr.length(); p++){
                                             tags[p] = tagArr.getString(p);
                                         }
-
+                                        //Toast.makeText(getApplicationContext(), "ID: " + id + "ClubID: " + clubIDpassedIn, Toast.LENGTH_LONG).show();
                                         if(id.equals(clubIDpassedIn)){
+
                                             idFound = 1;
-                                            ArrayList<String> memList = new ArrayList<>(members.length);
+                                            //ArrayList<String> memList = new ArrayList<>(members.length);
                                             for(String j : members){
                                                 memList.add(j);
                                             }
 
                                             memList.add(userIDpassedIn);
+                                            //Toast.makeText(getApplicationContext(), memList.get(memList.size() - 2), Toast.LENGTH_LONG).show();
 
                                             clubID = id;
                                             clubName = name ;
                                             clubDomain = domain;
                                             clubStatus = status;
-                                            clubMembers = (String[]) memList.toArray();
                                             clubTags = tags;
+
                                         }
 
                                         if(idFound == 1){
-                                            postData(clubID, clubName, clubDomain, clubStatus, clubMembers, clubTags);
+                                            //Toast.makeText(getApplicationContext(), "Reached", Toast.LENGTH_LONG).show();
+                                            postData(clubID, clubName, clubDomain, clubStatus, memList, clubTags);
                                         }
 
                                     }
 
-                                    // Toast if credentials are not in the server
-                                    if (!exists) {
-                                        Toast.makeText(getApplicationContext(), "Incorrect Credentials", Toast.LENGTH_LONG).show();
-
-                                    }
+//                                    // Toast if credentials are not in the server
+//                                    if (!exists) {
+//                                        Toast.makeText(getApplicationContext(), "Incorrect Credentials", Toast.LENGTH_LONG).show();
+//
+//                                    }
 
 
                                 } catch (JSONException e) {
@@ -160,8 +166,12 @@ public class ClubHomePage extends AppCompatActivity {
             }
 
 
-            public void postData(String clubs, String name, String domain, String status, String[] mems, String[] tags) throws JSONException {
+            public void postData(String clubs, String name, String domain, String status, ArrayList<String> mems, String[] tags) throws JSONException {
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+
+                //ArrayList<String> memsList = new ArrayList<>(Arrays.asList(mems));
+                ArrayList<String> tagsList = new ArrayList<>(Arrays.asList(tags));
+                //Toast.makeText(getApplicationContext(), memsList.get(1) + " " + tagsList.get(1), Toast.LENGTH_LONG).show();
 
                 //Map<String, String> params = new HashMap();
                 JSONObject params = new JSONObject();
@@ -169,8 +179,8 @@ public class ClubHomePage extends AppCompatActivity {
                 params.put("clubName", name);
                 params.put("clubDomain", domain);
                 params.put("clubStatus", status);
-                params.put("clubMembers", mems);
-                params.put("clubTags", tags);
+                params.put("clubMembers", new JSONArray(mems));
+                params.put("clubTags", new JSONArray(tagsList));
 
                 String url = "http://cs309-pp-4.misc.iastate.edu:8080/clubtable";
                 //String url = "https://0ea88006-bc29-40d9-8155-873d2ed83f3c.mock.pstmn.io/registration";
@@ -190,7 +200,7 @@ public class ClubHomePage extends AppCompatActivity {
                             public void onErrorResponse(VolleyError error) {
                                 // error
                                 Log.d("Error.Response", error.toString());
-                                Toast.makeText(getApplicationContext(), "Error joining the " + clubName, Toast.LENGTH_LONG).show();
+                               //Toast.makeText(getApplicationContext(), "Error joining the " + clubName, Toast.LENGTH_LONG).show();
                             }
                         }
                 );

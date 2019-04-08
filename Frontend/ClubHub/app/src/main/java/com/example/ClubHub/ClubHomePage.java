@@ -5,16 +5,48 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.SimpleTimeZone;
 
 
 public class ClubHomePage extends AppCompatActivity {
 
+    private boolean exists = false; // Variable to see if the user is already in the club
+
     private String clubName;
     private String domainName;
     private String clubStatus;
+    private String clubIDpassedIn;
+    private String userIDpassedIn;
+    private String cJSONURLString = "http://cs309-pp-4.misc.iastate.edu:8080/clubtable";
+    private String eJSONURLString = "http://cs309-pp-4.misc.iastate.edu:8080/clubenrollment";
+
+    private String mainClubId = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +56,9 @@ public class ClubHomePage extends AppCompatActivity {
         clubName = getIntent().getStringExtra("clubName");
         domainName = getIntent().getStringExtra("clubDomain");
         clubStatus = getIntent().getStringExtra("clubStatus");
+        clubIDpassedIn = getIntent().getStringExtra("clubID");
+        userIDpassedIn = getIntent().getStringExtra("IDNumber");
+
 
         Button mButton = (Button)findViewById(R.id.mapsLocation);
         Button jButton = (Button)findViewById(R.id.joinButton);
@@ -37,19 +72,235 @@ public class ClubHomePage extends AppCompatActivity {
             }
         });
 
-//        jButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
+//        IMPLEMENT THIS PROPERLY
+        jButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+
+                // New JSON GET Request
+                JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, cJSONURLString, null,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                // Do something with response
+
+                                String clubID = "";
+                                String clubName = "";
+                                String clubDomain = "";
+                                String clubStatus = "";
+                                ArrayList<String> memList = new ArrayList<>();
+                                String [] clubTags = {};
+
+                                int idFound = 0;
+
+                                try {
+                                    // Get JSON object
+                                    JSONArray array = response.getJSONArray("clubs"); // From club table
+
+                                    //Change upper bound of for loop to array.length() to print all values
+                                    for (int i = 0; i < array.length(); i++) {
+
+                                        // Get current json object
+                                        JSONObject club = array.getJSONObject(i);
+
+                                        String id = club.getString("clubID");
+                                        String name = club.getString("clubName");
+                                        String domain = club.getString("clubDomain");
+                                        String status = club.getString("clubStatus");
+
+                                        JSONArray memArr = club.getJSONArray("clubMembers");
+                                        String [] members = new String[memArr.length()];
+                                        for(int k = 0; k < memArr.length(); k++){
+                                            members[k] = memArr.getString(k);
+                                        }
+
+
+                                        JSONArray tagArr = club.getJSONArray("clubTags");
+                                        String [] tags = new String[tagArr.length()];
+                                        for(int p = 0; p < tagArr.length(); p++){
+                                            tags[p] = tagArr.getString(p);
+                                        }
+                                        //Toast.makeText(getApplicationContext(), "ID: " + id + "ClubID: " + clubIDpassedIn, Toast.LENGTH_LONG).show();
+                                        if(id.equals(clubIDpassedIn)){
+
+                                            idFound = 1;
+                                            mainClubId = id;
+                                            //ArrayList<String> memList = new ArrayList<>(members.length);
+                                            for(String j : members){
+                                                memList.add(j);
+                                            }
+
+                                            memList.add(userIDpassedIn);
+                                            //Toast.makeText(getApplicationContext(), memList.get(memList.size() - 2), Toast.LENGTH_LONG).show();
+
+                                            clubID = id;
+                                            clubName = name ;
+                                            clubDomain = domain;
+                                            clubStatus = status;
+                                            clubTags = tags;
+
+                                        }
+
+                                        if(idFound == 1){
+                                            //Toast.makeText(getApplicationContext(), "Reached", Toast.LENGTH_LONG).show();
+                                            postData(clubID, clubName, clubDomain, clubStatus, memList, clubTags);
+                                        }
+
+                                    }
+
+//                                    // Toast if credentials are not in the server
+//                                    if (!exists) {
+//                                        Toast.makeText(getApplicationContext(), "Incorrect Credentials", Toast.LENGTH_LONG).show();
+//
+//                                    }
+
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(getApplicationContext(), "Volley error " + error.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        }
+                );
+                queue.add(jsonObjectRequest);
+
+                // New JSON GET Request
+                JsonObjectRequest jsonObjectRequestEnrollment = new JsonObjectRequest(Request.Method.GET, eJSONURLString, null,
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                // Do something with response
+
+                                String enrollmentNumber = "";
+
+
+                                try {
+                                    // Get JSON object
+                                    JSONArray array = response.getJSONArray("enrollments"); // From enrollment table
+
+                                    // Get current json object
+                                    JSONObject enrollment = array.getJSONObject(array.length() - 1);
+
+                                    String enroll = enrollment.getString("enrollmentNumber");
+
+                                    epostData(enroll, mainClubId);
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Toast.makeText(getApplicationContext(), "Volley error " + error.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        }
+                );
+                queue.add(jsonObjectRequestEnrollment);
+
+            }
+
+
+            public void postData(String clubs, String name, String domain, String status, ArrayList<String> mems, String[] tags) throws JSONException {
+                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+
+                //ArrayList<String> memsList = new ArrayList<>(Arrays.asList(mems));
+                ArrayList<String> tagsList = new ArrayList<>(Arrays.asList(tags));
+                //Toast.makeText(getApplicationContext(), memsList.get(1) + " " + tagsList.get(1), Toast.LENGTH_LONG).show();
+
+                //Map<String, String> params = new HashMap();
+                JSONObject params = new JSONObject();
+                params.put("clubID", clubs);
+                params.put("clubName", name);
+                params.put("clubDomain", domain);
+                params.put("clubStatus", status);
+                params.put("clubMembers", new JSONArray(mems));
+                params.put("clubTags", new JSONArray(tagsList));
+
+                String url = "http://cs309-pp-4.misc.iastate.edu:8080/clubtable";
+                //String url = "https://0ea88006-bc29-40d9-8155-873d2ed83f3c.mock.pstmn.io/registration";
+                JsonObjectRequest postRequestAddMember = new JsonObjectRequest(Request.Method.POST, url, params,
+                        new Response.Listener<JSONObject>()
+                        {
+                            @Override
+                            public void onResponse(JSONObject response) {
+                                // response
+                                Log.d("Response", response.toString());
+                                Toast.makeText(getApplicationContext(), "Welcome to the" + clubName, Toast.LENGTH_LONG).show();
+                            }
+                        },
+                        new Response.ErrorListener()
+                        {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                // error
+                                Log.d("Error.Response", error.toString());
+                               //Toast.makeText(getApplicationContext(), "Error joining the " + clubName, Toast.LENGTH_LONG).show();
+                            }
+                        }
+                );
+                queue.add(postRequestAddMember);
+            }
+
+        public void epostData(String enrolled, String clubID) throws JSONException {
+            RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+
+            int enrolledInt = Integer.parseInt(enrolled);
+            enrolledInt += 1;
+            enrolled = Integer.toString(enrolledInt);
+
+
+            DateFormat df = new SimpleDateFormat("MM-dd-yyyy");
+            String date = df.format(Calendar.getInstance().getTime());
+
+            //Map<String, String> params = new HashMap();
+            JSONObject params = new JSONObject();
+            params.put("enrollmentNumber", enrolled);
+            params.put("clubID", clubIDpassedIn);
+            params.put("clubStanding", "Active");
+            params.put("expirationDate", date);
+            params.put("joinDate", date);
+            params.put("ranking", "Member");
+            params.put("studentID",userIDpassedIn );
+
+            String url = "http://cs309-pp-4.misc.iastate.edu:8080/clubenrollment";
+            //String url = "https://0ea88006-bc29-40d9-8155-873d2ed83f3c.mock.pstmn.io/registration";
+            JsonObjectRequest postRequestAddMember2 = new JsonObjectRequest(Request.Method.POST, url, params,
+                    new Response.Listener<JSONObject>()
+                    {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            // response
+                            Log.d("Response", response.toString());
+                            Toast.makeText(getApplicationContext(), "Welcome to the" + clubName, Toast.LENGTH_LONG).show();
+                        }
+                    },
+                    new Response.ErrorListener()
+                    {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            // error
+                            Log.d("Error.Response", error.toString());
+                            //Toast.makeText(getApplicationContext(), "Error joining the " + clubName, Toast.LENGTH_LONG).show();
+                        }
+                    }
+            );
+            queue.add(postRequestAddMember2);
+        }
+        });
 
         TextView myTxt = (TextView) findViewById(R.id.clubName);
         myTxt.setText(clubName);
-
-        //TextView myTxt2 = (TextView)findViewById(R.id.domain);
-        //myTxt2.setText(domainName);
 
         TextView myTxt2 =(TextView)findViewById(R.id.domain);
         myTxt2.setClickable(true);

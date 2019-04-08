@@ -1,21 +1,13 @@
 package com.example.ClubHub;
 
-
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
-import android.webkit.HttpAuthHandler;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -45,6 +37,7 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
     //private final String[] mStrings = { "Google", "Apple", "Samsung", "Sony", "LG", "HTC" };
     final ArrayList<String> clubNameArrayList = new ArrayList<>();
 
+
     //public static String[] clubNameArray;
     //private String[] clubNameArray = new String[100];
 
@@ -53,6 +46,9 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
     protected void onCreate(Bundle savedInstanceState) {
         final ArrayList<String> clubDomainList = new ArrayList<>();
         final ArrayList<String> clubStatusList = new ArrayList<>();
+        final ArrayList<String> clubIDList = new ArrayList<>();
+        final String userID = getIntent().getStringExtra("IDNumber");
+        final String clubID = getIntent().getStringExtra("clubID");
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
 
@@ -85,12 +81,10 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
                                 JSONObject club = array.getJSONObject(i);
 
                                 // Get the current club (json object) data
-//                                String clubID = club.getString("clubID");
                                 String clubName = club.getString("clubName");
                                 String clubDomain = club.getString("clubDomain");
                                 String clubStatus = club.getString("clubStatus");
-//                                JSONArray numArray = array.optJSONArray(5);
-
+                                String clubID = club.getString("clubID");
 
 
                                 //clubDomainList.add(clubDomain);
@@ -100,6 +94,7 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
                                     clubNameArrayList.add(clubName);
                                     clubDomainList.add(clubDomain);
                                     clubStatusList.add(clubStatus);
+                                    clubIDList.add(clubID);
 
                                 }
                                 else{
@@ -143,9 +138,16 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
             Intent clubPage = new Intent(ClubSearchPage.this, ClubHomePage.class);
-            //Intent clubPage = new Intent(ClubSearchPage.this, Login.class);
-            clubPage.putExtra("clubName", clubNameArrayList.get(position));
 
+            //if(userID == null){
+                //clubPage.putExtra("userID" , " " );
+            //}
+            //else{
+                clubPage.putExtra("IDNumber", userID);
+            //}
+
+            clubPage.putExtra("clubID", clubIDList.get(position));
+            clubPage.putExtra("clubName", clubNameArrayList.get(position));
             //Change below to get current domain and status
             clubPage.putExtra("clubDomain", clubDomainList.get(position));
             clubPage.putExtra("clubStatus", clubStatusList.get(position));

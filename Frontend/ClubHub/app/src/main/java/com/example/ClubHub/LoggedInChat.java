@@ -58,7 +58,7 @@ public class LoggedInChat extends AppCompatActivity {
                     //Log.d("first", "run() returned: " + s);
                     //s=t1.getText().toString();
                     //Log.d("second", "run() returned: " + s);
-                    t1.setText(s+" Server:"+message +"\n");
+                    t1.setText(s+message +"\n");
                 }
 
                 @Override

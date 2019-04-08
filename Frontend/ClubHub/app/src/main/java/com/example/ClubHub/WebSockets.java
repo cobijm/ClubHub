@@ -23,7 +23,7 @@ import java.net.URISyntaxException;
 public class WebSockets extends AppCompatActivity {
 
     Button  b1,b2;
-    EditText e1,e2;
+    EditText e1,e2, clubName;
     TextView t1;
 
     private WebSocketClient cc;
@@ -36,6 +36,8 @@ public class WebSockets extends AppCompatActivity {
         e1=(EditText)findViewById(R.id.et1);
         e2=(EditText)findViewById(R.id.et2);
         t1=(TextView)findViewById(R.id.tx1);
+
+        clubName = (EditText)findViewById(R.id.ClubChat);
 
         //Make the textView scrollable
         t1.setMovementMethod(new ScrollingMovementMethod());
@@ -51,7 +53,14 @@ public class WebSockets extends AppCompatActivity {
                  * If running on the emulator, you can use localhost.
                  */
                 //ws://hostname:8080/chat/{user name/id}
-                String w = "ws://cs309-pp-4.misc.iastate.edu:8080/websocket/"+e1.getText().toString();
+                String w;
+
+                if(clubName.length() > 0){
+                    w = "ws://cs309-pp-4.misc.iastate.edu:8080/websocket/" + clubName.getText() + "/" + e1.getText().toString();
+                }
+                else{
+                    w = "ws://cs309-pp-4.misc.iastate.edu:8080/websocket/"+e1.getText().toString();
+                }
 
                 try {
                     Log.d("Socket:", "Trying socket");
@@ -60,11 +69,7 @@ public class WebSockets extends AppCompatActivity {
                         public void onMessage(String message) {
                             Log.d("", "run() returned: " + message);
                             String s=t1.getText().toString();
-                            //t1.setText("hello world");
-                            //Log.d("first", "run() returned: " + s);
-                            //s=t1.getText().toString();
-                            //Log.d("second", "run() returned: " + s);
-                            t1.setText(s+" Server:"+message +"\n");
+                            t1.setText(s+message +"\n");
                         }
 
                         @Override

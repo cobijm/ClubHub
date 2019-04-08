@@ -266,7 +266,7 @@ public class ClubHomePage extends AppCompatActivity {
             //Map<String, String> params = new HashMap();
             JSONObject params = new JSONObject();
             params.put("enrollmentNumber", enrolled);
-            params.put("clubID", clubID);
+            params.put("clubID", clubIDpassedIn);
             params.put("clubStanding", "Active");
             params.put("expirationDate", date);
             params.put("joinDate", date);

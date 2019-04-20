@@ -17,8 +17,11 @@ public class EvanMockitoTests {
 
     @Rule public MockitoRule mockitoRule = MockitoJUnit.rule();
 
-
-@Test
+    /**
+     * Evan's first mockito test
+     * @throws JSONException
+     */
+    @Test
 public void loginSuccess_fetchUserTest() throws JSONException {
     //This creates a Mock Object of the class that we have not fully implemented
     LoginSuccess test = mock(LoginSuccess.class);

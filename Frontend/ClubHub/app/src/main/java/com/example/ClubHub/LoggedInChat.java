@@ -27,21 +27,22 @@ public class LoggedInChat extends AppCompatActivity {
      */
     Button  bt,b2;
     /**
-     *
+     * Editable text sections
      */
     EditText e1,e2, clubName;
+
     /**
-     *
+     * Text view to display the chat to the user
      */
     TextView t1;
 
     /**
-     *
+     * Client for the websocket
      */
     private WebSocketClient cc;
 
     /**
-     *
+     * Logged in chat uses the websockets to implement chat for logged in users with a custom username
      * @param savedInstanceState
      */
     @Override

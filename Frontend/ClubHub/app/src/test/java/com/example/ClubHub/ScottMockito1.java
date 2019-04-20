@@ -20,6 +20,10 @@ public class ScottMockito1 {
 
     @Rule public MockitoRule mockitoRule = MockitoJUnit.rule();
 
+    /**
+     * Scott's first mockito test
+     * @throws JSONException
+     */
     @Test
     public void loginSuccessUserTest() throws JSONException{
 

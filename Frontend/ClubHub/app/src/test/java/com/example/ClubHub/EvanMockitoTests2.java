@@ -18,8 +18,11 @@ public class EvanMockitoTests2 {
 
     @Rule public MockitoRule mockitoRule = MockitoJUnit.rule();
 
-
-@Test
+    /**
+     * Evan's second mockito test
+     * @throws JSONException
+     */
+    @Test
 public void clubSearchPage_onQueryTextChange() throws JSONException {
     //This creates a Mock Object of the class that we have not fully implemented
     ClubSearchPage test = mock(ClubSearchPage.class);

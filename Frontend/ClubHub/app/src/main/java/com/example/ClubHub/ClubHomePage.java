@@ -39,46 +39,52 @@ import java.util.SimpleTimeZone;
 public class ClubHomePage extends AppCompatActivity {
 
     /**
-     *
+     * Variable to see if the user is already in the club
      */
-    private boolean exists = false; // Variable to see if the user is already in the club
+    private boolean exists = false;
 
     /**
-     *
+     * The name of the given club
      */
     private String clubName;
+
     /**
-     *
+     * The domain name for the clubs website
      */
     private String domainName;
+
     /**
-     *
+     * The status, denoting whether the club is active or not
      */
     private String clubStatus;
+
     /**
-     *
+     * The club id passed in from the previous page
      */
     private String clubIDpassedIn;
+
     /**
-     *
+     * The user id passed in from the page before
      */
     private String userIDpassedIn;
+
     /**
-     *
+     * The url for the json gets and json posts for the club table
      */
     private String cJSONURLString = "http://cs309-pp-4.misc.iastate.edu:8080/clubtable";
+
     /**
-     *
+     * The url for the json gets and json posts for the club enrollment table
      */
     private String eJSONURLString = "http://cs309-pp-4.misc.iastate.edu:8080/clubenrollment";
 
     /**
-     *
+     * The string to hold the main club id being used
      */
     private String mainClubId = "";
 
     /**
-     *
+     * The club home page is the main hub for each club
      * @param savedInstanceState
      */
     @Override
@@ -107,6 +113,10 @@ public class ClubHomePage extends AppCompatActivity {
 
 //        IMPLEMENT THIS PROPERLY
         jButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * The onclick method handles button clicks to redirect the user to new pages
+             * @param v
+             */
             @Override
             public void onClick(View v) {
 
@@ -243,7 +253,22 @@ public class ClubHomePage extends AppCompatActivity {
 
             }
 
-
+            /**
+             * Post data posts the new data to the club table to allow the user to join the club
+             * @param clubs
+             * The list of clubs
+             * @param name
+             * The name of the club
+             * @param domain
+             * The domain of the club
+             * @param status
+             * The status of the club (active or not)
+             * @param mems
+             * The arraylist of club members
+             * @param tags
+             * This list of club tags
+             * @throws JSONException
+             */
             public void postData(String clubs, String name, String domain, String status, ArrayList<String> mems, String[] tags) throws JSONException {
                 RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
@@ -288,7 +313,9 @@ public class ClubHomePage extends AppCompatActivity {
             /**
              *
               * @param enrolled
+             * The amount of enrolled users
              * @param clubID
+             * The id of the club
              * @throws JSONException
              */
         public void epostData(String enrolled, String clubID) throws JSONException {

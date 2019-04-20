@@ -10,6 +10,9 @@ import static org.mockito.Mockito.when;
 
 public class ScottMockito3 {
 
+    /**
+     * Soctt's third mockito test
+     */
     @Test
     public void registrationTest(){
 

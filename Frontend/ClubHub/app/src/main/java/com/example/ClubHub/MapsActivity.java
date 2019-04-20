@@ -18,16 +18,17 @@ import java.util.Random;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     /**
-     *
+     * An implementation of a google map
      */
     private GoogleMap mMap;
+
     /**
-     *
+     * A given map location
      */
     private String mapLoc;
 
     /**
-     *
+     * The maps activity allows users to locate their clubs and events
      * @param savedInstanceState
      */
     @Override
@@ -128,8 +129,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     /**
-     *
+     * Returns a random x value for when a club does not have a map location
      * @return
+     * The random x coordinate
      */
     public float randomX(){
         float randomValue;
@@ -143,8 +145,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     /**
-     *
+     * Returns a random y value for when the club does not have a map location
      * @return
+     * The random y coordinate
      */
     public float randomY(){
         float randomValue;

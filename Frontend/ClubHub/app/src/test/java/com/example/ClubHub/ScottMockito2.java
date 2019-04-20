@@ -9,7 +9,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class ScottMockito2 {
-
+    /**
+     * Soctt's second mockito test
+     */
     @Test
     public void loginTest(){
 

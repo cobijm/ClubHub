@@ -11,17 +11,17 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 /**
- *
+ * Search function that allows the user to search for clubs by specific tags
  */
 public class ClubTagSearch extends AppCompatActivity implements View.OnClickListener {
     /**
-     *
+     * Array list to store all the tags that can be searched
      */
     final ArrayList<String> availableTags = new ArrayList<String>();
 
 
     /**
-     *
+     * Sets the page and adds the tags to the array list
      * @param savedInstanceState
      */
     @Override
@@ -50,7 +50,8 @@ public class ClubTagSearch extends AppCompatActivity implements View.OnClickList
     }
 
     /**
-     *
+     * Function that searches through the array list and sees if there is a match.  User is able
+     * to click on the tags and arrive at a different page. Sends message if the tag is not there.
      * @param v
      */
     @Override

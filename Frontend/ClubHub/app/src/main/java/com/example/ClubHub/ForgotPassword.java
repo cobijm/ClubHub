@@ -25,19 +25,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
+ * Allows the user to change their password given their userid exists in the database
  */
 public class ForgotPassword extends AppCompatActivity implements View.OnClickListener {
 
     /**
-     *
+     * String that references the server
      */
     private String mJSONURLString = "http://cs309-pp-4.misc.iastate.edu:8080/usersid";
     //Test comment for development purposes
 
 
     /**
-     *
+     * Sets the page and onClickListener
      * @param savedInstanceState
      */
     @Override
@@ -52,7 +52,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
     }
 
     /**
-     *
+     * Performs a JSON get to retrieve the userid of the user
      * @param v
      */
     public void onClick(View v) {
@@ -142,14 +142,21 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
     }
 
     /**
-     *
+     * Performs a JSON post to change the password of the user while keeping the rest of their data the same
      * @param id
+     * userId of the user
      * @param netID
+     * netID of the user
      * @param firstName
+     * First name of the user
      * @param lastName
+     * Last name of the user
      * @param classification
+     * Classification of the user
      * @param phoneNumber
+     * Phone Number of the user
      * @param major
+     * Major of the user
      */
     public void postData(String id, String netID, String firstName, String lastName, String classification, String phoneNumber, String major){
         RequestQueue queue = Volley.newRequestQueue(this);

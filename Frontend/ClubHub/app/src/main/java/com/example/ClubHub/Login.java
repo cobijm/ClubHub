@@ -24,21 +24,21 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 /**
- *
+ * Login page that the user enters their credentials in assuming they exist in the database
  */
 public class Login extends AppCompatActivity implements View.OnClickListener{
 
     /**
-     *
+     * String that references the server
      */
     private String mJSONURLString = "http://cs309-pp-4.misc.iastate.edu:8080/usersid";
     /**
-     *
+     * See if the user exists in the database
      */
-    private boolean exists = false; // Variable to see if the user exists
+    private boolean exists = false;
 
     /**
-     *
+     * Sets the onClickListeners for each of the buttons on the Login page
      * @param savedInstanceState
      */
     @Override
@@ -59,7 +59,8 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     }
 
     /**
-     *
+     * Function that performs a JSON get from the datbase and checks to see if the credentials being
+     * entered matches or if the user does not exist.
      * @param v
      */
     public void onClick(View v) {

@@ -18,6 +18,11 @@ import org.mockito.junit.MockitoJUnitRunner;
 import backend.userID.userID;
 
 @RunWith(MockitoJUnitRunner.class)
+/**
+ * class to test club table
+ * @author Yip
+ *
+ */
 public class clubTableTest {
 
 	@Mock
@@ -27,6 +32,9 @@ public class clubTableTest {
 	clubTableServices clubtableservices;
 
 	@Test
+	/**
+	 * test get club table method
+	 */
 	public void testGetClubTable() {
 
 		clubTableServices services = mock(clubTableServices.class);
@@ -43,6 +51,9 @@ public class clubTableTest {
 	}
 
 	@Test
+	/**
+	 * test get all club table method
+	 */
 	public void testGetAllClubTables() {
 
 		clubTableServices services = mock(clubTableServices.class);
@@ -60,6 +71,9 @@ public class clubTableTest {
 	}
 
 	@Test
+	/**
+	 * test all fields
+	 */
 	public void testAllFields() {
 
 		clubTableServices services = mock(clubTableServices.class);

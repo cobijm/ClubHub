@@ -4,6 +4,12 @@ import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
+/**
+ * 
+ * @author Danny Yip, Cobi Mom
+ *	class to test user id 
+ *
+ */
 public class userIDTestRunner {
 
 	   public static void main(String[] args) {

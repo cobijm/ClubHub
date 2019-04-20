@@ -16,6 +16,11 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
+/**
+ * 
+ * @author Danny Yip, Coi Mom
+ *
+ */
 public class userIDTest {
 
 		@Mock
@@ -28,6 +33,9 @@ public class userIDTest {
 		
 		
 		@Test
+		/**
+		 * test get yser id 
+		 */
 		public void testGetUserId() {
 			
 			userIDServices services = mock(userIDServices.class);
@@ -42,6 +50,9 @@ public class userIDTest {
 
 
 		@Test
+		/**
+		 * test get all usr id
+		 */
 		public void testGetAllUserID() {
 		
 		userIDServices services = mock(userIDServices.class);
@@ -60,6 +71,9 @@ public class userIDTest {
 		
 		
 		@Test
+		/**
+		 * test all fields in user id
+		 */
 		public void testAllFields() {
 			
 			userIDServices services = mock(userIDServices.class);

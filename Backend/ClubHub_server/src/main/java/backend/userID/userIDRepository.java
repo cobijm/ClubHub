@@ -12,6 +12,13 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+/**
+ * 
+ * @author Danny Yip, Cobi Mom
+ * 
+ * a class of a user id repository
+ *
+ */
 public interface userIDRepository extends CrudRepository<userID, String> {
 
 

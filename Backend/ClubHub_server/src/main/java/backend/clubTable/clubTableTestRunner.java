@@ -4,6 +4,12 @@ import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
+/**
+ * 
+ * @author Danny Yip, Cobi Mom
+ *	class to test club table
+ *
+ */
 public class clubTableTestRunner {
 
 	   public static void main(String[] args) {

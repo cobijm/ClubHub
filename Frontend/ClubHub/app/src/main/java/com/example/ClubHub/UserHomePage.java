@@ -22,9 +22,15 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-
+/**
+ *
+ */
 public class UserHomePage extends Activity {
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

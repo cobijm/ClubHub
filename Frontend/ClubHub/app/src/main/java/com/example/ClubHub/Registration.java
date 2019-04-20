@@ -25,12 +25,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ *
+ */
 public class Registration extends AppCompatActivity implements View.OnClickListener {
 
+
     private Context mContext;
+    /**
+     *
+     */
     private String mJSONURLString = "http://cs309-pp-4.misc.iastate.edu:8080/usersid";
     private String postmanTest = "https://0ea88006-bc29-40d9-8155-873d2ed83f3c.mock.pstmn.io/registration";
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +65,10 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    /**
+     *
+     * @param v
+     */
     public void onClick(View v) {
 
         switch (v.getId()) {
@@ -138,6 +153,9 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     *
+     */
     public void postData(){
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -204,6 +222,18 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         queue.add(postRequest);
     }
 
+    /**
+     *
+     * @param netID
+     * @param id
+     * @param fName
+     * @param lName
+     * @param classification
+     * @param phone
+     * @param major
+     * @param pass
+     * @return
+     */
     public ArrayList<String> regCreds(String netID, String id, String fName, String lName, String classification, String phone, String major, String pass){
 
         ArrayList<String> regStuff = new ArrayList<String>();

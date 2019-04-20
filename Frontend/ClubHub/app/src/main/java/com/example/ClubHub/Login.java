@@ -23,15 +23,24 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-/*
-Login Page that takes netID and password from server
+/**
+ *
  */
 public class Login extends AppCompatActivity implements View.OnClickListener{
 
-
+    /**
+     *
+     */
     private String mJSONURLString = "http://cs309-pp-4.misc.iastate.edu:8080/usersid";
+    /**
+     *
+     */
     private boolean exists = false; // Variable to see if the user exists
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +58,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
     }
 
+    /**
+     *
+     * @param v
+     */
     public void onClick(View v) {
 
         switch (v.getId()) {
@@ -139,6 +152,12 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
     }
 
+    /**
+     *
+     * @param user
+     * @param pass
+     * @return
+     */
     public ArrayList<String> loginCredentials(String user, String pass){
 
         ArrayList<String> loginStuff = new ArrayList<String>();

@@ -12,11 +12,24 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.Random;
 
+/**
+ *
+ */
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    /**
+     *
+     */
     private GoogleMap mMap;
+    /**
+     *
+     */
     private String mapLoc;
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +100,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
-    //Helper method to check if the map locations have been created
+    /**
+     * Helper method to check if the map locations have been created
+     */
     public boolean existingClub(String locName){
         boolean locExists = false;
 
@@ -112,6 +127,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public float randomX(){
         float randomValue;
 
@@ -123,6 +142,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return randomValue;
     }
 
+    /**
+     *
+     * @return
+     */
     public float randomY(){
         float randomValue;
 

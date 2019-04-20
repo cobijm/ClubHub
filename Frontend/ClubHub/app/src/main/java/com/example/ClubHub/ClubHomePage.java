@@ -33,21 +33,54 @@ import java.util.List;
 import java.util.Map;
 import java.util.SimpleTimeZone;
 
-
+/**
+ *
+ */
 public class ClubHomePage extends AppCompatActivity {
 
+    /**
+     *
+     */
     private boolean exists = false; // Variable to see if the user is already in the club
 
+    /**
+     *
+     */
     private String clubName;
+    /**
+     *
+     */
     private String domainName;
+    /**
+     *
+     */
     private String clubStatus;
+    /**
+     *
+     */
     private String clubIDpassedIn;
+    /**
+     *
+     */
     private String userIDpassedIn;
+    /**
+     *
+     */
     private String cJSONURLString = "http://cs309-pp-4.misc.iastate.edu:8080/clubtable";
+    /**
+     *
+     */
     private String eJSONURLString = "http://cs309-pp-4.misc.iastate.edu:8080/clubenrollment";
 
+    /**
+     *
+     */
     private String mainClubId = "";
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -252,6 +285,12 @@ public class ClubHomePage extends AppCompatActivity {
                 queue.add(postRequestAddMember);
             }
 
+            /**
+             *
+              * @param enrolled
+             * @param clubID
+             * @throws JSONException
+             */
         public void epostData(String enrolled, String clubID) throws JSONException {
             RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 

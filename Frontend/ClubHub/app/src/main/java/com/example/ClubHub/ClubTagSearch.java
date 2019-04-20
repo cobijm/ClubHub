@@ -10,10 +10,20 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/**
+ *
+ */
 public class ClubTagSearch extends AppCompatActivity implements View.OnClickListener {
+    /**
+     *
+     */
     final ArrayList<String> availableTags = new ArrayList<String>();
 
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +49,10 @@ public class ClubTagSearch extends AppCompatActivity implements View.OnClickList
         nButton.setOnClickListener(this);
     }
 
+    /**
+     *
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         EditText tagEdit = (EditText)findViewById(R.id.tagSearchInput);

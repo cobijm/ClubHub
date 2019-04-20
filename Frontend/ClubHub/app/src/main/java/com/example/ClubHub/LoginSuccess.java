@@ -9,12 +9,21 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
+/**
+ *
+ */
 public class LoginSuccess extends AppCompatActivity {
 
+    /**
+     *
+     */
     TextView text;
 
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +73,10 @@ public class LoginSuccess extends AppCompatActivity {
 
     }
 
+    /**
+     *
+     * @return
+     */
     public String fetchUser(){
 
         Bundle extra = getIntent().getBundleExtra("extra");

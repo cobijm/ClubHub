@@ -24,12 +24,22 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ *
+ */
 public class ForgotPassword extends AppCompatActivity implements View.OnClickListener {
 
+    /**
+     *
+     */
     private String mJSONURLString = "http://cs309-pp-4.misc.iastate.edu:8080/usersid";
     //Test comment for development purposes
 
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +51,10 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
 
     }
 
+    /**
+     *
+     * @param v
+     */
     public void onClick(View v) {
 
         switch (v.getId()) {
@@ -127,6 +141,16 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    /**
+     *
+     * @param id
+     * @param netID
+     * @param firstName
+     * @param lastName
+     * @param classification
+     * @param phoneNumber
+     * @param major
+     */
     public void postData(String id, String netID, String firstName, String lastName, String classification, String phoneNumber, String major){
         RequestQueue queue = Volley.newRequestQueue(this);
 

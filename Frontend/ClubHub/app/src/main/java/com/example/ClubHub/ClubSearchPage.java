@@ -32,20 +32,20 @@ import java.util.ArrayList;
 public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     /**
-     *
+     * Search view to be used
      */
     private SearchView mSearchView;
     /**
-     *
+     * Listview to contain all the clubs
      */
     private ListView mListView;
     /**
-     *
+     * String that refers to the server database
      */
     private String mJSONURLString = "http://cs309-pp-4.misc.iastate.edu:8080/clubtable";
     //private final String[] mStrings = { "Google", "Apple", "Samsung", "Sony", "LG", "HTC" };
     /**
-     *
+     * ArrayList that stores all the club name
      */
     final ArrayList<String> clubNameArrayList = new ArrayList<>();
 
@@ -54,7 +54,8 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
     //private String[] clubNameArray = new String[100];
 
     /**
-     *
+     * Performs a JSON get to retrieve all the names of the clubs from the clubID table and adds them to
+     * the list view to be displayed during a search
      * @param savedInstanceState
      */
     @Override
@@ -172,7 +173,7 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
     }
 
     /**
-     *
+     * Creates the searchView
      */
     private void setupSearchView() {
         mSearchView.setIconifiedByDefault(false);
@@ -182,9 +183,11 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
     }
 
     /**
-     *
+     *  Function to handle the text being inout by the user
      * @param newText
+     * Text being input by the user
      * @return
+     * True
      */
     public boolean onQueryTextChange(String newText) {
         if (TextUtils.isEmpty(newText)) {
@@ -196,9 +199,11 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
     }
 
     /**
-     *
+     * Test to see if the textChange is working correctly
      * @param newText
+     * String that will be the new text in the query
      * @return
+     * The newText value in the query
      */
     public boolean onqueryTextTest(String newText){
         return onQueryTextChange(newText);
@@ -206,9 +211,11 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
 
 
     /**
-     *
+     * Function to submit false
      * @param query
+     * String that contains the query
      * @return
+     * False
      */
     public boolean onQueryTextSubmit(String query) {
         return false;

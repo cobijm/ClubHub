@@ -26,30 +26,31 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
- *
+ * Chat function to be available to all users
  */
 public class WebSockets extends AppCompatActivity {
 
     /**
-     *
+     * Buttons to allow the user to send a message and register in the chat
      */
     Button  b1,b2;
     /**
-     *
+     * Text the user is able to send and modify
      */
     EditText e1,e2, clubName;
     /**
-     *
+     * TextView variable to show messages
      */
     TextView t1;
 
     /**
-     *
+     * WebSocket variable to contain the chat
      */
     private WebSocketClient cc;
 
     /**
-     *
+     * Creates the layout for the page and differentiates the chat from User chat by checking if the
+     * user is a member of any of the clubs
      * @param savedInstanceState
      */
     @Override

@@ -18,12 +18,12 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
- *
+ * Chat that only users who are logged in can participate in
  */
 public class LoggedInChat extends AppCompatActivity {
 
     /**
-     *
+     * Buttons that allow the user to send a message
      */
     Button  bt,b2;
     /**
@@ -39,6 +39,11 @@ public class LoggedInChat extends AppCompatActivity {
      *
      */
     private WebSocketClient cc;
+
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

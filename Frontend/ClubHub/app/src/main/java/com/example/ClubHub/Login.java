@@ -154,10 +154,13 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     }
 
     /**
-     *
+     * Function that returns the login credentials of the user
      * @param user
+     * User's userid
      * @param pass
+     * User's password
      * @return
+     * Credentials as an arrayList
      */
     public ArrayList<String> loginCredentials(String user, String pass){
 

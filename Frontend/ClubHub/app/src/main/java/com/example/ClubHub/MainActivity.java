@@ -23,6 +23,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Main page that the user sees when they open the application
+ */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     //From tutorial
@@ -36,6 +39,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String postmanTest = "https://0ea88006-bc29-40d9-8155-873d2ed83f3c.mock.pstmn.io/registration";
 
 
+    /**
+     * Sets up the buttons and views for the page
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +74,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    /**
+     * Sends the user to the specific page based on what they click
+     * @param v
+     */
     @Override
     public void onClick(View v) {
 

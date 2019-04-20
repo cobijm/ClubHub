@@ -9,12 +9,21 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
+/**
+ * Page the user is taken to once they correctly login
+ */
 public class LoginSuccess extends AppCompatActivity {
 
+    /**
+     * TextView that will appear when they reach the page after a successful login
+     */
     TextView text;
 
 
+    /**
+     * Sets the view of the LoginSuccess page and adds the required buttons/destinations to it
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +73,11 @@ public class LoginSuccess extends AppCompatActivity {
 
     }
 
+    /**
+     * String function that returns the userName of the user once they login
+     * @return
+     * userName of the user
+     */
     public String fetchUser(){
 
         Bundle extra = getIntent().getBundleExtra("extra");

@@ -22,9 +22,16 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-
+/**
+ * Home page of the user that displays all of the clubs they are a memeber of
+ */
 public class UserHomePage extends Activity {
 
+    /**
+     * Performs a JSON get request to retrieve all of the clubs the user is a member of and display
+     * them in a listview
+     * @param savedInstanceState
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -17,12 +17,27 @@ import org.java_websocket.handshake.ServerHandshake;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+/**
+ *
+ */
 public class LoggedInChat extends AppCompatActivity {
 
+    /**
+     *
+     */
     Button  bt,b2;
+    /**
+     *
+     */
     EditText e1,e2, clubName;
+    /**
+     *
+     */
     TextView t1;
 
+    /**
+     *
+     */
     private WebSocketClient cc;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -31,17 +31,32 @@ import java.util.ArrayList;
  */
 public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
+    /**
+     *
+     */
     private SearchView mSearchView;
+    /**
+     *
+     */
     private ListView mListView;
+    /**
+     *
+     */
     private String mJSONURLString = "http://cs309-pp-4.misc.iastate.edu:8080/clubtable";
     //private final String[] mStrings = { "Google", "Apple", "Samsung", "Sony", "LG", "HTC" };
+    /**
+     *
+     */
     final ArrayList<String> clubNameArrayList = new ArrayList<>();
 
 
     //public static String[] clubNameArray;
     //private String[] clubNameArray = new String[100];
 
-
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         final ArrayList<String> clubDomainList = new ArrayList<>();
@@ -156,6 +171,9 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
         });
     }
 
+    /**
+     *
+     */
     private void setupSearchView() {
         mSearchView.setIconifiedByDefault(false);
         mSearchView.setOnQueryTextListener(this);
@@ -163,6 +181,11 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
         mSearchView.setQueryHint("Search Here");
     }
 
+    /**
+     *
+     * @param newText
+     * @return
+     */
     public boolean onQueryTextChange(String newText) {
         if (TextUtils.isEmpty(newText)) {
             mListView.clearTextFilter();
@@ -172,11 +195,21 @@ public class ClubSearchPage extends AppCompatActivity implements SearchView.OnQu
         return true;
     }
 
+    /**
+     *
+     * @param newText
+     * @return
+     */
     public boolean onqueryTextTest(String newText){
         return onQueryTextChange(newText);
     }
 
 
+    /**
+     *
+     * @param query
+     * @return
+     */
     public boolean onQueryTextSubmit(String query) {
         return false;
     }

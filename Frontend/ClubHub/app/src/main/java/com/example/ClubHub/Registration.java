@@ -25,12 +25,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Function that registers the user into the database
+ */
 public class Registration extends AppCompatActivity implements View.OnClickListener {
 
+
     private Context mContext;
+    /**
+     * String to reference the server
+     */
     private String mJSONURLString = "http://cs309-pp-4.misc.iastate.edu:8080/usersid";
     private String postmanTest = "https://0ea88006-bc29-40d9-8155-873d2ed83f3c.mock.pstmn.io/registration";
 
+    /**
+     * Sets up the view and links the button
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +65,11 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    /**
+     * Performs a JSON get to see if the user already exists in the database which would make them
+     * unable to register again under the same credentials
+     * @param v
+     */
     public void onClick(View v) {
 
         switch (v.getId()) {
@@ -138,6 +154,10 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * Performs a JSON post to the database to add the new information of the registered user to the
+     * userID table
+     */
     public void postData(){
         RequestQueue queue = Volley.newRequestQueue(this);
 
@@ -204,6 +224,27 @@ public class Registration extends AppCompatActivity implements View.OnClickListe
         queue.add(postRequest);
     }
 
+    /**
+     * Method to return the information of a registered user
+     * @param netID
+     * User's nerID
+     * @param id
+     * User's ID
+     * @param fName
+     * User's first name
+     * @param lName
+     * User's last name
+     * @param classification
+     * User's classification
+     * @param phone
+     * User's Phone Number
+     * @param major
+     * User's Major
+     * @param pass
+     * User's Password
+     * @return
+     * All the credentials in an arrayList
+     */
     public ArrayList<String> regCreds(String netID, String id, String fName, String lName, String classification, String phone, String major, String pass){
 
         ArrayList<String> regStuff = new ArrayList<String>();

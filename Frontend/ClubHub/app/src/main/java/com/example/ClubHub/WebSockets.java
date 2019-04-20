@@ -25,13 +25,33 @@ import org.java_websocket.handshake.ServerHandshake;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+/**
+ *
+ */
 public class WebSockets extends AppCompatActivity {
 
+    /**
+     *
+     */
     Button  b1,b2;
+    /**
+     *
+     */
     EditText e1,e2, clubName;
+    /**
+     *
+     */
     TextView t1;
 
+    /**
+     *
+     */
     private WebSocketClient cc;
+
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

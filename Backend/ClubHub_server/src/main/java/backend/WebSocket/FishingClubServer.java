@@ -18,20 +18,40 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 /**
  * 
- * @author Vamsi Krishna Calpakkam
+ * @author Danny Yip, Cobi Mom
  *
  */
 @ServerEndpoint("/websocket/fishing/{username}")
 @Component
+/**
+ * 
+ * @author Danny Yip, Cobi Mom
+ * class of a Fishing club
+ */
 public class FishingClubServer {
 	
 	// Store all socket session and their corresponding username.
-    private static Map<Session, String> sessionUsernameMap = new HashMap<>();
-    private static Map<String, Session> usernameSessionMap = new HashMap<>();
-    
+    /**
+     * private instance variable of a map of sessionUsernameMap
+     */
+	private static Map<Session, String> sessionUsernameMap = new HashMap<>();
+    /**
+     * private instance variable of a map of usernameSessionMap
+     */
+	private static Map<String, Session> usernameSessionMap = new HashMap<>();
+	/**
+     * private instance of a logger
+	 */
     private final Logger logger = LoggerFactory.getLogger(WebSocketServer.class);
     
     @OnOpen
+    /**
+     * method of on open 
+     * @param session a session to connect 
+     * @param username user name
+     * @throws IOException 
+     * exception Input or output
+     */
     public void onOpen(
     	      Session session, 
     	      @PathParam("username") String username) throws IOException 
@@ -47,6 +67,14 @@ public class FishingClubServer {
     }
  
     @OnMessage
+    /**
+     * on Message method
+     * 
+     * @param session a session to connect 
+     * @param message message to input
+     * @throws IOException
+     * exception Input or output
+     */
     public void onMessage(Session session, String message) throws IOException 
     {
         // Handle new messages
@@ -66,6 +94,12 @@ public class FishingClubServer {
     }
  
     @OnClose
+    /**
+     * close the session 
+     * @param session a session to connect 
+     * @throws IOException 
+     * exception Input or output
+     */
     public void onClose(Session session) throws IOException
     {
     	logger.info("Entered into Close");
@@ -79,12 +113,23 @@ public class FishingClubServer {
     }
  
     @OnError
+    /**
+     * method on error
+     * @param session a session to connect 
+     * @param throwable throwable variable
+     */
     public void onError(Session session, Throwable throwable) 
     {
         // Do error handling here
     	logger.info("Entered into Error");
     }
     
+    /**
+     * send message to particular user
+     * 
+     * @param username users name
+     * @param message users message
+     */
 	private void sendMessageToPArticularUser(String username, String message) 
     {	
     	try {
@@ -95,6 +140,12 @@ public class FishingClubServer {
         }
     }
     
+	/**
+	 * braodcast to all server
+	 * @param message users or server message
+	 * @throws IOException 
+	 * exception Input or output
+	 */
     private static void broadcast(String message) 
     	      throws IOException 
     {	  

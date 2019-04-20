@@ -24,7 +24,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- *
+ * Main page that the user sees when they open the application
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     /**
-     *
+     * Sets up the buttons and views for the page
      * @param savedInstanceState
      */
     @Override
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     *
+     * Sends the user to the specific page based on what they click
      * @param v
      */
     @Override

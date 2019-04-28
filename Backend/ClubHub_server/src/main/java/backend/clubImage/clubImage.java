@@ -17,13 +17,13 @@ public class clubImage {
 	
 	@Id
 	/**
-	 * students image number
-	 */
-	private String imageNumber;
-	/**
 	 * club unique id
 	 */
 	private String clubID;
+	/**
+	 * students image number
+	 */
+	private String imageNumber;
 	/**
 	 * clubs image format
 	 */
@@ -54,7 +54,7 @@ public class clubImage {
 	 * @param imageurl
 	 * clubs image url
 	 */
-	public clubImage(String imagenumber,String clubid,String imageformat , String imageurl)
+	public clubImage(String clubid,String imagenumber,String imageformat , String imageurl)
 	{
 		this.clubID = clubid;
 		this.imageNumber = imagenumber;

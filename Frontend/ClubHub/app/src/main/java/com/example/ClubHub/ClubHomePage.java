@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -82,6 +84,11 @@ public class ClubHomePage extends AppCompatActivity {
      * The string to hold the main club id being used
      */
     private String mainClubId = "";
+
+    /**
+     * The string to hold the url of the given club picture
+     */
+    private String pictureURL = "https://bloximages.chicago2.vip.townnews.com/iowastatedaily.com/content/tncms/assets/v3/editorial/f/b3/fb3cbf90-8c20-11e7-bab3-9bc829bc7696/59a464a6003b6.image.png?resize=328%2C328";
 
     /**
      * The club home page is the main hub for each club
@@ -376,6 +383,64 @@ public class ClubHomePage extends AppCompatActivity {
 
         TextView myTxt3 = (TextView)findViewById(R.id.status);
         myTxt3.setText(clubStatus);
+
+        // New JSON GET Request
+        //JSON GET for the club picture
+        RequestQueue lastQueue = Volley.newRequestQueue(getApplicationContext());
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, cJSONURLString, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Do something with response
+
+                        String clubID = "";
+                        String clubName = "";
+
+                        int idFound = 0;
+
+                        try {
+                            // Get JSON object
+                            JSONArray array = response.getJSONArray("clubs"); // From club table
+
+                            //Change upper bound of for loop to array.length() to print all values
+                            for (int i = 0; i < array.length(); i++) {
+
+                                // Get current json object
+                                JSONObject club = array.getJSONObject(i);
+
+                                String id = club.getString("clubID");
+                                String url = club.getString("pictureURL");
+
+                                //Toast.makeText(getApplicationContext(), "ID: " + id + "ClubID: " + clubIDpassedIn, Toast.LENGTH_LONG).show();
+                                if(id.equals(clubIDpassedIn)){
+                                    pictureURL = url;
+                                }
+
+                            }
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), "Volley error " + error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }
+        );
+        lastQueue.add(jsonObjectRequest);
+
+
+
+        ImageView i = findViewById(R.id.imageView2);
+
+        Picasso.get().load(pictureURL).resize(600, 600).centerInside().into(i);
+
     }
 
 }

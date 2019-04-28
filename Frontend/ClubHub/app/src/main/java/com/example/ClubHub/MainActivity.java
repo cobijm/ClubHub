@@ -3,11 +3,14 @@ package com.example.ClubHub;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import android.widget.Toast;
@@ -18,10 +21,17 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * Main page that the user sees when they open the application
@@ -29,7 +39,6 @@ import org.json.JSONObject;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     //From tutorial
-    private Context mContext;
     private Activity mActivity;
 
     private CoordinatorLayout mCLayout;
@@ -49,12 +58,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         // Get the application context
-        mContext = getApplicationContext();
         mActivity = MainActivity.this;
 
         // Get the widget reference from XML layout
         //mButtonDo = (Button) findViewById(R.id.JSONget);
         mTextView = (TextView) findViewById(R.id.showResponse);
+
+
 
         //Button to change text
         Button nButton = (Button) findViewById(R.id.Login);
@@ -71,7 +81,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Search button
         Button cButton = (Button) findViewById(R.id.chat);
         cButton.setOnClickListener(this);
-
     }
 
     /**

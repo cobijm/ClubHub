@@ -19,15 +19,12 @@ public class clubImage {
 	/**
 	 * club unique id
 	 */
-	private String clubID;
+	private String imageID;
 	/**
 	 * students image number
 	 */
-	private String imageNumber;
-	/**
-	 * clubs image format
-	 */
-	private String imageFormat;
+	private String clubID;
+
 	/**
 	 * clubs image url
 	 */
@@ -45,20 +42,19 @@ public class clubImage {
 	/**
 	 * Club image constructor with parameters
 	 * 
-	 * @param imagenumber
-	 * students image number
 	 * @param clubid
+	 * students image number
+	 * @param imageid
 	 * club unique id
 	 * @param imageformat
 	 * clubs image format
 	 * @param imageurl
 	 * clubs image url
 	 */
-	public clubImage(String clubid,String imagenumber,String imageformat , String imageurl)
+	public clubImage(String imageid,String clubid, String imageurl)
 	{
+		this.imageID = imageid;
 		this.clubID = clubid;
-		this.imageNumber = imagenumber;
-		this.imageFormat = imageformat;
 		this.imageURL = imageurl;
 
 
@@ -70,16 +66,16 @@ public class clubImage {
 	 * @return
 	 * image number
 	 */
-	public String getImageNumber() {
-		return imageNumber;
+	public String getImageID() {
+		return imageID;
 	}
 
 	/**
 	 * set image number
 	 * @param imageNumber image number
 	 */
-	public void setImageNumber(String imageNumber) {
-		this.imageNumber = imageNumber;
+	public void setImageID(String imageid) {
+		this.imageID = imageid;
 	}
 
 	/**
@@ -95,24 +91,8 @@ public class clubImage {
 	 * set club id
 	 * @param clubID club id
 	 */
-	public void setClubID(String clubID) {
-		this.clubID = clubID;
-	}
-
-	/**
-	 * get image format
-	 * @return image format
-	 */
-	public String getImageFormat() {
-		return imageFormat;
-	}
-
-	/**
-	 * set image format 
-	 * @param imageFormat image format
-	 */
-	public void setImageFormat(String imageFormat) {
-		this.imageFormat = imageFormat;
+	public void setClubID(String clubid) {
+		this.clubID = clubid;
 	}
 
 	/**

@@ -78,10 +78,6 @@ public class LoggedInChat extends AppCompatActivity {
                 public void onMessage(String message) {
                     Log.d("", "run() returned: " + message);
                     String s=t1.getText().toString();
-                    //t1.setText("hello world");
-                    //Log.d("first", "run() returned: " + s);
-                    //s=t1.getText().toString();
-                    //Log.d("second", "run() returned: " + s);
                     t1.setText(s+message +"\n");
                 }
 

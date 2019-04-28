@@ -97,7 +97,8 @@ public class WebSockets extends AppCompatActivity {
                             Log.d("", "run() returned: " + message);
                             String s=t1.getText().toString();
                             t1.setText(s + message + "\n");
-                            t1.setTextColor(Color.BLUE);
+                            t1.setTextColor(Color.WHITE);
+                            t1.setBackgroundColor(Color.rgb(123,169,242));
                             //Spanned display = Html.fromHtml(s + "<font color=blue>" + message + "\n" + "</font><br><br> < br/>");
                         }
 

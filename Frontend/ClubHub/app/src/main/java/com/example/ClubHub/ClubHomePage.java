@@ -81,6 +81,11 @@ public class ClubHomePage extends AppCompatActivity {
     private String eJSONURLString = "http://cs309-pp-4.misc.iastate.edu:8080/clubenrollment";
 
     /**
+     * The url for the json gets and json posts for the club enrollment table
+     */
+    private String fJSONURLString = "http://cs309-pp-4.misc.iastate.edu:8080/clubimage";
+
+    /**
      * The string to hold the main club id being used
      */
     private String mainClubId = "";
@@ -388,7 +393,7 @@ public class ClubHomePage extends AppCompatActivity {
         //JSON GET for the club picture
         RequestQueue lastQueue = Volley.newRequestQueue(getApplicationContext());
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, cJSONURLString, null,
+        JsonObjectRequest jsonObjectRequestTwo = new JsonObjectRequest(Request.Method.GET, fJSONURLString, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -401,7 +406,7 @@ public class ClubHomePage extends AppCompatActivity {
 
                         try {
                             // Get JSON object
-                            JSONArray array = response.getJSONArray("clubs"); // From club table
+                            JSONArray array = response.getJSONArray("image"); // From club table
 
                             //Change upper bound of for loop to array.length() to print all values
                             for (int i = 0; i < array.length(); i++) {
@@ -410,20 +415,25 @@ public class ClubHomePage extends AppCompatActivity {
                                 JSONObject club = array.getJSONObject(i);
 
                                 String id = club.getString("clubID");
-                                String url = club.getString("pictureURL");
+                                String url = club.getString("imageURL");
 
                                 //Toast.makeText(getApplicationContext(), "ID: " + id + "ClubID: " + clubIDpassedIn, Toast.LENGTH_LONG).show();
                                 if(id.equals(clubIDpassedIn)){
+                                    //Toast.makeText(getApplicationContext(), "Reached", Toast.LENGTH_LONG).show();
                                     pictureURL = url;
+
                                 }
 
                             }
-
 
                         } catch (JSONException e) {
                             e.printStackTrace();
 
                         }
+
+                        ImageView i = findViewById(R.id.imageView2);
+
+                        Picasso.get().load(pictureURL).resize(600, 600).centerInside().into(i);
                     }
                 },
                 new Response.ErrorListener() {
@@ -433,13 +443,7 @@ public class ClubHomePage extends AppCompatActivity {
                     }
                 }
         );
-        lastQueue.add(jsonObjectRequest);
-
-
-
-        ImageView i = findViewById(R.id.imageView2);
-
-        Picasso.get().load(pictureURL).resize(600, 600).centerInside().into(i);
+        lastQueue.add(jsonObjectRequestTwo);
 
     }
 

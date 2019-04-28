@@ -1,6 +1,7 @@
 package com.example.ClubHub;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
@@ -95,7 +96,8 @@ public class WebSockets extends AppCompatActivity {
                         public void onMessage(String message) {
                             Log.d("", "run() returned: " + message);
                             String s=t1.getText().toString();
-                            t1.setText(s+message +"\n");
+                            t1.setTextColor(Color.rgb(123, 169, 242));
+                            //t1.setText(s+message +"\n");
                             //Spanned display = Html.fromHtml(s + "<font color=blue>" + message + "\n" + "</font><br><br> < br/>");
                         }
 

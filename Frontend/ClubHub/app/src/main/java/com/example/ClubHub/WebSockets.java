@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.ClubHub.R;
 
@@ -43,6 +44,11 @@ public class WebSockets extends AppCompatActivity {
      * TextView variable to show messages
      */
     TextView t1;
+
+    /**
+     * Message field two
+     */
+    String message2 = "";
 
     /**
      * WebSocket variable to contain the chat
@@ -94,11 +100,18 @@ public class WebSockets extends AppCompatActivity {
                     cc = new WebSocketClient(new URI(w),(Draft) drafts[0]) {
                         @Override
                         public void onMessage(String message) {
+
                             Log.d("", "run() returned: " + message);
                             String s=t1.getText().toString();
-                            t1.setText(s + message + "\n");
-                            t1.setTextColor(Color.WHITE);
-                            t1.setBackgroundColor(Color.rgb(123,169,242));
+                            //t1.setText(Html.fromHtml("<font color=red>" + message + "</font><br><br>"));
+
+                            String[] tokens = message.split(":");
+                            message2 = message2 + "<font color=black>" + tokens[0] + ":" + "</font>" + "<font color=white>" + tokens[1] + "</font><br>";
+
+                            t1.setText(Html.fromHtml(message2));
+                            //t1.setText(s + message + "\n");
+                            //t1.setTextColor(Color.WHITE);
+                            //t1.setBackgroundColor(Color.rgb(123,169,242));
                             //Spanned display = Html.fromHtml(s + "<font color=blue>" + message + "\n" + "</font><br><br> < br/>");
                         }
 

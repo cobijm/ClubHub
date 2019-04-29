@@ -44,6 +44,7 @@ public class UserHomePage extends Activity {
         final ArrayList<String> memberClubIDArray = new ArrayList<String>();
         final ArrayList<String> clubDomain = new ArrayList<>();
         final ArrayList<String> clubStatus = new ArrayList<>();
+        final ArrayList<String> clubIDs = new ArrayList<>();
 
         final String userIDNumber = getIntent().getStringExtra("IDNumber");
 
@@ -98,6 +99,7 @@ public class UserHomePage extends Activity {
                         String status = object.getString("clubStatus");
 
                         if(memberClubIDArray.contains(clubID)) {
+                            clubIDs.add(clubID);
                             clubNames.add(clubs);
                             clubDomain.add(domains);
                             clubStatus.add(status);
@@ -124,6 +126,7 @@ public class UserHomePage extends Activity {
                             String  itemValue    = (String) listView.getItemAtPosition(position);
 
                             Intent intent = new Intent(UserHomePage.this, ClubHomePage.class);
+                            intent.putExtra("clubID", clubIDs.get(position));
                             intent.putExtra("clubDomain", clubDomain.get(position));
                             intent.putExtra("clubStatus", clubStatus.get(position));
                             intent.putExtra("clubName", clubNames.get(position));

@@ -35,16 +35,18 @@
         android:layout_height="50dp"
         android:hint="Chat Message"
         android:textSize="20dp" />
+
     <Button
+        android:id="@+id/bt2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Send"
-        android:id="@+id/bt2" />
+        android:text="Send" />
 
     <TextView
         android:id="@+id/tx1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="262dp"
+        android:baselineAligned="false"
         android:scrollbars="vertical"
         android:textSize="30sp" />
 

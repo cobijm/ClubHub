@@ -1,7 +1,9 @@
 package com.example.ClubHub;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
@@ -35,6 +37,11 @@ public class LoggedInChat extends AppCompatActivity {
      * Text view to display the chat to the user
      */
     TextView t1;
+
+    /**
+     * String to hold messageTwo
+     */
+    String message2 = "";
 
     /**
      * Client for the websocket
@@ -77,8 +84,22 @@ public class LoggedInChat extends AppCompatActivity {
                 @Override
                 public void onMessage(String message) {
                     Log.d("", "run() returned: " + message);
-                    String s=t1.getText().toString();
-                    t1.setText(s+message +"\n");
+                    //String s=t1.getText().toString();
+                    //t1.setText(s+message +"\n");
+                    String s = t1.getText().toString();
+                    //t1.setText(Html.fromHtml("<font color=red>" + message + "</font><br><br>"));
+
+                    t1.setBackgroundColor(Color.rgb(123, 169, 242));
+
+                    if(message.contains("Joined")){
+                        message2 = "<font color=black>" + message2 + "</font>" + "<font color=red>" + message + "</font><br>";
+                    }
+                    else{
+                        String[] tokens = message.split(":");
+                        message2 = "<font color=black>" + message2 + "</font>" + "<font color=yellow>" + tokens[0] + ":" + "</font>" + "<font color=black>" + tokens[1] + "</font><br>";
+                    }
+
+                    t1.setText(Html.fromHtml(message2));
                 }
 
                 @Override
@@ -130,8 +151,18 @@ public class LoggedInChat extends AppCompatActivity {
                         @Override
                         public void onMessage(String message) {
                             Log.d("", "run() returned: " + message);
-                            String s=t1.getText().toString();
-                            t1.setText(s+message +"\n");
+
+                            t1.setBackgroundColor(Color.rgb(123, 169, 242));
+
+                            if(message.contains("Joined")){
+                                message2 = "<font color=black>" + message2 + "</font>" + "<font color=red>" + message + "</font><br>";
+                            }
+                            else{
+                                String[] tokens = message.split(":");
+                                message2 = "<font color=black>" + message2 + "</font>" + "<font color=yellow>" + tokens[0] + ":" + "</font>" + "<font color=black>" + tokens[1] + "</font><br>";
+                            }
+
+                            t1.setText(Html.fromHtml(message2));
                         }
 
                         @Override

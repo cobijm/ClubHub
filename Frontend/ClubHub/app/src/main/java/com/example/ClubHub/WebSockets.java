@@ -108,11 +108,11 @@ public class WebSockets extends AppCompatActivity {
                             t1.setBackgroundColor(Color.rgb(123, 169, 242));
 
                             if(message.contains("Joined")){
-                                message2 = s + "<font color=red>" + message + "</font><br>";
+                                message2 = "<font color=black>" + message2 + "</font>" + "<font color=red>" + message + "</font><br>";
                             }
                             else{
                                 String[] tokens = message.split(":");
-                                message2 = s + "<font color=yellow>" + tokens[0] + ":" + "</font>" + "<font color=black>" + tokens[1] + "</font><br>";
+                                message2 = "<font color=black>" + message2 + "</font>" + "<font color=yellow>" + tokens[0] + ":" + "</font>" + "<font color=black>" + tokens[1] + "</font><br>";
                             }
 
                             t1.setText(Html.fromHtml(message2));

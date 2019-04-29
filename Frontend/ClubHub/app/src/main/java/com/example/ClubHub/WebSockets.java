@@ -107,11 +107,10 @@ public class WebSockets extends AppCompatActivity {
 
                             String[] tokens = message.split(":");
                             message2 = message2 + "<font color=black>" + tokens[0] + ":" + "</font>" + "<font color=white>" + tokens[1] + "</font><br>";
-
+                            t1.setBackgroundColor(Color.rgb(123,169,242));
                             t1.setText(Html.fromHtml(message2));
                             //t1.setText(s + message + "\n");
                             //t1.setTextColor(Color.WHITE);
-                            //t1.setBackgroundColor(Color.rgb(123,169,242));
                             //Spanned display = Html.fromHtml(s + "<font color=blue>" + message + "\n" + "</font><br><br> < br/>");
                         }
 

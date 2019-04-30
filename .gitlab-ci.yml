@@ -62,7 +62,7 @@ android-build:
   artifacts:
     paths:
     - ./Frontend/ClubHub/app/build/outputs/
-    
+#test    
 # To run Android unit tests.   
 #unitTests:
 #  image: javiersantos/android-ci:latest

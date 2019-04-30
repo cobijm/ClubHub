@@ -57,7 +57,7 @@ android-build:
   tags:
    - android_tag
   script:
-    - cd /Frontend/ClubHub
+    - cd ./Frontend/ClubHub
     - ./gradlew assemble
   artifacts:
     paths:

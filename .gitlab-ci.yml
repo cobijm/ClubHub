@@ -2,9 +2,9 @@
 # Each stages executes in sequence, if previous job fails, then all the preceeding jobs are skipped.
 stages:
   - mavenbuild
-#  - maventest
+  - maventest
   - autodeploy
-#  - androidbuild
+  - androidbuild
 #  - androidtest
 
 # tags: "shell" should match with the tag name provided to runner, for spring runner should execute in shell.
